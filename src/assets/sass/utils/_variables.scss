@@ -1,0 +1,17 @@
+// Sizing
+// ---
+
+// Usage: @include query(small) {...}
+$breakpoints: (
+  xs: 30em, // 480px
+  sm: 40em, //	640px
+	md: 48em, // 768px
+	lg: 62em, //	992px
+  xl: 87.5em, //1400px
+	xxl: 112.5rem // 1800px
+);
+
+$screen-sm: map-get($breakpoints, 'sm');
+
+$spacing: 30px;
+$gutter: $spacing / 2;

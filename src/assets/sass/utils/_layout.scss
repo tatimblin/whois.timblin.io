@@ -1,0 +1,11 @@
+// Container
+
+@mixin l-container
+{
+  padding: $gutter;
+
+  @include query (md)
+  {
+    max-width: $screen-sm;
+  }
+}
