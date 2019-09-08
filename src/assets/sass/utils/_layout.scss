@@ -2,10 +2,21 @@
 
 @mixin l-container
 {
-  padding: $gutter;
+  margin: 0 $spacing / 2;
+
+  @include query (sm)
+  {
+    max-width: $screen-sm;
+    margin: 0 auto;
+  }
 
   @include query (md)
   {
-    max-width: $screen-sm;
+    max-width: $screen-md;
+  }
+
+  @include query (lg)
+  {
+    max-width: $screen-lg;
   }
 }

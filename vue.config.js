@@ -3,7 +3,7 @@ module.exports = {
     loaderOptions: {
       sass: {
         data: `
-          @import "@/assets/sass/include.scss";
+          @import "@/assets/sass/injected.scss";
         `
       }
     }

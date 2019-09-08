@@ -3,15 +3,18 @@
 
 // Usage: @include query(small) {...}
 $breakpoints: (
-  xs: 30em, // 480px
-  sm: 40em, //	640px
-	md: 48em, // 768px
-	lg: 62em, //	992px
-  xl: 87.5em, //1400px
-	xxl: 112.5rem // 1800px
+  xs: 480px, // 480px
+  sm: 640px, //	640px
+	md: 768px, // 768px
+	lg: 992px, //	992px
+  xl: 1400px, //1400px
+	xxl: 1800px // 1800px
 );
 
-$screen-sm: map-get($breakpoints, 'sm');
-
 $spacing: 30px;
-$gutter: $spacing / 2;
+$gutter: $spacing;
+
+$screen-xs: map-get($breakpoints, 'xs') - $gutter / 2 !default;
+$screen-sm: map-get($breakpoints, 'sm') - $gutter / 2 !default;
+$screen-md: map-get($breakpoints, 'md') - $gutter !default;
+$screen-lg: map-get($breakpoints, 'lg') - $gutter !default;

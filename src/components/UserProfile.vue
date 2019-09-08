@@ -1,10 +1,10 @@
 <template>
   <section class="UserProfile">
     <div class="UserProfile-cover">
-      <img src="" alt="" class="UserProfile-image">
+      <img src="@/assets/img/profile-cohere.jpg" alt="" class="UserProfile-image">
     </div>
     <h1 class="UserProfile-title">
-      <span class="UserProfile-name">Tristan Timblin</span>
+      <span class="UserProfile-name Heading Heading--lead">Tristan Timblin</span>
       <span class="UserProfile-role">Software Engineer</span>
     </h1>
     <p class="UserProfile-bio">A bit about me</p>
@@ -14,11 +14,34 @@
 </template>
 
 <script>
-import AccountLink from './AccountLink.vue'
+import AccountLink from './AccountLink.vue';
 
 export default {
   components: {
     AccountLink,
+  },
+};
+</script>
+
+<style scoped lang="scss">
+.UserProfile
+{
+  &-name
+  {
+    @include Heading--lead;
+  }
+
+  &-role
+  {
+    @include Heading--brow;
+  }
+
+  &-cta
+  {
+    @include Link--cta;
+
+    display: block;
+    margin: $spacing / 2 0;
   }
 }
-</script>
+</style>

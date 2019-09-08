@@ -33,3 +33,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.AccountLink
+{
+  &-item
+  {
+    display: inline-block;
+  }
+}
+</style>

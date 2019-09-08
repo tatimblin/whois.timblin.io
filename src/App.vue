@@ -25,6 +25,11 @@ export default {
 {
   @include l-container;
 
-  background-color: red;
+  display: grid;
+
+  @include query (sm)
+  {
+    grid-template-columns: 1fr 3fr;
+  }
 }
 </style>
