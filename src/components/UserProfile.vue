@@ -26,6 +26,11 @@ export default {
 <style scoped lang="scss">
 .UserProfile
 {
+  &-image
+  {
+    width: 100%;
+  }
+
   &-name
   {
     @include Heading--lead;

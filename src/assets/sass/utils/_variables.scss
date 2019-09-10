@@ -12,7 +12,7 @@ $breakpoints: (
 );
 
 $spacing: 30px;
-$gutter: $spacing;
+$gutter: $spacing / 2;
 
 $screen-xs: map-get($breakpoints, 'xs') - $gutter / 2 !default;
 $screen-sm: map-get($breakpoints, 'sm') - $gutter / 2 !default;
