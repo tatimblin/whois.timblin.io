@@ -4,7 +4,7 @@
       <h2 class="ContentContainer-title">
         {{ title }}
       </h2>
-      <a :href="external" v-if="external" class="ContentContainer-external">
+      <a :href="external" v-if="external" class="ContentContainer-external" target="_blank">
         {{ prettyExternal }}
       </a>
     </div>
@@ -34,8 +34,9 @@ export default {
 <style lang="scss">
 .ContentContainer
 {
-  margin-bottom: $spacing;
-  border: 1px dashed black;
+  @include l-section;
+
+  border: $border-section;
 
   &-head
   {

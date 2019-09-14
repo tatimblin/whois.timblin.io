@@ -26,6 +26,11 @@ export default {
 <style scoped lang="scss">
 .UserProfile
 {
+  @include l-section;
+
+  position: sticky;
+  top: $spacing;
+
   &-image
   {
     width: 100%;
