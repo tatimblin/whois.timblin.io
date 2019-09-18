@@ -28,5 +28,7 @@
 
 @mixin Link--cta
 {
-  border: 1px solid black;
+  padding: $spacing / 2;
+  border: $border-default;
+  text-align: center;
 }
