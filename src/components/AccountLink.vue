@@ -37,9 +37,14 @@ export default {
 <style lang="scss">
 .AccountLink
 {
+  display: flex;
+
   &-item
   {
-    display: inline-block;
+    &:not(:last-child)
+    {
+      margin-right: $spacing / 2;
+    }
   }
 }
 </style>
