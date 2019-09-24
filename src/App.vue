@@ -1,5 +1,5 @@
 <template>
-  <main class="App">
+  <main class="App Text">
     <aside class="App-sidebar">
       <user-profile></user-profile>
     </aside>

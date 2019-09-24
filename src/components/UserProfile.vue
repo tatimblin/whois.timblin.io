@@ -5,10 +5,10 @@
     </div>
     <h1 class="UserProfile-title">
       <span class="UserProfile-name Heading Heading--lead">Tristan Timblin</span>
-      <span class="UserProfile-role">Software Engineer</span>
+      <span class="UserProfile-role Heading--flag">Software Engineer</span>
     </h1>
     <p class="UserProfile-bio">A bit about me</p>
-    <a href="" class="UserProfile-cta">My homepage</a>
+    <a href="" class="UserProfile-cta Link--cta">My homepage</a>
     <account-link></account-link>
   </section>
 </template>
@@ -30,26 +30,25 @@ export default {
 
   position: sticky;
   top: $spacing;
+  margin-bottom: 0;
 
   &-image
   {
     width: 100%;
   }
 
-  &-name
+  &-title
   {
-    @include Heading--lead;
+    margin: $spacing / 4 0;
   }
 
   &-role
   {
-    @include Heading--brow;
+    display: block;
   }
 
   &-cta
   {
-    @include Link--cta;
-
     display: block;
     margin: $spacing / 2 0;
   }

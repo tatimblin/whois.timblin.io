@@ -1,7 +1,7 @@
 // Sass variables, functions, and mixins to be available in each vue component
 
-@import 'utils/variables';
-@import 'utils/functions';
-@import 'utils/mixins';
-@import 'utils/layout';
-@import 'utils/type';
+@import '/component/variables';
+@import 'component/functions';
+@import 'component/mixins';
+@import 'component/layout';
+@import 'component/type';

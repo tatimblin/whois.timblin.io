@@ -1,27 +1,74 @@
 <template>
   <article class="JobItem">
     <div class="JobItem-media">
-      icon
+      <a :href="data.url" class="JobTitle-link" target="_blank">
+        <img class="JobItem-image" :src="getImage(data.image)" :alt="data.co">
+      </a>
     </div>
     <div class="JobItem-content">
-      <h4 class="JobItem-title">Front End Developer</h4>
-      <h3 class="JobItem-role">Yext</h3>
-      <span class="JobItem-duration">
-        <time class="JobItem-date">2019</time>
-        <span class="JobItem-current">Current</span>
+      <a :href="data.url" class="JobTitle-link" target="_blank">
+        <h4 class="JobItem-title Heading--sub">{{ data.title }}</h4>
+      </a>
+      <h3 class="JobItem-co Heading--flag">{{ data.co }}</h3>
+      <span class="JobItem-duration Heading--brow">
+        <time class="JobItem-date">{{ data.duration }}</time>
+        <span class="JobItem-status">Current</span>
       </span>
-      <p class="JobItem-desc">About the job</p>
-      <a href="#" class="JobItem-referral">Want to work with me?</a>
+      <p class="JobItem-desc">{{ data.description }}</p>
+      <a href="#" class="JobItem-referral" v-if="index == 0">
+        Want to work with me?
+      </a>
     </div>
   </article>
 </template>
+
+<script>
+export default {
+  props: ['data', 'index'],
+  methods: {
+    getImage (fileName) {
+      return require('@/assets/img/' + fileName)
+    },
+  },
+}
+</script>
 
 <style lang="scss" scoped>
 .JobItem
 {
   display: grid;
-  grid-template-columns: 60px auto;
+  grid-template-columns: $spacing * 2 auto;
   grid-gap: $spacing / 2;
-  padding: $spacing / 2;
+
+  &-image
+  {
+    width: 100%;
+  }
+
+  &-co
+  {
+    margin-top: 6px;
+  }
+
+  &-duration
+  {
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  &-status
+  {
+    &::before
+    {
+      content: '•';
+      padding: 0 6px;
+    }
+  }
+
+  &-referral
+  {
+    display: block;
+    margin-top: $spacing / 4;
+  }
 }
 </style>

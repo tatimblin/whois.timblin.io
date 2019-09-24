@@ -1,0 +1,83 @@
+// Heading
+
+@mixin Heading
+{
+  font-family: $font-heading;
+  color: $text-primary;
+}
+
+@mixin Heading--lead
+{
+  @include Heading;
+
+  font-size: 24px;
+  line-height: 24px;
+}
+
+@mixin Heading--head
+{
+  @include Heading;
+
+  font-size: 14px;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+
+@mixin Heading--sub
+{
+  @include Heading;
+
+  font-size: 18px;
+  line-height: 18px;
+}
+
+@mixin Heading--flag
+{
+  @include Heading;
+
+  color: $text-secondary;
+}
+
+@mixin Heading--brow
+{
+  @include Heading;
+}
+
+// Body
+
+@mixin Text
+{
+  font-family: $font-body;
+  font-size: 14px;
+  line-height: 1.33em;
+}
+
+@mixin Text--quiet
+{
+  font-size: 12px;
+}
+
+@mixin Text--loud
+{
+  font-size: 18px;
+}
+
+// Link
+
+@mixin Link
+{
+  color: $link-site;
+}
+
+@mixin Link--cta
+{
+  padding: $spacing / 2;
+  border: $border-default;
+  text-align: center;
+}
+
+@mixin Link--nav
+{
+  @include Heading--sub;
+  @include Link;
+}

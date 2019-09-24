@@ -1,11 +1,31 @@
 // Colors
 // ---
 
-$border-default: 1px dashed black !default;
+$gray10: #3a3a39;
+$gray20: #3a3a39;
+$gray30: #cccac7;
+$gray40: #3a3a39;
+$gray50: #3a3a39;
+$gray60: #3a3a39;
+$gray70: #3a3a39;
+$gray80: #3a3a39;
+$gray90: #191918;
+
+$bright-blue: #0276fd;
+
+$text-primary: $gray70;
+$text-secondary: $gray30;
+
+$link-site: $bright-blue;
+
+$border-default: 1px dashed $gray90 !default;
 $border-section: $border-default;
 
 // Type
 // ---
+
+$font-heading: 'DM Sans', sans-serif;
+$font-body: 'Roboto Mono', monospace;
 
 $font-weight-bold: 600;
 $font-weight-normal: 400;

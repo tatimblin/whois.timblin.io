@@ -1,6 +1,6 @@
 <template>
   <section class="MyApps">
-    <h2 class="MyApps-title">
+    <h2 class="MyApps-title Heading--head">
       Recommended Apps and Services
     </h2>
     <ul class="MyApps-content">
@@ -70,8 +70,14 @@ export default {
   &-content
   {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: $spacing / 2 $spacing;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: $spacing / 2;
+
+    @include query (sm)
+    {
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: $spacing / 2 $spacing;
+    }
   }
 }
 </style>

@@ -49,3 +49,16 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.MySites
+{
+  padding-top: $spacing / 4;
+
+  &-item
+  {
+    @include l-list;
+  }
+}
+
+</style>

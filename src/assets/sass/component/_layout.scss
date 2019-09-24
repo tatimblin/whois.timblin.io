@@ -27,3 +27,11 @@
 {
   margin: $spacing 0;
 }
+
+@mixin l-list
+{
+  &:not(:last-child)
+  {
+    margin-bottom: $spacing;
+  }
+}

@@ -1,7 +1,7 @@
 <template>
   <section class="ContentContainer">
     <div class="ContentContainer-head">
-      <h2 class="ContentContainer-title">
+      <h2 class="ContentContainer-title Heading--head">
         {{ title }}
       </h2>
       <a :href="external" v-if="external" class="ContentContainer-external" target="_blank">
@@ -42,8 +42,13 @@ export default {
   {
     display: flex;
     justify-content: space-between;
+    padding: $spacing / 3 $spacing / 2;
+    border-bottom: $border-default;
+  }
+
+  &-content
+  {
     padding: $spacing / 2;
-    border-bottom: 1px dashed black;
   }
 
   &-expand

@@ -1,6 +1,6 @@
 <template>
   <section class="MyInterests">
-    <h2 class="MyInterests-title">
+    <h2 class="MyInterests-title Heading--head">
       Interests
     </h2>
     <ul class="MyInterests-content">
@@ -52,8 +52,14 @@ export default {
   &-content
   {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: $spacing / 2 $spacing;
+    grid-template-columns: 1fr;
+    grid-gap: $spacing / 2;
+
+    @include query (sm)
+    {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: $spacing / 2 $spacing;
+    }
   }
 }
 </style>

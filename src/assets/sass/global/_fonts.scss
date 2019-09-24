@@ -1,0 +1,67 @@
+// Fonts
+
+@import url('https://fonts.googleapis.com/css?family=DM+Sans:500|Roboto+Mono:300&display=swap');
+
+// Headings
+
+.Heading
+{
+  @include Heading;
+
+  &--lead
+  {
+    @include Heading--lead;
+  }
+
+  &--head
+  {
+    @include Heading--head;
+  }
+
+  &--sub
+  {
+    @include Heading--sub;
+
+    color: green;
+  }
+
+  &--flag
+  {
+    @include Heading--flag;
+  }
+
+  &--brow
+  {
+    @include Heading--brow;
+  }
+}
+
+.Text
+{
+  @include Text;
+
+  &--quiet
+  {
+    @include Text--quiet;
+  }
+
+  &--loud
+  {
+    @include Text--loud;
+  }
+}
+
+.Link
+{
+  @include Link;
+
+  &--nav
+  {
+    @include Link--nav;
+  }
+
+  &--cta
+  {
+    @include Link--cta;
+  }
+}

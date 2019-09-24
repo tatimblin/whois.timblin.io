@@ -1,6 +1,6 @@
 <template>
   <article class="CardItem">
-    <h3 class="CardItem-title">{{ title }}</h3>
+    <h3 class="CardItem-title Heading--sub">{{ title }}</h3>
     <p class="CardItem-desc">{{ desc }}</p>
   </article>
 </template>

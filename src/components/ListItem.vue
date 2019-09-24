@@ -4,7 +4,7 @@
       {{ icon }}
     </div>
     <h3 class="ListItem-title">
-      <a :href="url" class="ListItem-link" target="_blank">
+      <a :href="url" class="ListItem-link Link--nav" target="_blank">
         {{ title }}
       </a>
     </h3>
@@ -26,12 +26,6 @@ export default {
   display: grid;
   grid-template-columns: $spacing auto;
   grid-gap: 10px $gutter;
-  padding: $spacing / 4 $spacing / 2;
-
-  &:hover
-  {
-    background-color: #eee;
-  }
 
   &-icon
   {

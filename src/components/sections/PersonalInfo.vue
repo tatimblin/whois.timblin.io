@@ -2,7 +2,7 @@
   <content-container title="Personal Information">
     <ul class="PersonalInfo">
       <li class="PersonalInfo-item" v-for="fact in facts" :key="fact.label">
-        <span class="PersonalInfo-label">
+        <span class="PersonalInfo-label Heading--brow">
           {{ fact.label }}:
         </span>
         <ul class="PersonalInfo-values" v-if="valueIsArray(fact.value)">
@@ -79,7 +79,6 @@ export default {
 <style lang="scss" scoped>
 .PersonalInfo
 {
-  padding: $spacing / 2;
   columns: 2;
 
   &-item
@@ -89,11 +88,6 @@ export default {
     grid-gap: $spacing / 2;
     line-height: 2em;
     break-inside: avoid;
-  }
-
-  &-label
-  {
-    font-weight: $font-weight-bold;
   }
 }
 </style>
