@@ -11,7 +11,7 @@
     <div class="ContentContainer-content">
       <slot/>
     </div>
-    <div class="ContentContainer-foot">
+    <div class="ContentContainer-foot" v-if="route">
       <button class="ContentContainer-expand">
         More
       </button>
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  props: ['title', 'external'],
+  props: ['title', 'external', 'route'],
   computed: {
     prettyExternal () {
       const url = this.external.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i)

@@ -12,14 +12,22 @@ $gray80: #3a3a39;
 $gray90: #191918;
 
 $bright-blue: #0276fd;
+$pale-yellow: #fff7e6;
 
 $text-primary: $gray70;
 $text-secondary: $gray30;
 
 $link-site: $bright-blue;
 
+$color-bg: $pale-yellow;
+
 $border-default: 1px dashed $gray90 !default;
 $border-section: $border-default;
+
+// General
+// ---
+
+$border-radius: 5px;
 
 // Type
 // ---

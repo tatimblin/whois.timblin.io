@@ -79,15 +79,38 @@ export default {
 <style lang="scss" scoped>
 .PersonalInfo
 {
-  columns: 2;
+  @include query (md)
+  {
+    columns: 2;
+  }
 
   &-item
   {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 2fr;
     grid-gap: $spacing / 2;
     line-height: 2em;
     break-inside: avoid;
+
+    @include query (xs)
+    {
+      grid-template-columns: 1fr 3fr;
+    }
+
+    @include query (sm)
+    {
+      grid-template-columns: 1fr 3fr;
+    }
+
+    @include query (md)
+    {
+      grid-template-columns: 1fr 2fr;
+    }
+
+    @include query (lg)
+    {
+      grid-template-columns: 1fr 3fr;
+    }
   }
 }
 </style>

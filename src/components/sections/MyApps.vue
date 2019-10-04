@@ -6,7 +6,9 @@
     <ul class="MyApps-content">
       <li class="MyApps-item" v-for="interest in interests" :key="interest.title">
         <card-item
+          :image="interest.image ? 'apps/' + interest.image : null"
           :title="interest.title"
+          :url="interest.url"
         >
         </card-item>
       </li>
@@ -25,31 +27,49 @@ export default {
     return {
       interests: [
         {
-          title: 'Vue.js'
+          image: 'vue.png',
+          title: 'Vue.js',
+          url: 'https://vuejs.org/'
         },
         {
-          title: 'Netlify'
+          image: 'netlify.png',
+          title: 'Netlify',
+          url: 'https://netlify.com/'
         },
         {
-          title: 'Firebase'
+          image: 'firebase.png',
+          title: 'Firebase',
+          url: 'https://firebase.google.com/docs/web/setup'
         },
         {
-          title: 'Codepen'
+          image: 'codepen.png',
+          title: 'Codepen',
+          url: 'https://codepen.io/'
         },
         {
-          title: 'Codrops'
+          image: 'codrops.png',
+          title: 'Codrops',
+          url: 'https://tympanus.net/codrops/'
         },
         {
-          title: 'Eleventy'
+          image: '11ty.png',
+          title: 'Eleventy',
+          url: 'https://www.11ty.io/'
         },
         {
-          title: 'Git Flow'
+          image: 'git.png',
+          title: 'Git Flow',
+          url: 'https://github.com/nvie/gitflow'
         },
         {
-          title: 'Pull Panda'
+          image: 'pullpanda.png',
+          title: 'Pull Panda',
+          url: 'https://pullreminders.com/'
         },
         {
-          title: 'You Don\'t Know Javascript'
+          image: 'ydkjs.jpg',
+          title: 'You Don\'t Know Javascript',
+          url: 'https://github.com/getify/You-Dont-Know-JS',
         },
       ],
     }

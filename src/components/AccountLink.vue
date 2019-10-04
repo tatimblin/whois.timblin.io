@@ -38,6 +38,7 @@ export default {
 .AccountLink
 {
   display: flex;
+  flex-wrap: wrap;
 
   &-item
   {

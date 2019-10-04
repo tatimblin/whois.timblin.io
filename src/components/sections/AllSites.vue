@@ -1,5 +1,5 @@
 <template>
-  <content-container title="Chronological Site List">
+  <content-container title="Chronological Site List" route="site-list">
     <ul class="MySites">
       <li class="MySites-item" v-for="site in sites" :key="site.url">
         <list-item
