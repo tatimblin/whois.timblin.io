@@ -3,11 +3,14 @@
     <div class="ListItem-icon">
       {{ icon }}
     </div>
-    <h3 class="ListItem-title">
-      <a :href="url" class="ListItem-link Link--nav" target="_blank">
+    <h4 class="ListItem-title">
+      <a :href="url"
+         class="ListItem-link Link--nav"
+         :target="newTab ? '_blank' : '_self'"
+         :rel="noreferrer ? 'no-referrer' : ''">
         {{ title }}
       </a>
-    </h3>
+    </h4>
     <p class="ListItem-desc">
       {{ desc }}
     </p>
@@ -16,7 +19,7 @@
 
 <script>
 export default {
-  props: ['icon', 'title', 'url', 'desc'],
+  props: ['icon', 'title', 'url', 'desc', 'newTab', 'noreferrer'],
 }
 </script>
 

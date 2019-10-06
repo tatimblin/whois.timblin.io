@@ -12,9 +12,9 @@
       <slot/>
     </div>
     <div class="ContentContainer-foot" v-if="route">
-      <button class="ContentContainer-expand">
-        More
-      </button>
+      <router-link :to="route">
+        View More
+      </router-link>
     </div>
   </section>
 </template>

@@ -1,49 +1,12 @@
 <template>
-  <div class="App">
-    <main class="App-content Text">
-      <aside class="App-item">
-        <user-profile></user-profile>
-      </aside>
-      <div class="App-item">
-        <right-now></right-now>
-        <personal-info></personal-info>
-        <my-sites></my-sites>
-        <my-interests></my-interests>
-        <work-history></work-history>
-        <my-apps></my-apps>
-        <all-sites></all-sites>
-        <server-info></server-info>
-      </div>
-    </main>
+  <div id="app">
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/sites">Sites</router-link>
+    </div>
+    <router-view/>
   </div>
 </template>
-
-<script>
-import RightNow from './components/sections/RightNow.vue'
-import UserProfile from './components/UserProfile.vue'
-import PersonalInfo from './components/sections/PersonalInfo.vue'
-import MySites from './components/sections/MySites.vue'
-import MyInterests from './components/sections/MyInterests.vue'
-import WorkHistory from './components/sections/WorkHistory.vue'
-import MyApps from './components/sections/MyApps.vue'
-import AllSites from './components/sections/AllSites.vue'
-import ServerInfo from './components/sections/ServerInfo.vue'
-
-export default {
-  name: 'app',
-  components: {
-    RightNow,
-    UserProfile,
-    PersonalInfo,
-    MySites,
-    MyInterests,
-    WorkHistory,
-    MyApps,
-    AllSites,
-    ServerInfo,
-  },
-};
-</script>
 
 <style lang="scss">
 .App
