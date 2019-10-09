@@ -27,10 +27,19 @@ export default {
 {
   padding: $spacing / 2;
   border: $border-section;
+  background-color: $section-content;
 
   &-image
   {
     height: 60px;
+  }
+
+  &-cta
+  {
+    &:hover
+    {
+      text-decoration: none;
+    }
   }
 }
 </style>

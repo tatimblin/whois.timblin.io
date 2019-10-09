@@ -4,10 +4,10 @@
       <img src="@/assets/img/profile-cohere.jpg" alt="" class="UserProfile-image">
     </div>
     <h1 class="UserProfile-title">
-      <span class="UserProfile-name Heading Heading--lead">Tristan Timblin</span>
-      <span class="UserProfile-role Heading--flag">Software Engineer</span>
+      <span class="UserProfile-name Heading Heading--lead" itemprop="name">Tristan Timblin</span>
+      <span class="UserProfile-role Heading--flag" itemprop="jobTitle">Software Engineer</span>
     </h1>
-    <p class="UserProfile-bio">A bit about me</p>
+    <p class="UserProfile-bio" itemprop="description">A bit about me</p>
     <a href="" class="UserProfile-cta Link--cta">My homepage</a>
     <account-link></account-link>
   </section>

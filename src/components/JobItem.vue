@@ -12,7 +12,7 @@
       <h3 class="JobItem-co Heading--flag">{{ data.co }}</h3>
       <span class="JobItem-duration Heading--brow">
         <time class="JobItem-date">{{ data.duration }}</time>
-        <span class="JobItem-status">Current</span>
+        <span class="JobItem-status" v-if="index == 0">Current</span>
       </span>
       <p class="JobItem-desc">{{ data.description }}</p>
       <a href="#" class="JobItem-referral" v-if="index == 0">

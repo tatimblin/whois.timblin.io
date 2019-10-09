@@ -81,7 +81,7 @@ export default {
           url: 'https://thepostphl.com/',
           icon: '🐴',
           year: 2018,
-          desc: 'Single page Wordpress site pulling data in from parent brand using Wordpress API.',
+          desc: 'Single page Wordpress site pulling data in from its parent brand using Wordpress API.',
         },
         {
           title: 'Giuseppe & Sons',
@@ -89,7 +89,7 @@ export default {
           url: 'https://.com/',
           icon: '👌🏼',
           year: 2018,
-          desc: '',
+          desc: 'Restaurant theme built on Squarespace\'s developer platform, designed by Avery Sohn.',
         },
         {
           title: 'Interactive design manifesto',
@@ -97,7 +97,7 @@ export default {
           url: 'https://.com/',
           icon: '✒️',
           year: 2018,
-          desc: '',
+          desc: 'Interactive lead page, it accepts user signatures and displays them along with the architects manifesto, to design with purpose.',
         },
         {
           title: 'Redevelopment effort in Brewerytown',
@@ -105,7 +105,7 @@ export default {
           url: 'https://.com/',
           icon: '🏗',
           year: 2018,
-          desc: '',
+          desc: 'Vue.js application introducing one of the first developments in Brewerytown, Phildelphia.',
         },
         {
           title: 'University of Pennsylvania business services portfolio',
@@ -113,7 +113,7 @@ export default {
           url: 'https://.com/',
           icon: '👩🏼‍🏫',
           year: 2018,
-          desc: '',
+          desc: 'UX prototype and wireframe of a new site promoting each of UPenn\'s divisions.',
         },
         {
           title: 'Historic munitions plant, turned business campus.',
@@ -121,7 +121,7 @@ export default {
           url: 'https://.com/',
           icon: '🏭',
           year: 2018,
-          desc: '',
+          desc: 'Animation heavy static site built Brendan Russo.',
         },
         {
           title: 'UPenn graduate student living',
@@ -232,7 +232,7 @@ export default {
   {
     margin-bottom: $spacing / 1.5;
     padding-left: $spacing / 4;
-    background-color: $gray20;
+    background-color: $section-heading;
   }
 
   &-list

@@ -1,33 +1,36 @@
 // Colors
 // ---
 
-$gray10: #3a3a39;
+$gray10: #fdfdfd;
 $gray20: #f1f1ef;
 $gray30: #cccac7;
 $gray40: #3a3a39;
 $gray50: #3a3a39;
-$gray60: #3a3a39;
-$gray70: #3a3a39;
-$gray80: #3a3a39;
+$gray60: #4b4b4a;
+$gray70: #525250;
+$gray80: #2b2b29;
 $gray90: #191918;
 
+$pale-blue: #eaf1f7;
 $bright-blue: #0276fd;
 $pale-yellow: #fff7e6;
 
 $text-primary: $gray70;
 $text-secondary: $gray30;
 
+$section-heading: $pale-blue;
+$section-content: $gray10;
 $link-site: $bright-blue;
 
 $color-bg: $pale-yellow;
-
-$border-default: 1px dashed $gray90 !default;
-$border-section: $border-default;
 
 // General
 // ---
 
 $border-radius: 5px;
+$border-default: 1px dashed $gray90 !default;
+$border-section: $border-default;
+$box-shadow-hard: 2px 2px 0 0 $gray70;
 
 // Type
 // ---
@@ -58,3 +61,9 @@ $screen-xs: map-get($breakpoints, 'xs') - $gutter / 2 !default;
 $screen-sm: map-get($breakpoints, 'sm') - $gutter / 2 !default;
 $screen-md: map-get($breakpoints, 'md') - $gutter !default;
 $screen-lg: map-get($breakpoints, 'lg') - $gutter !default;
+
+// ANIMATION
+
+$dur: 250ms !default;
+$ease: cubic-bezier(0.645, 0.045, 0.355, 1) !default;
+$anim-default: all $dur $ease;

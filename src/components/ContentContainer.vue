@@ -11,11 +11,9 @@
     <div class="ContentContainer-content">
       <slot/>
     </div>
-    <div class="ContentContainer-foot" v-if="route">
-      <router-link :to="route">
-        View More
-      </router-link>
-    </div>
+    <router-link class="ContentContainer-expand" v-if="route" :to="route">
+      View More
+    </router-link>
   </section>
 </template>
 
@@ -35,8 +33,7 @@ export default {
 .ContentContainer
 {
   @include l-section;
-
-  border: $border-section;
+  @include border-container;
 
   &-head
   {
@@ -44,17 +41,28 @@ export default {
     justify-content: space-between;
     padding: $spacing / 3 $spacing / 2;
     border-bottom: $border-default;
+    background-color: $section-heading;
   }
 
   &-content
   {
     padding: $spacing / 2;
+    background-color: $section-content;
   }
 
   &-expand
   {
-    width: 100%;
+    display: block;
     padding: $spacing / 2;
+    text-align: center;
+    border-top: $border-default;
+    background-color: $gray10;
+    transition: $anim-default;
+
+    &:hover
+    {
+      background-color: $gray20;
+    }
   }
 }
 </style>

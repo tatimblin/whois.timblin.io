@@ -5,6 +5,7 @@
         <user-profile></user-profile>
       </aside>
       <div class="App-item">
+        <router-link class="App-nav" to="/">Back</router-link>
         <my-sites></my-sites>
         <all-sites></all-sites>
       </div>
@@ -48,6 +49,24 @@ export default {
   &-item
   {
     min-width: 0;
+
+    .ContentContainer:nth-child(2)
+    {
+      margin-top: 0;
+    }
+  }
+
+  &-nav
+  {
+    display: block;
+    margin: 28px 0 8px;
+    text-decoration: none;
+
+    &::before
+    {
+      content: '⬅';
+      margin-right: 3px;
+    }
   }
 }
 </style>
