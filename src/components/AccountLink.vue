@@ -15,17 +15,17 @@ export default {
       accounts: [
         {
           name: 'Codepen',
-          url: 'codepen.com',
+          url: 'https://codepen.io/tatimblin',
           src: 'imageGoesHere'
         },
         {
           name: 'Github',
-          url: 'github.com',
+          url: 'https://github.com/tatimblin/',
           src: 'imageGoesHere'
         },
         {
           name: 'Dev.to',
-          url: 'dev.to',
+          url: 'https://dev.to/tristimb',
           src: 'imageGoesHere'
         }
       ]

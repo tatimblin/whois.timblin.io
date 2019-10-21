@@ -30,7 +30,7 @@ export default {
           title: 'timblin.io',
           url: 'https://timblin.io/',
           icon: '🌎',
-          desc: 'Personal homepage',
+          desc: 'A Personal homepage, which mostly just links back to this site.',
         },
         {
           title: 'jpg.timblin.io',
@@ -39,7 +39,7 @@ export default {
           desc: 'Photography website',
         },
         {
-          title: 'jpg.timblin.io',
+          title: 'mp3.timblin.io',
           url: 'https://mp3.timblin.io/',
           icon: '🎸',
           desc: 'Music stats website',

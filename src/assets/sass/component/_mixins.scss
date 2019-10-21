@@ -16,4 +16,7 @@
 
 @mixin border-container {
   border: $border-section;
+  border-radius: $border-radius;
+  background-color: $section-content;
+  overflow: hidden;
 }

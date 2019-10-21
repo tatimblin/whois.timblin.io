@@ -40,7 +40,7 @@ export default {
 
   &-title
   {
-    margin: $spacing / 4 0;
+    margin: $spacing / 2 0;
   }
 
   &-role
@@ -50,8 +50,16 @@ export default {
 
   &-cta
   {
+    @include border-container;
+
     display: block;
     margin: $spacing / 2 0;
+    background: $section-heading;
+
+    &:hover
+    {
+      background: $pale-blue;
+    }
   }
 }
 </style>

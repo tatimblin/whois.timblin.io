@@ -25,9 +25,9 @@ export default {
 <style lang="scss" scoped>
 .CardItem
 {
+  @include border-container;
+
   padding: $spacing / 2;
-  border: $border-section;
-  background-color: $section-content;
 
   &-image
   {

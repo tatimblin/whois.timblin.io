@@ -36,8 +36,8 @@ export default {
           schema: 'name'
         },
         {
-          label: 'Nationality',
-          value: 'Value',
+          label: 'Origin',
+          value: 'Virginia',
           schema: 'nationality'
         },
         {

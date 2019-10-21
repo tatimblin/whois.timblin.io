@@ -15,7 +15,7 @@
         <span class="JobItem-status" v-if="index == 0">Current</span>
       </span>
       <p class="JobItem-desc">{{ data.description }}</p>
-      <a href="#" class="JobItem-referral" v-if="index == 0">
+      <a :href="data.referral" class="JobItem-referral" v-if="index == 0">
         Want to work with me?
       </a>
     </div>

@@ -41,13 +41,12 @@ export default {
     justify-content: space-between;
     padding: $spacing / 3 $spacing / 2;
     border-bottom: $border-default;
-    background-color: $section-heading;
+    background: $section-heading;
   }
 
   &-content
   {
     padding: $spacing / 2;
-    background-color: $section-content;
   }
 
   &-expand
@@ -61,7 +60,7 @@ export default {
 
     &:hover
     {
-      background-color: $gray20;
+      background-color: $pale-blue;
     }
   }
 }

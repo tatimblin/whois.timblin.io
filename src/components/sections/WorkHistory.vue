@@ -27,7 +27,7 @@ export default {
           co: 'Yext',
           duration: 'April 2019',
           description: 'Implement new pages sites',
-          referral: 'https://www.yext.com/',
+          referral: 'https://rolp.co/nVPMg',
           url: 'https://www.yext.com/',
           image: 'yext.png',
         },

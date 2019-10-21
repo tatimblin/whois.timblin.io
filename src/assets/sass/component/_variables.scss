@@ -2,23 +2,23 @@
 // ---
 
 $gray10: #fdfdfd;
-$gray20: #f1f1ef;
+$gray20: #f5f5f3;
 $gray30: #cccac7;
-$gray40: #3a3a39;
-$gray50: #3a3a39;
+$gray40: #aaa9a6;
+$gray50: #727270;
 $gray60: #4b4b4a;
 $gray70: #525250;
 $gray80: #2b2b29;
 $gray90: #191918;
 
-$pale-blue: #eaf1f7;
+$pale-blue: #f1f4f7;
 $bright-blue: #0276fd;
-$pale-yellow: #fff7e6;
+$pale-yellow: #f8f7f4;
 
 $text-primary: $gray70;
-$text-secondary: $gray30;
+$text-secondary: $gray40;
 
-$section-heading: $pale-blue;
+$section-heading: linear-gradient($gray10 50%, $pale-blue);
 $section-content: $gray10;
 $link-site: $bright-blue;
 
@@ -27,8 +27,8 @@ $color-bg: $pale-yellow;
 // General
 // ---
 
-$border-radius: 5px;
-$border-default: 1px dashed $gray90 !default;
+$border-radius: 2px;
+$border-default: 1px solid $gray40 !default;
 $border-section: $border-default;
 $box-shadow-hard: 2px 2px 0 0 $gray70;
 
