@@ -16,21 +16,21 @@ export default {
         {
           name: 'Codepen',
           url: 'https://codepen.io/tatimblin',
-          src: 'imageGoesHere'
+          src: 'imageGoesHere',
         },
         {
           name: 'Github',
           url: 'https://github.com/tatimblin/',
-          src: 'imageGoesHere'
+          src: 'imageGoesHere',
         },
         {
           name: 'Dev.to',
           url: 'https://dev.to/tristimb',
-          src: 'imageGoesHere'
-        }
-      ]
+          src: 'imageGoesHere',
+        },
+      ],
     }
-  }
+  },
 }
 </script>
 
