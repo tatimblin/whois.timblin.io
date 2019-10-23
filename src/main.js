@@ -6,10 +6,10 @@ Vue.config.productionTip = false;
 import '@/assets/sass/main.scss'
 import router from './router'
 
-new Vue({
+const app = new Vue({
   router,
   render: h => h(App)
-}).$mount('#app');
+});
 
 // During pre-rendering the initial state is
 // injected into the global scope, here we

@@ -1,5 +1,5 @@
 <template>
-  <div class="App">
+  <div class="App" data-view>
     <main class="App-content Text" itemscope itemtype="http://schema.org/Person">
       <aside class="App-item">
         <user-profile></user-profile>
