@@ -5,7 +5,7 @@
         <user-profile></user-profile>
       </aside>
       <div class="App-item">
-        <right-now></right-now>
+        <professional-info></professional-info>
         <personal-info></personal-info>
         <my-sites></my-sites>
         <my-interests></my-interests>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import RightNow from '../components/sections/RightNow.vue'
+import ProfessionalInfo from '../components/sections/ProfessionalInfo.vue'
 import UserProfile from '../components/UserProfile.vue'
 import PersonalInfo from '../components/sections/PersonalInfo.vue'
 import MySites from '../components/sections/MySites.vue'
@@ -32,7 +32,7 @@ import ServerInfo from '../components/sections/ServerInfo.vue'
 export default {
   name: 'app',
   components: {
-    RightNow,
+    ProfessionalInfo,
     UserProfile,
     PersonalInfo,
     MySites,

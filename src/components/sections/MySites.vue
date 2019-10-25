@@ -30,13 +30,13 @@ export default {
           title: 'timblin.io',
           url: 'https://timblin.io/',
           icon: '🌎',
-          desc: 'A Personal homepage, which mostly just links back to this site.',
+          desc: 'A general homepage page reserved for something fun, while this site is more professional.',
         },
         {
           title: 'jpg.timblin.io',
           url: 'https://jpg.timblin.io/',
           icon: '📸',
-          desc: 'Photography website',
+          desc: 'My photo gallery separated out into easily browsable collections, just keep scrolling.',
         },
         {
           title: 'mp3.timblin.io',

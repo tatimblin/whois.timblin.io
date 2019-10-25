@@ -38,12 +38,12 @@ export default {
         {
           label: 'Origin',
           value: 'Virginia',
-          schema: 'nationality'
+          schema: 'homeLocation'
         },
         {
           label: 'Birthday',
           value: 'June 11',
-          schema: 'test'
+          schema: 'birthDate'
         },
         {
           label: 'Hobbies',
@@ -62,8 +62,8 @@ export default {
         },
         {
           label: 'About',
-          value: 'Lorem ipsum dolor sit amit.',
-          schema: 'test'
+          value: 'I love to create things and be outside, summer is by far my favorite season.',
+          schema: 'about'
         },
       ]
     }
@@ -89,7 +89,7 @@ export default {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: $spacing / 2;
-    line-height: 2em;
+    margin-bottom: $spacing-text;
     break-inside: avoid;
 
     @include query (xs)
@@ -111,6 +111,11 @@ export default {
     {
       grid-template-columns: 1fr 3fr;
     }
+  }
+
+  &-values
+  {
+    line-height: 2em;
   }
 }
 </style>

@@ -1,16 +1,20 @@
 <template>
-  <content-container title="Server Information">
-    <ul class="ServerInfo">
-      <li class="ServerInfo-item" v-for="fact in facts" :key="fact.label">
-        <span class="ServerInfo-label Heading--brow">
+  <content-container title="Site Information">
+    <div class="SiteInfo-intro">
+      <h3 class="SiteInfo-introTitle Heading--brow">{{ intro.title }}: </h3>
+      <p class="SiteInfo-introBody">{{ intro.body }}</p>
+    </div>
+    <ul class="SiteInfo">
+      <li class="SiteInfo-item" v-for="fact in facts" :key="fact.label">
+        <span class="SiteInfo-label Heading--brow">
           {{ fact.label }}:
         </span>
-        <ul class="ServerInfo-values" v-if="valueIsArray(fact.value)">
-          <li class="ServerInfo-value" v-for="value in fact.value" :key="value">
+        <ul class="SiteInfo-values" v-if="valueIsArray(fact.value)">
+          <li class="SiteInfo-value" v-for="value in fact.value" :key="value">
             {{ value }}
           </li>
         </ul>
-        <span class="ServerInfo-value" v-else>
+        <span class="SiteInfo-value" v-else>
           {{ fact.value }}
         </span>
       </li>
@@ -29,6 +33,12 @@ export default {
   },
   data () {
     return {
+      intro: {
+        title: 'Site Purpose',
+        body: `This site aims to be a source of truth for my internet presence. It keeps track of the sites I've been
+        a part of, both for work and fun. It's also marked up as structured data helping my general information be indexed for
+        external use.`,
+      },
       facts: [
         {
           label: 'Version',
@@ -66,11 +76,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.ServerInfo
+.SiteInfo
 {
   @include query (md)
   {
     columns: 2;
+  }
+
+  &-intro
+  {
+    margin-bottom: 8px;
   }
 
   &-item
