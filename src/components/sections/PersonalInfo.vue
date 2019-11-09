@@ -1,5 +1,5 @@
 <template>
-  <content-container title="Personal Information">
+  <content-container title="Personal Profile">
     <ul class="PersonalInfo">
       <li class="PersonalInfo-item" v-for="fact in facts" :key="fact.label">
         <span class="PersonalInfo-label Heading--brow">
@@ -37,7 +37,7 @@ export default {
         },
         {
           label: 'Origin',
-          value: 'Virginia',
+          value: 'Virginia, US',
           schema: 'homeLocation'
         },
         {
@@ -89,7 +89,6 @@ export default {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: $spacing / 2;
-    margin-bottom: $spacing-text;
     break-inside: avoid;
 
     @include query (xs)

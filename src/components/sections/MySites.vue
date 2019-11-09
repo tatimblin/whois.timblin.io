@@ -30,7 +30,7 @@ export default {
           title: 'timblin.io',
           url: 'https://timblin.io/',
           icon: '🌎',
-          desc: 'A general homepage page reserved for something fun, while this site is more professional.',
+          desc: 'A general homepage page reserved for something fun, while this site is more a professional record.',
         },
         {
           title: 'jpg.timblin.io',

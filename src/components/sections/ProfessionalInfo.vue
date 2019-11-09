@@ -1,5 +1,5 @@
 <template>
-  <content-container title="Professional Bio">
+  <content-container title="Biography">
     <ul class="ProfessionalInfo">
       <li class="ProfessionalInfo-item" v-for="item in items" :key="item.label">
         <h3 class="ProfessionalInfo-label Heading--brow" v-if="item.label">{{ item.label }}</h3>
@@ -22,9 +22,8 @@ export default {
     return {
       items: [
         {
-          value: `I'm a User Interface Engineer with a strong UX design background, focused on creating user valued digital
-          experiences. I closely follow web standards to create accessible semantic web applications that all humans and
-          search engines love.`,
+          value: `A software engineer focused on the human computer interaction between people and the applications
+          they use day to day. I believe in building smaller solutions to service the same user needs faster and cheaper.`,
         },
       ],
     }

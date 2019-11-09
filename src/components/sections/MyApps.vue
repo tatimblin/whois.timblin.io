@@ -71,6 +71,11 @@ export default {
           title: 'You Don\'t Know Javascript',
           url: 'https://github.com/getify/You-Dont-Know-JS',
         },
+        {
+          image: 'gyazo.png',
+          title: 'Gyazo',
+          url: 'https://gyazo.com',
+        },
       ],
     }
   },

@@ -13,7 +13,7 @@ $gray90: #191918;
 
 $pale-blue: #f1f4f7;
 $bright-blue: #0276fd;
-$pale-yellow: #f8f7f4;
+$pale-yellow: #f0ebdc;
 
 $text-primary: $gray70;
 $text-secondary: $gray40;
@@ -27,8 +27,8 @@ $color-bg: $pale-yellow;
 // General
 // ---
 
-$border-radius: 2px;
-$border-default: 1px solid $gray40 !default;
+$border-radius: 2.5px;
+$border-default: 1px dashed $gray40 !default;
 $border-section: $border-default;
 $box-shadow-hard: 2px 2px 0 0 $gray70;
 
@@ -54,7 +54,7 @@ $breakpoints: (
 	xxl: 1800px // 1800px
 );
 
-$spacing: 30px;
+$spacing: 32px;
 $gutter: $spacing / 2;
 $spacing-text: 8px;
 

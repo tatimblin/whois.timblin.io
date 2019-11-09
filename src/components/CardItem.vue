@@ -41,5 +41,10 @@ export default {
       text-decoration: none;
     }
   }
+
+  &-desc
+  {
+    margin-top: unit(50);
+  }
 }
 </style>

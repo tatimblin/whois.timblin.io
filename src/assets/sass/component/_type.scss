@@ -41,6 +41,8 @@
 @mixin Heading--brow
 {
   @include Heading;
+
+  margin-bottom: unit(25);
 }
 
 // Body

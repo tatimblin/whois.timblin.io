@@ -26,7 +26,9 @@ export default {
           title: 'Front End Developer',
           co: 'Yext',
           duration: 'April 2019',
-          description: 'Implement new pages sites',
+          description: `At Yext I build highly crawlable web applications, to help populate current business information
+          throughout the web like in rich snippets. Our focus is to enable businesses to answer questions about themselves
+          wherever a customer asks.`,
           referral: 'https://rolp.co/nVPMg',
           url: 'https://www.yext.com/',
           image: 'yext.png',

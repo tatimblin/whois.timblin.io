@@ -27,11 +27,13 @@ export default {
       interests: [
         {
           title: 'JAMStack',
-          desc: 'Web ideology',
+          desc: `A web ideology that relies on javascript, API calls, and prerendered markup to move processing
+          off the server.`,
         },
         {
           title: 'Web Components',
-          desc: 'Javascript framework',
+          desc: `A collection of web technologies that enables the creation of custom elements to encapsulate
+          UI components within the shadow DOM.`,
         },
       ],
     }

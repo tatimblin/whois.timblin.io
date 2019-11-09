@@ -12,6 +12,10 @@
   }
 }
 
+@function unit($percent) {
+  @return $spacing * ($percent / 100);
+}
+
 // Container border
 
 @mixin border-container {
