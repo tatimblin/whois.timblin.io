@@ -22,7 +22,7 @@ export default {
     return {
       items: [
         {
-          value: `A software engineer focused on the human computer interaction between people and the applications
+          value: `A software engineer focused on the human computer interaction between people, and the applications
           they use day to day. I believe in building smaller solutions to service the same user needs faster and cheaper.`,
         },
       ],
