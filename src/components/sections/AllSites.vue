@@ -41,7 +41,7 @@ export default {
           url: 'https://local.biglots.com/',
           icon: '🛒',
           year: 2019,
-          desc: 'Personal homepage',
+          desc: 'Yext Pages implementation for a retail store in the United States.',
         },
         {
           title: 'JTB branch locator',
@@ -49,7 +49,7 @@ export default {
           url: 'https://branch.jtbbwt.com/',
           icon: '✈️',
           year: 2019,
-          desc: 'Photography website',
+          desc: 'Yext pages implementation for a Japanese travel agency.',
         },
         {
           title: 'uCity Lawn activation',

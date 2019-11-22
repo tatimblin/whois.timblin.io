@@ -7,7 +7,7 @@
     </div>
     <div class="JobItem-content">
       <a :href="data.url" class="JobTitle-link" target="_blank">
-        <h4 class="JobItem-title Heading--sub">{{ data.title }}</h4>
+        <h4 class="JobItem-title Heading--sub Link">{{ data.title }}</h4>
       </a>
       <h3 class="JobItem-co Heading--flag">{{ data.co }}</h3>
       <span class="JobItem-duration Heading--brow">

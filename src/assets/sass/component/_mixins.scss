@@ -22,5 +22,6 @@
   border: $border-section;
   border-radius: $border-radius;
   background-color: $section-content;
+  box-shadow: 0 1px 0 1px darken($pale-blue, 10%);
   overflow: hidden;
 }

@@ -36,13 +36,13 @@ export default {
       intro: {
         title: 'Site Purpose',
         body: `This site aims to be a source of truth for my internet presence. It keeps track of the sites I've been
-        a part of, both for work and fun. It's also marked up as structured data for experimenting with indexing
-        personal information.`,
+        a part of, both for work and fun. It's also marked up as structured data for experimenting with indexing my
+        personal profile.`,
       },
       facts: [
         {
           label: 'Version',
-          value: '1.0.0'
+          value: '1.0.1'
         },
         {
           label: 'Domain',

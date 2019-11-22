@@ -114,7 +114,7 @@ export default {
 
   &-values
   {
-    line-height: 2em;
+    line-height: 1.66em;
   }
 }
 </style>

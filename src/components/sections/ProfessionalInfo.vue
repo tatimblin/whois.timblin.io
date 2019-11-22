@@ -22,8 +22,11 @@ export default {
     return {
       items: [
         {
-          value: `A software engineer focused on the human computer interaction between people, and the applications
-          they use day to day. I believe in building smaller solutions to service the same user needs faster and cheaper.`,
+          value: `
+            A software engineer focused on the human computer interaction between people, and the applications
+            they use day to day. I believe in building smaller solutions to service the same user needs faster and cheaper.
+            At Yext I help build and maintain the application, that generates our pages. Together our service hosts
+            over a million generated pages which average +1.5 billion views a year, chances are you've alredy visited one.`,
         },
       ],
     }
