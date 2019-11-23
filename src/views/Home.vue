@@ -48,7 +48,7 @@ export default {
 <style lang="scss">
 .App
 {
-  background-color: #fff8eb;
+  background-color: $color-bg;
 
   &-content
   {

@@ -90,6 +90,7 @@ export default {
     grid-template-columns: 1fr 2fr;
     grid-gap: $spacing / 2;
     break-inside: avoid;
+    margin-bottom: $spacing / 4;
 
     @include query (xs)
     {

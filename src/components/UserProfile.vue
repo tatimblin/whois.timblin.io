@@ -30,7 +30,6 @@ export default {
 
   position: sticky;
   top: $spacing;
-  margin-bottom: 0;
 
   &-image
   {

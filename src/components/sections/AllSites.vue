@@ -36,6 +36,14 @@ export default {
       count: 0,
       sites: [
         {
+          title: 'Church\'s Chicken restaurant locator',
+          company: 'Yext',
+          url: 'https://locations.churchs.com/la/baton-rouge/10785-florida-blvd',
+          icon: '🍗',
+          year: 2019,
+          desc: 'Yext Pages implementation for a fried chicken chain in the United States.',
+        },
+        {
           title: 'Big Lots store locator',
           company: 'Yext',
           url: 'https://local.biglots.com/',

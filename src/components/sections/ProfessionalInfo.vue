@@ -58,6 +58,7 @@ export default {
   &-value
   {
     display: inline;
+    line-height: 1.4em;
   }
 }
 </style>
