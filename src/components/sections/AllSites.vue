@@ -36,6 +36,14 @@ export default {
       count: 0,
       sites: [
         {
+          title: 'Tuesday Morning store locator',
+          company: 'Yext',
+          url: 'http://www.tuesdaymorning.com/stores/index.html',
+          icon: '📆',
+          year: 2019,
+          desc: 'Yext Pages implementation for a home goods store the United States.',
+        },
+        {
           title: 'Church\'s Chicken restaurant locator',
           company: 'Yext',
           url: 'https://locations.churchs.com/la/baton-rouge/10785-florida-blvd',

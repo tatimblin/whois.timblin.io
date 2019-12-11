@@ -28,12 +28,13 @@ export default {
         {
           title: 'JAMStack',
           desc: `A web ideology that relies on javascript, API calls, and prerendered markup to move processing
-          off the server.`,
+          off the server. Sites built on the JamStack can be smaller, cheaper, and more performant applications.`,
         },
         {
           title: 'Web Components',
-          desc: `A collection of web technologies that enables the creation of custom elements to encapsulate
-          UI components within the shadow DOM.`,
+          desc: `A collection of web technologies that enable the creation of custom elements to encapsulate
+          UI components on the shadow DOM. With web components custom interactions can be better abstracted
+          and used throughout an application or across the organization.`,
         },
       ],
     }
