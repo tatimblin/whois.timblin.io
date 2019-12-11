@@ -42,6 +42,9 @@ export default {
     AllSites,
     ServerInfo,
   },
+  metaInfo: {
+    titleTemplate: '%s - Software Engineering Profile'
+  }
 };
 </script>
 

@@ -25,6 +25,9 @@ export default {
     MySites,
     AllSites,
   },
+  metaInfo: {
+    titleTemplate: '%s - Site List'
+  }
 };
 </script>
 
