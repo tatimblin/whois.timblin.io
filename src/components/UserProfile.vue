@@ -39,7 +39,7 @@ export default {
 
   &-title
   {
-    margin: $spacing / 2 0;
+    margin: $spacing / 2 0 $spacing / 4;
   }
 
   &-role

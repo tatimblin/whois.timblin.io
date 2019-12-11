@@ -44,6 +44,11 @@ export default {
     background: $section-heading;
   }
 
+  &-external
+  {
+    @include Link--underline;
+  }
+
   &-content
   {
     padding: $spacing / 2;

@@ -5,6 +5,7 @@ import Home from './views/Home.vue';
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -17,4 +18,7 @@ export default new Router({
       component: () => import('./views/Sites.vue'),
     },
   ],
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 });

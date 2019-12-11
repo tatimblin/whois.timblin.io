@@ -10,6 +10,8 @@
 {
   @include Heading;
 
+  display: inline-block;
+  margin-bottom: $spacing / 4;
   font-size: 24px;
   line-height: 24px;
 }
@@ -35,7 +37,11 @@
 {
   @include Heading;
 
+  font-size: 12px;
+  font-weight: bold;
   color: $text-secondary;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
 }
 
 @mixin Heading--brow
@@ -66,8 +72,21 @@
 
 // Link
 
+@mixin Link--underline
+{
+  text-decoration: underline;
+
+  &:hover,
+  &:active,
+  &:focus
+  {
+    text-decoration: none;
+  }
+}
+
 @mixin Link
 {
+  @include Link--underline;
   color: $link-site;
 }
 
