@@ -36,12 +36,12 @@ export default {
       count: 0,
       sites: [
         {
-          title: 'Tuesday Morning store locator',
+          title: 'Tuesday Morning intent pages',
           company: 'Yext',
           url: 'http://www.tuesdaymorning.com/stores/index.html',
           icon: '📆',
           year: 2019,
-          desc: 'Yext Pages implementation for a home goods store the United States.',
+          desc: 'Department specific pages to increase SEO performance for customers looking for specific goods, near a Tuesday Morning location.',
         },
         {
           title: 'Church\'s Chicken restaurant locator',
