@@ -42,7 +42,7 @@ export default {
           title: 'mp3.timblin.io',
           url: 'https://mp3.timblin.io/',
           icon: '🎸',
-          desc: 'Music stats website',
+          desc: 'Hold for a listening data site I\'ve been thinking about.',
         },
       ]
     }

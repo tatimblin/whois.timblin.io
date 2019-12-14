@@ -15,7 +15,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'description', content: 'A User Interface Engineer with a strong UX design background, focused on creating user valued digital experiences. I closely follow web standards to create accessible semantic web applications that all humans and search engines love.' },
+      { name: 'description', content: 'A User Interface Engineer with a strong UX design background, focused on creating user valued digital experiences.' },
       { name: 'theme-color', content: '#e1ecff' },
       { name: 'robots', content: 'index' },
       { name: 'googlebot', content: 'index' },
@@ -27,7 +27,7 @@ export default {
       { name: 'og:title', content: 'Tristan Timblin - Software Engineer'},
       { name: 'og:image', content: '/assets/img/profile-cohere.jpg'},
       { name: 'og:image:alt', content: 'Profile of Tristan Timblin'},
-      { name: 'og:description', content: 'A User Interface Engineer with a strong UX design background, focused on creating user valued digital experiences. I closely follow web standards to create accessible semantic web applications that all humans and search engines love.'},
+      { name: 'og:description', content: 'A User Interface Engineer with a strong UX design background, focused on creating user valued digital experiences.'},
       { name: 'os:site_name', content: 'whois.timblin.io'},
       { name: 'locale', content: 'en_US'},
       { name: 'article:author', content: 'Tristan Timblin'},

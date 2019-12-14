@@ -48,7 +48,7 @@ export default {
         {
           label: 'Hobbies',
           value: ['Photography', 'Running', 'Drawing'],
-          schema: 'test'
+          schema: 'knowsAbout'
         },
         {
           label: 'Height',
@@ -62,8 +62,7 @@ export default {
         },
         {
           label: 'About',
-          value: 'I love to create things and be outside, summer is by far my favorite season.',
-          schema: 'about'
+          value: 'I love to create things and be outside, summer is by far my favorite season.'
         },
       ]
     }

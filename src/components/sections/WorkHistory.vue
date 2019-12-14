@@ -32,6 +32,7 @@ export default {
           referral: 'https://rolp.co/nVPMg',
           url: 'https://www.yext.com/',
           image: 'yext.png',
+          jobCode: '15-1252.00',
         },
         {
           key: 1,
@@ -42,6 +43,7 @@ export default {
           referral: 'https://cohere.city/careers',
           url: 'https://cohere.city/',
           image: 'cohere.png',
+          jobCode: '15-1252.00',
         },
       ],
     }
