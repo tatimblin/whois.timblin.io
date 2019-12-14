@@ -26,6 +26,17 @@
 @mixin l-section
 {
   margin: $spacing 0;
+
+  
+  &:first-child
+  {
+    margin-bottom: 0;
+
+    @include query (sm)
+    {
+      margin-bottom: $spacing;
+    }
+  }
 }
 
 @mixin l-list

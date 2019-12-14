@@ -1,7 +1,7 @@
 <template>
   <ul class="AccountLink">
     <li class="AccountLink-item" v-for="account in accounts" :key="account.url">
-      <a :href="account.url" class="AccountLink-link">
+      <a :href="account.url" class="AccountLink-link Link">
         {{ account.name }}
       </a>
     </li>

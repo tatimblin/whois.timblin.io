@@ -8,7 +8,7 @@
       <span class="UserProfile-role Heading--flag" itemprop="jobTitle">Software Engineer</span>
     </h1>
     <p class="UserProfile-bio">I'm a developer building pages at Yext.</p>
-    <a href="https://timblin.io/" class="UserProfile-cta Link--cta" itemprop="url">My homepage</a>
+    <a href="https://timblin.io/" class="UserProfile-cta Link Link--cta" itemprop="url">My homepage</a>
     <account-link></account-link>
   </section>
 </template>

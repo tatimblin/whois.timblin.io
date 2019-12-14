@@ -7,8 +7,8 @@
       </a>
     </div>
     <div class="JobItem-content">
-      <a :href="data.url" class="JobTitle-link" target="_blank" itemprop="url">
-        <h4 class="JobItem-title Heading--sub Link" itemprop="name">{{ data.title }}</h4>
+      <a :href="data.url" class="JobTitle-link Link" target="_blank" itemprop="url">
+        <h4 class="JobItem-title Heading--sub" itemprop="name">{{ data.title }}</h4>
       </a>
       <h3 class="JobItem-co Heading--flag">{{ data.co }}</h3>
       <span class="JobItem-duration Heading--brow">
@@ -16,7 +16,7 @@
         <span class="JobItem-status" v-if="index == 0">Current</span>
       </span>
       <p class="JobItem-desc" itemprop="description">{{ data.description }}</p>
-      <a :href="data.referral" class="JobItem-referral" v-if="index == 0" itemprop="potentialAction">
+      <a :href="data.referral" class="JobItem-referral Link" v-if="index == 0" itemprop="potentialAction">
         Want to work with me?
       </a>
     </div>
