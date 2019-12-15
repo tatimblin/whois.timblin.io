@@ -4,7 +4,7 @@
       <img src="@/assets/img/profile-cohere.jpg" alt="Tristan Timblin" class="UserProfile-image">
     </div>
     <h1 class="UserProfile-title">
-      <span class="UserProfile-name Heading Heading--lead" itemprop="name">Tristan Timblin</span>
+      <span class="UserProfile-name Heading Heading--lead" itemprop="name">Tristan Timblin&nbsp;</span>
       <span class="UserProfile-role Heading--flag" itemprop="jobTitle">Software Engineer</span>
     </h1>
     <p class="UserProfile-bio">I'm a developer building pages at Yext.</p>
