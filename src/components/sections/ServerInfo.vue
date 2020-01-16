@@ -42,7 +42,7 @@ export default {
       facts: [
         {
           label: 'Version',
-          value: '1.0.1'
+          value: '1.0.2'
         },
         {
           label: 'Domain',
@@ -53,16 +53,8 @@ export default {
           value: 'Netlify'
         },
         {
-          label: 'Registrar',
-          value: 'Gandi SAS'
-        },
-        {
           label: 'Creation',
-          value: '2018-07-14T20:22:57Z'
-        },
-        {
-          label: 'Updated',
-          value: '2019-06-10T21:58:30Z'
+          value: '2019-09-14T20:22:57Z'
         },
       ]
     }

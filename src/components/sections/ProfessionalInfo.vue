@@ -3,7 +3,7 @@
     <ul class="ProfessionalInfo">
       <li class="ProfessionalInfo-item" v-for="item in items" :key="item.label">
         <h3 class="ProfessionalInfo-label Heading--brow" v-if="item.label">{{ item.label }}</h3>
-        <p class="ProfessionalInfo-value" itemprop="about">{{ item.value }}</p>
+        <p class="ProfessionalInfo-value" itemprop="disambiguatingDescription">{{ item.value }}</p>
       </li>
     </ul>
   </content-container>

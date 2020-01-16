@@ -1,5 +1,5 @@
 <template>
-  <content-container title="Personal Profile">
+  <content-container title="Structured Data">
     <ul class="PersonalInfo">
       <li class="PersonalInfo-item" v-for="fact in facts" :key="fact.label">
         <span class="PersonalInfo-label Heading--brow">
@@ -49,6 +49,11 @@ export default {
           label: 'Hobbies',
           value: ['Photography', 'Running', 'Drawing'],
           schema: 'knowsAbout'
+        },
+        {
+          label: 'Alumni',
+          value: 'Drexel University',
+          schema: 'alumniOf'
         },
         {
           label: 'Height',
