@@ -20,7 +20,7 @@ export default {
       { name: 'robots', content: 'index' },
       { name: 'googlebot', content: 'index' },
       { name: 'generator', content: 'vue' },
-      { name: 'subject', content: 'Professional profile of software engineer Tristan Timblin.' },
+      { name: 'subject', content: 'Professional profile of software engineer Tristan Timblin' },
       { name: 'og:type', content: 'profile'},
       { name: 'og:profile:first_name', content: 'Tristan'},
       { name: 'og:profile:last_name', content: 'Timblin'},
@@ -36,7 +36,7 @@ export default {
       { name: 'twitter:creator', content: '@TristanTimblin'},
       { name: 'twitter:url', content: 'https://whois.timblin.io/'},
       { name: 'twitter:title', content: 'Tristan Timblin - Software Engineer'},
-      { name: 'twitter:description', content: 'Professional profile of software engineer Tristan Timblin.'},
+      { name: 'twitter:description', content: 'Professional profile of software engineer Tristan Timblin'},
       { name: 'twitter:image', content: '/assets/img/profile-cohere.jpg'},
       { name: 'twitter:image:alt', content: 'Profile of Tristan Timblin'},
       { name: 'mobile-web-app-capable', content: 'yes'}
