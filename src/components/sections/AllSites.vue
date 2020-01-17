@@ -36,6 +36,14 @@ export default {
       count: 0,
       sites: [
         {
+          title: 'ParkMobile venue parking',
+          company: 'Yext',
+          url: 'https://reserve.parkmobile.io/dc/washington/1500-south-capitol-st-se',
+          icon: '🏟',
+          year: 2020,
+          desc: 'Help fans, concertgoers, and other guests looking online, find parking near ParkMobile supported venues.',
+        },
+        {
           title: 'Tuesday Morning intent pages',
           company: 'Yext',
           url: 'http://www.tuesdaymorning.com/stores/index.html',
