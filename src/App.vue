@@ -25,7 +25,7 @@ export default {
       { name: 'og:profile:first_name', content: 'Tristan'},
       { name: 'og:profile:last_name', content: 'Timblin'},
       { name: 'og:title', content: 'Tristan Timblin - Software Engineer'},
-      { name: 'og:image', content: '../assets/img/profile-cohere.jpg'},
+      { name: 'og:image', content: '@/assets/img/profile-cohere.jpg'},
       { name: 'og:image:alt', content: 'Profile of Tristan Timblin'},
       { name: 'og:description', content: 'A User Interface Engineer with a strong UX design background, focused on creating user valued digital experiences.'},
       { name: 'os:site_name', content: 'whois.timblin.io'},
