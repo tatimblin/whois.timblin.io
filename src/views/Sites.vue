@@ -1,5 +1,5 @@
 <template>
-  <div class="App">
+  <div class="App" data-view>
     <main class="App-content Text">
       <aside class="App-item">
         <user-profile></user-profile>
