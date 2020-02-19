@@ -240,7 +240,7 @@ export default {
       return yearsList
     },
     currentYear () {
-      return 2019
+      return new Date().getFullYear()
     }
   },
   methods: {
