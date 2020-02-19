@@ -38,7 +38,7 @@ export default {
         {
           title: 'PF Chang\'s restaurant locator',
           company: 'Yext',
-          url: 'https://reserve.parkmobile.io/dc/washington/1500-south-capitol-st-se',
+          url: 'https://www.pfchangs.com/locations/us/va/mclean/1716m-international-dr/3000-tyson-s-corner.html?utm_source=YextMain&utm_medium=Directory',
           icon: '🥡',
           year: 2020,
           desc: 'Yext pages implementation for an asian-fusion restaurant in the United States.',
