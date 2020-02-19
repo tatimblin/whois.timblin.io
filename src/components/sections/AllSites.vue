@@ -36,6 +36,14 @@ export default {
       count: 0,
       sites: [
         {
+          title: 'PF Chang\'s restaurant locator',
+          company: 'Yext',
+          url: 'https://reserve.parkmobile.io/dc/washington/1500-south-capitol-st-se',
+          icon: '🥡',
+          year: 2020,
+          desc: 'Yext pages implementation for an asian-fusion restaurant in the United States.',
+        },
+        {
           title: 'ParkMobile venue parking',
           company: 'Yext',
           url: 'https://reserve.parkmobile.io/dc/washington/1500-south-capitol-st-se',
