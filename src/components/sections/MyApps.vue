@@ -17,13 +17,13 @@
 </template>
 
 <script>
-import CardItem from '@/components/CardItem'
+import CardItem from '@/components/CardItem';
 
 export default {
   components: {
     CardItem,
   },
-  data () {
+  data() {
     return {
       interests: [
         {
@@ -76,10 +76,15 @@ export default {
           title: 'Gyazo',
           url: 'https://gyazo.com',
         },
+        {
+          image: 'faunadb.png',
+          title: 'Fauna',
+          url: 'https://fauna.com/',
+        },
       ],
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

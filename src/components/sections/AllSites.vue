@@ -68,6 +68,14 @@ export default {
           desc: 'Yext Pages implementation for a fried chicken chain in the United States.',
         },
         {
+          title: 'Swiss Life Branch Finder',
+          company: 'Yext',
+          url: 'https://locations.swisslife.ch/de/zug',
+          icon: '😇',
+          year: 2019,
+          desc: 'Branch finder for a Swiss insurance agency.',
+        },
+        {
           title: 'Big Lots store locator',
           company: 'Yext',
           url: 'https://local.biglots.com/',
