@@ -1,6 +1,5 @@
 <template>
   <article class="JobItem">
-    <meta itemprop="occupationalCategory" :value="data.jobCode">
     <div class="JobItem-media">
       <a :href="data.url" class="JobTitle-link" target="_blank">
         <img class="JobItem-image" :src="getImage(data.image)" :alt="data.co">

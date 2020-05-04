@@ -31,14 +31,22 @@ export default {
     ListItem,
   },
   props: ['limit'],
-  data () {
+  data() {
     return {
       count: 0,
       sites: [
         {
+          title: 'Lenscrafters Store & Doctor locator',
+          company: 'Yext',
+          url: 'https://local.lenscrafters.com/',
+          icon: '🕶',
+          year: 2020,
+          desc: 'Store and doctor locator for US and Canada locations.',
+        },
+        {
           title: 'PF Chang\'s restaurant locator',
           company: 'Yext',
-          url: 'https://www.pfchangs.com/locations/us/va/mclean/1716m-international-dr/3000-tyson-s-corner.html?utm_source=YextMain&utm_medium=Directory',
+          url: 'https://www.pfchangs.com/locations/us/va/mclean/1716m-international-dr/3000-tyson-s-corner.html',
           icon: '🥡',
           year: 2020,
           desc: 'Yext pages implementation for an asian-fusion restaurant in the United States.',
