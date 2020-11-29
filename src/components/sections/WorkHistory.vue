@@ -23,7 +23,7 @@ export default {
       jobs: [
         {
           key: 2,
-          title: 'Front End Developer',
+          title: 'Software Engineer',
           co: 'Yext',
           duration: 'April 2019',
           description: `At Yext I build highly crawlable web applications, to help populate current business information
