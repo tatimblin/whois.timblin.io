@@ -36,6 +36,14 @@ export default {
       count: 0,
       sites: [
         {
+          title: 'Bell & Ross Timepieces',
+          company: 'Yext',
+          url: 'https://stores.bellross.com/france/paris-(75)/paris/25-rue-royale',
+          icon: '⌚️',
+          year: 2021,
+          desc: 'Search for Bell & Ross stores or their retailer partners',
+        },
+        {
           title: 'Subway Europe',
           company: 'Yext',
           url: 'https://restaurants.subway.com/',
