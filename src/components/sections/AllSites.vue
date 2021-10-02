@@ -36,6 +36,22 @@ export default {
       count: 0,
       sites: [
         {
+          title: 'Shutterfly',
+          company: 'Yext',
+          url: 'https://local.prestigeportraits.com/',
+          icon: '🤳',
+          year: 2021,
+          desc: 'Help parents and kids find their school pictures with location based SEO',
+        },
+        {
+          title: 'Japan Tourist Bureau',
+          company: 'Yext',
+          url: 'https://consultants.jtb.co.jp/',
+          icon: '🛩',
+          year: 2021,
+          desc: 'Find travel agents using advanced filtering',
+        },
+        {
           title: 'Bell & Ross Timepieces',
           company: 'Yext',
           url: 'https://stores.bellross.com/france/paris-(75)/paris/25-rue-royale',
