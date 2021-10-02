@@ -6,12 +6,12 @@
       </aside>
       <div class="App-item">
         <professional-info></professional-info>
-        <personal-info></personal-info>
         <my-sites></my-sites>
         <my-interests></my-interests>
         <work-history></work-history>
         <my-apps></my-apps>
         <all-sites limit="5"></all-sites>
+        <personal-info></personal-info>
         <server-info></server-info>
       </div>
     </main>

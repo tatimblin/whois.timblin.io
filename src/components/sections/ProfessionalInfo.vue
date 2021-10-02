@@ -23,13 +23,10 @@ export default {
       items: [
         {
           value: `
-            I work at Yext – we manage business data such as locations, reviews, and more – one of
-            our products involves surfacing this data in crawlable web apps. Within that product
-            team, I lead the development of our UI system. The basis of the project is to build
-            common components by combing through w3.org and schema.org, to implement features
-            that can be handled automatically or with simple configuration, and ingest data in
-            accordance with our platform's schema. I really love this work of baking in best
-            practices at the lowest common level to improve the entire team’s efficiency.`,
+            I'm a software engineer focused on the human computer interaction between people, and the
+            applications they use day to day. At Yext I help build and maintain the applications, that
+            generate our pages. Together our service hosts over a million static pages averaging
+            +1.5 billion views a year, chances are you've already visited one.`,
         },
       ],
     }
