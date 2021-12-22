@@ -49,8 +49,5 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ],
-  "engines": {
-    "node": "13.3.0"
-  }
+  ]
 }
