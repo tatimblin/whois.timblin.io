@@ -10,28 +10,26 @@
 </template>
 
 <script>
-import ContentContainer from '@/components/ContentContainer.vue'
-import ListItem from '@/components/ListItem.vue'
+import ContentContainer from '@/components/ContentContainer.vue';
 
 export default {
   components: {
     ContentContainer,
-    ListItem,
   },
-  data () {
+  data() {
     return {
       items: [
         {
           value: `
             I'm a software engineer focused on the human computer interaction between people, and the
-            applications they use day to day. At Yext I help build and maintain the applications, that
+            applications they use day to day. At Yext I help build and maintain the applications that
             generate our pages. Together our service hosts over a million static pages averaging
-            +1.5 billion views a year, chances are you've already visited one.`,
+            +1.5 billion views a year (2018), chances are you've already visited one.`,
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

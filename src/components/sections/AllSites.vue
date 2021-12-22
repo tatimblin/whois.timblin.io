@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import ContentContainer from '@/components/ContentContainer.vue'
-import ListItem from '@/components/ListItem.vue'
+import ContentContainer from '@/components/ContentContainer.vue';
+import ListItem from '@/components/ListItem.vue';
 
 export default {
   components: {
@@ -36,28 +36,44 @@ export default {
       count: 0,
       sites: [
         {
+          title: 'IQOS Search Experience',
+          company: 'Yext',
+          url: 'https://ch.iqos.com/en/searchresults?gr=false',
+          icon: '💨',
+          year: 2021,
+          desc: 'A rich search experience with grouping, autocomplete, and pagination (NOTE: If country origin block go back)',
+        },
+        {
+          title: 'Verizon – Cell Only',
+          company: 'Yext',
+          url: 'https://locations.cell-only.com/wy/jackson/365-w-broadway',
+          icon: '📲',
+          year: 2021,
+          desc: 'A trial site for a client\'s subsidiary',
+        },
+        {
           title: 'Shutterfly',
           company: 'Yext',
           url: 'https://local.prestigeportraits.com/',
           icon: '🤳',
           year: 2021,
-          desc: 'Help parents and kids find their school pictures with location based SEO',
+          desc: 'Help parents find their child\'s school photos by searching their school',
         },
         {
-          title: 'Japan Tourist Bureau',
+          title: 'JTB Travel Angent Search',
           company: 'Yext',
           url: 'https://consultants.jtb.co.jp/',
           icon: '🛩',
           year: 2021,
-          desc: 'Find travel agents using advanced filtering',
+          desc: 'A search experience with advanced filtering like common wordpart facets to narrow down results',
         },
         {
-          title: 'Bell & Ross Timepieces',
+          title: 'Bell & Ross Timepiece Store Locator',
           company: 'Yext',
           url: 'https://stores.bellross.com/france/paris-(75)/paris/25-rue-royale',
           icon: '⌚️',
           year: 2021,
-          desc: 'Search for Bell & Ross stores or their retailer partners',
+          desc: 'Surface the nearest Bell & Ross store or retail partner location information in third party search applications',
         },
         {
           title: 'Subway Europe',
@@ -65,15 +81,18 @@ export default {
           url: 'https://restaurants.subway.com/',
           icon: '🥪',
           year: 2020,
-          desc: 'Added support for locations across europe and translations for 26 languages',
+          desc: `Added locale support across Europe and translations for 26 different languages
+          for each Subway restaurant on the continent`,
         },
         {
-          title: 'At&t store locator',
+          title: 'AT&T store locator',
           company: 'Yext',
           url: 'https://www.att.com/stores/',
           icon: '📲',
           year: 2020,
-          desc: 'Store locator with additional product pages for each city in the country',
+          desc: `A webpage for every AT&T store and major product (like the new iPhone) at each
+          store. As well as a recurring job to keep a complex hierarchy of permissions (like
+          branch, region, or corporate managers) up to date with proper user permissions`,
         },
         {
           title: 'Oakley store locator',
@@ -291,32 +310,32 @@ export default {
           year: 2016,
           desc: '',
         },
-      ]
-    }
+      ],
+    };
   },
   computed: {
-    years () {
-      const yearsList = [...new Set(this.sites.map(x => x.year))]
-      console.log(yearsList[0])
+    years() {
+      const yearsList = [...new Set(this.sites.map(x => x.year))];
+
       if (this.limit) {
-        return yearsList.slice(0, 1)
+        return yearsList.slice(0, 1);
       }
-      return yearsList
+      return yearsList;
     },
-    currentYear () {
-      return new Date().getFullYear()
-    }
+    currentYear() {
+      return new Date().getFullYear();
+    },
   },
   methods: {
-    sortByYear (year) {
-      const filter = this.sites.filter(x => x.year === year)
+    sortByYear(year) {
+      const filter = this.sites.filter(x => x.year === year);
       if (this.limit) {
-        return filter.slice(0, this.limit)
+        return filter.slice(0, this.limit);
       }
-      return filter
-    }
+      return filter;
+    },
   },
-}
+};
 </script>
 
 <style lang="scss">
@@ -341,5 +360,4 @@ export default {
     @include l-list;
   }
 }
-
 </style>
