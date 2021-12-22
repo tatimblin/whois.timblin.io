@@ -60,7 +60,7 @@ export default {
           desc: 'Help parents find their child\'s school photos by searching their school',
         },
         {
-          title: 'JTB Travel Angent Search',
+          title: 'JTB Travel Agent Search',
           company: 'Yext',
           url: 'https://consultants.jtb.co.jp/',
           icon: '🛩',
