@@ -5,46 +5,46 @@
         <user-profile></user-profile>
       </aside>
       <div class="App-item">
-        <professional-info></professional-info>
+        <default-section v-bind="content.aboutMe" />
         <my-sites></my-sites>
         <my-interests></my-interests>
         <work-history></work-history>
         <my-apps></my-apps>
         <all-sites limit="5"></all-sites>
-        <personal-info></personal-info>
-        <server-info></server-info>
+        <default-section v-bind="content.personalInfo" />
+        <default-section v-bind="content.serverInfo" />
       </div>
     </main>
   </div>
 </template>
 
 <script>
-import ProfessionalInfo from '../components/sections/ProfessionalInfo.vue'
-import UserProfile from '../components/UserProfile.vue'
-import PersonalInfo from '../components/sections/PersonalInfo.vue'
-import MySites from '../components/sections/MySites.vue'
-import MyInterests from '../components/sections/MyInterests.vue'
-import WorkHistory from '../components/sections/WorkHistory.vue'
-import MyApps from '../components/sections/MyApps.vue'
-import AllSites from '../components/sections/AllSites.vue'
-import ServerInfo from '../components/sections/ServerInfo.vue'
+import DefaultSection from '../components/sections/DefaultSection.vue';
+import UserProfile from '../components/UserProfile.vue';
+import MySites from '../components/sections/MySites.vue';
+import MyInterests from '../components/sections/MyInterests.vue';
+import WorkHistory from '../components/sections/WorkHistory.vue';
+import MyApps from '../components/sections/MyApps.vue';
+import AllSites from '../components/sections/AllSites.vue';
+import content from '../content';
 
 export default {
   name: 'app',
   components: {
-    ProfessionalInfo,
+    DefaultSection,
     UserProfile,
-    PersonalInfo,
     MySites,
     MyInterests,
     WorkHistory,
     MyApps,
     AllSites,
-    ServerInfo,
+  },
+  data() {
+    return { content };
   },
   metaInfo: {
-    titleTemplate: '%s - Software Engineering Profile'
-  }
+    titleTemplate: '%s - Software Engineering Profile',
+  },
 };
 </script>
 

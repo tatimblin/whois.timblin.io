@@ -15,15 +15,15 @@
 </template>
 
 <script>
-import ContentContainer from '@/components/ContentContainer.vue'
-import ListItem from '@/components/ListItem.vue'
+import ContentContainer from '@/components/ContentContainer.vue';
+import ListItem from '@/components/ListItem.vue';
 
 export default {
   components: {
     ContentContainer,
     ListItem,
   },
-  data () {
+  data() {
     return {
       sites: [
         {
@@ -44,10 +44,10 @@ export default {
           icon: '🎸',
           desc: 'Hold for a listening data site I\'ve been thinking about.',
         },
-      ]
-    }
+      ],
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

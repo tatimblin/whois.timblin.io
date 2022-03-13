@@ -36,6 +36,27 @@ export default {
       count: 0,
       sites: [
         {
+          title: 'Burger King UK',
+          company: 'Yext',
+          url: 'https://locations.burgerking.co.uk/london/117-kingsway',
+          icon: '🤴🏻',
+          year: 2022,
+          desc: `
+            Yext Pages implementation for an American fast food staple in the UK.
+          `,
+        },
+        {
+          title: 'Dignity Funerals Microsites',
+          company: 'Yext',
+          url: 'https://www.rdaviesfunerals.co.uk/',
+          icon: '👻',
+          year: 2022,
+          desc: `
+            A customizable microsite Dignity can provide to each of it's franchise owners. Replacing the former consolidated
+            website which only offered each location a standard page.
+          `,
+        },
+        {
           title: 'IQOS Search Experience',
           company: 'Yext',
           url: 'https://ch.iqos.com/en/searchresults?gr=false',
