@@ -46,6 +46,18 @@ export default {
           `,
         },
         {
+          title: 'Clara Weisman – Fashion Portfolio',
+          company: 'Personal',
+          url: 'https://www.claraweisman.com/',
+          icon: '👗',
+          year: 2022,
+          desc: `
+            A fork of my photography website that I connected to a Contentful account for
+            my friend Clara, who's an amazing designer. Bonus I'm wearing her clothes in
+            one of the collections.
+          `,
+        },
+        {
           title: 'Burger King UK',
           company: 'Yext',
           url: 'https://locations.burgerking.co.uk/london/117-kingsway',
