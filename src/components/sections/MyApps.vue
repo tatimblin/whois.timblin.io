@@ -29,42 +29,52 @@ export default {
         {
           image: 'vue.png',
           title: 'Vue.js',
-          url: 'https://vuejs.org/'
+          url: 'https://vuejs.org/',
         },
         {
           image: 'netlify.png',
           title: 'Netlify',
-          url: 'https://netlify.com/'
+          url: 'https://netlify.com/',
+        },
+        {
+          image: 'faunadb.png',
+          title: 'Fauna',
+          url: 'https://fauna.com/',
         },
         {
           image: 'firebase.png',
           title: 'Firebase',
-          url: 'https://firebase.google.com/docs/web/setup'
+          url: 'https://firebase.google.com/docs/web/setup',
+        },
+        {
+          image: 'vanilla-extract.svg',
+          title: 'Vanilla Extract',
+          url: 'https://vanilla-extract.style/',
         },
         {
           image: 'codepen.png',
           title: 'Codepen',
-          url: 'https://codepen.io/'
+          url: 'https://codepen.io/',
         },
         {
           image: 'codrops.png',
           title: 'Codrops',
-          url: 'https://tympanus.net/codrops/'
+          url: 'https://tympanus.net/codrops/',
         },
         {
           image: '11ty.png',
           title: 'Eleventy',
-          url: 'https://www.11ty.io/'
+          url: 'https://www.11ty.io/',
         },
         {
           image: 'git.png',
           title: 'Git Flow',
-          url: 'https://github.com/nvie/gitflow'
+          url: 'https://github.com/nvie/gitflow',
         },
         {
           image: 'pullpanda.png',
           title: 'Pull Panda',
-          url: 'https://pullreminders.com/'
+          url: 'https://pullreminders.com/',
         },
         {
           image: 'ydkjs.jpg',
@@ -75,11 +85,6 @@ export default {
           image: 'gyazo.png',
           title: 'Gyazo',
           url: 'https://gyazo.com',
-        },
-        {
-          image: 'faunadb.png',
-          title: 'Fauna',
-          url: 'https://fauna.com/',
         },
       ],
     };

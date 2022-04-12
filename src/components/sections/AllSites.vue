@@ -36,6 +36,16 @@ export default {
       count: 0,
       sites: [
         {
+          title: 'Armani',
+          company: 'Yext',
+          url: 'https://locations.armani.com/search?q=paris&qp=paris&l=en',
+          icon: '👔',
+          year: 2022,
+          desc: `
+            Yext Pages implementation for an Italian luxury fashion house.
+          `,
+        },
+        {
           title: 'Burger King UK',
           company: 'Yext',
           url: 'https://locations.burgerking.co.uk/london/117-kingsway',
@@ -49,7 +59,7 @@ export default {
           title: 'Dignity Funerals Microsites',
           company: 'Yext',
           url: 'https://www.rdaviesfunerals.co.uk/',
-          icon: '👻',
+          icon: '🧟‍♂️',
           year: 2022,
           desc: `
             A customizable microsite Dignity can provide to each of it's franchise owners. Replacing the former consolidated
