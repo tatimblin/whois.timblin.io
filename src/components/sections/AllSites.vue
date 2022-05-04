@@ -36,6 +36,17 @@ export default {
       count: 0,
       sites: [
         {
+          title: 'ball sort game',
+          company: 'Personal',
+          url: 'https://tatimblin.github.io/ball-sort-game/',
+          icon: '🧮',
+          year: 2022,
+          desc: `
+            A fun puzzle game where you try and sort colored cubes in a stack.
+            I created this to learn React and the HTML Drag and Drop API.
+          `,
+        },
+        {
           title: 'Armani',
           company: 'Yext',
           url: 'https://locations.armani.com/search?q=paris&qp=paris&l=en',
