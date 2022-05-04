@@ -37,8 +37,8 @@ export default {
 .JobItem
 {
   display: grid;
-  grid-template-columns: $spacing * 2 auto;
-  grid-gap: $spacing / 2;
+  grid-template-columns: calc(#{$spacing} * 2) auto;
+  grid-gap: calc(#{$spacing} / 2);
 
   &-image
   {
@@ -68,7 +68,7 @@ export default {
   &-referral
   {
     display: block;
-    margin-top: $spacing / 4;
+    margin-top: calc(#{$spacing} / 4);
   }
 }
 </style>

@@ -11,7 +11,7 @@
   @include Heading;
 
   display: inline-block;
-  margin-bottom: $spacing / 4;
+  margin-bottom: calc(#{$spacing} / 4);
   font-size: 24px;
   line-height: 24px;
 }
@@ -97,7 +97,7 @@
 
 @mixin Link--cta
 {
-  padding: $spacing / 3;
+  padding: calc(#{$spacing} / 3);
   border: $border-default;
   text-align: center;
 }

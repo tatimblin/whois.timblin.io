@@ -60,7 +60,7 @@ export default {
 .Paragraph {
   &-item:not(:last-child)
   {
-    margin-bottom: $spacing / 2;
+    margin-bottom: calc(#{$spacing} / 2);
   }
 }
 
@@ -79,7 +79,7 @@ export default {
   {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-gap: $spacing / 2;
+    grid-gap: calc(#{$spacing} / 2);
     break-inside: avoid;
 
     @include query (xs)

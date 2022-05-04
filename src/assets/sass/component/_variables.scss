@@ -55,13 +55,13 @@ $breakpoints: (
 );
 
 $spacing: 32px;
-$gutter: $spacing / 2;
+$gutter: calc(#{$spacing} / 2);
 $spacing-text: 8px;
 
-$screen-xs: map-get($breakpoints, 'xs') - $gutter / 2 !default;
-$screen-sm: map-get($breakpoints, 'sm') - $gutter / 2 !default;
-$screen-md: map-get($breakpoints, 'md') - $gutter !default;
-$screen-lg: map-get($breakpoints, 'lg') - $gutter !default;
+$screen-xs: calc(map-get($breakpoints, 'xs') - $gutter / 2) !default;
+$screen-sm: calc(map-get($breakpoints, 'sm') - $gutter / 2) !default;
+$screen-md: calc(map-get($breakpoints, 'md') - $gutter) !default;
+$screen-lg: calc(map-get($breakpoints, 'lg') - $gutter) !default;
 
 // ANIMATION
 

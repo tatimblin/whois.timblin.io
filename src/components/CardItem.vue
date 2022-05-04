@@ -28,7 +28,7 @@ export default {
   @include border-container;
 
   height:100%;
-  padding: $spacing / 2;
+  padding: calc(#{$spacing} / 2);
   box-sizing: border-box;
 
   &-image

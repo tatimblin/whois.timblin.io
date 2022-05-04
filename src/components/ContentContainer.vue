@@ -39,7 +39,7 @@ export default {
   {
     display: flex;
     justify-content: space-between;
-    padding: $spacing / 3 $spacing / 2;
+    padding: calc(#{$spacing} / 3) calc(#{$spacing} / 2);
     border-bottom: $border-default;
     background: $section-heading;
   }
@@ -51,13 +51,13 @@ export default {
 
   &-content
   {
-    padding: $spacing / 2;
+    padding: calc(#{$spacing} / 2);
   }
 
   &-expand
   {
     display: block;
-    padding: $spacing / 2;
+    padding: calc(#{$spacing} / 2);
     text-align: center;
     border-top: $border-default;
     background-color: $gray10;

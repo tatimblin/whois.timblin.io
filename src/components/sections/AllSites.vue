@@ -384,18 +384,18 @@ export default {
 <style lang="scss">
 .AllSites
 {
-  margin-top: $spacing / 4;
+  margin-top: calc(#{$spacing} / 4);
 
   &-title
   {
-    margin-bottom: $spacing / 1.5;
-    padding-left: $spacing / 4;
+    margin-bottom: calc(#{$spacing} / 1.5);
+    padding-left: calc(#{$spacing} / 4);
     background-color: $section-heading;
   }
 
   &-list
   {
-    margin-bottom: $spacing / 2;
+    margin-bottom: calc(#{$spacing} / 2);
   }
 
   &-item

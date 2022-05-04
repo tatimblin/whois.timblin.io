@@ -39,7 +39,7 @@ export default {
 
   &-title
   {
-    margin: $spacing / 2 0 $spacing / 4;
+    margin: calc(#{$spacing} / 2) 0 calc(#{$spacing} / 4);
   }
 
   &-role
@@ -52,7 +52,7 @@ export default {
     @include border-container;
 
     display: block;
-    margin: $spacing / 2 0;
+    margin: calc(#{$spacing} / 2) 0;
     background: $section-heading;
 
     &:hover

@@ -44,7 +44,7 @@ export default {
   {
     &:not(:last-child)
     {
-      margin-right: $spacing / 2;
+      margin-right: calc(#{$spacing} / 2);
     }
   }
 }

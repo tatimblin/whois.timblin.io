@@ -53,7 +53,7 @@ export default {
 <style lang="scss">
 .MySites
 {
-  padding-top: $spacing / 4;
+  padding-top: calc(#{$spacing} / 4);
 
   &-item
   {

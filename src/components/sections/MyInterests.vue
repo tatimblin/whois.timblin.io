@@ -49,19 +49,19 @@ export default {
 
   &-title
   {
-    margin-bottom: $spacing / 2;
+    margin-bottom: calc(#{$spacing} / 2);
   }
 
   &-content
   {
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap: $spacing / 2;
+    grid-gap: calc(#{$spacing} / 2);
 
     @include query (sm)
     {
       grid-template-columns: repeat(2, 1fr);
-      grid-gap: $spacing / 2 $spacing;
+      grid-gap: calc(#{$spacing} / 2) $spacing;
     }
   }
 }

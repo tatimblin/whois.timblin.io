@@ -2,7 +2,7 @@
 
 @mixin l-container
 {
-  margin: 0 $spacing / 2;
+  margin: 0 calc(#{$spacing} / 2);
 
   @include query (sm)
   {
