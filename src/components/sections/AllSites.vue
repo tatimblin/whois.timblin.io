@@ -36,6 +36,36 @@ export default {
       count: 0,
       sites: [
         {
+          title: 'Rover + Petco',
+          company: 'Yext',
+          url: 'https://stores.petco.com/al/birmingham/rover-birmingham-al-1835.html',
+          icon: '🐶',
+          year: 2022,
+          desc: `
+            Deep integration of Rover bookings app on Petco.com.
+          `,
+        },
+        {
+          title: 'Custom Truck',
+          company: 'Yext',
+          url: 'https://www.customtruck.com/locations/cabot',
+          icon: '🚧',
+          year: 2022,
+          desc: `
+            Yext Pages implementation for a truck rental company.
+          `,
+        },
+        {
+          title: 'Grease Monkey',
+          company: 'Yext',
+          url: 'https://www.greasemonkeyauto.com/locations/us/al/phenix-city/1304-u.s.-280-bypass',
+          icon: '🛻',
+          year: 2022,
+          desc: `
+            Multi-brand Yext Pages implementation for Grease Monkey and SpeeDee brands.
+          `,
+        },
+        {
           title: 'ball sort game',
           company: 'Personal',
           url: 'https://tatimblin.github.io/ball-sort-game/',
