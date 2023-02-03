@@ -26,9 +26,11 @@ export default {
           title: 'Software Engineer',
           co: 'Yext',
           duration: 'April 2019',
-          description: `At Yext I build highly crawlable web applications, to help populate current business information
-          throughout the web like in rich snippets. Our focus is to enable businesses to answer questions about themselves
-          wherever a customer asks.`,
+          description: `
+            I work on creating the developer environment and experience building on the Pages product. This involves
+            communicating with third-party developers through the main open-source offering, as well as developing
+            auxiliary quality of life products like a component library or a reverse proxy network solution.
+          `,
           referral: 'https://rolp.co/nVPMg',
           url: 'https://www.yext.com/',
           image: 'yext.png',
@@ -39,7 +41,10 @@ export default {
           title: 'Front End Developer',
           co: 'Cohere',
           duration: 'April 2017 - April 2019',
-          description: 'Established a design system, to reduce development time and standarize common code across the team. The component based system serves as a layer between web elements and company patterns.',
+          description: `
+            Established a design system, to reduce development time and standarize common code across the team. The
+            component based system serves as a layer between web elements and company patterns.
+          `,
           referral: 'https://cohere.city/careers',
           url: 'https://cohere.city/',
           image: 'cohere.png',

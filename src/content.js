@@ -4,7 +4,7 @@ const aboutMe = {
     {
       body: `I'm a software engineer focused on the human computer interaction between
       people, and the applications they use day to day. At Yext I help build and maintain
-      the applications that generate our pages. Together our service hosts over a million
+      the applications that generate our pages. Together our service hosts millions of
       static pages receiving +5 billion views in a year (2021), chances are you've
       already visited one.`,
     },

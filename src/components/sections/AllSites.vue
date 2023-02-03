@@ -36,6 +36,46 @@ export default {
       count: 0,
       sites: [
         {
+          title: 'Credentials Manager VS Code Extension',
+          company: 'Yext',
+          url: 'https://github.com/tatimblin/vscode-yext',
+          icon: '🔑',
+          year: 2023,
+          desc: `
+            Created a VS Code extension to manage your active credentials and set defaults per repository.
+          `,
+        },
+        {
+          title: 'React Component Library',
+          company: 'Yext',
+          url: 'https://github.com/yext/react-components',
+          icon: '⚛️',
+          year: 2022,
+          desc: `
+            Created a component library to handle rendering Yext platform specific datatypes, like Hours or Address.
+          `,
+        },
+        {
+          title: 'Unified Type library',
+          company: 'Yext',
+          url: 'https://github.com/yext/types',
+          icon: '🔏',
+          year: 2022,
+          desc: `
+            Created a single source of truth for API response types, to reduce duplicated implementation as several projects and teams adopted Typescript.
+          `,
+        },
+        {
+          title: 'Pages JS',
+          company: 'Yext',
+          url: 'https://github.com/yext/pages',
+          icon: '🖨',
+          year: 2022,
+          desc: `
+            A static site generator for hydrating React templates with Yext platform data, writted in Typescript and packaged as a Vite plugin.
+          `,
+        },
+        {
           title: 'Rover + Petco',
           company: 'Yext',
           url: 'https://stores.petco.com/al/birmingham/rover-birmingham-al-1835.html',
