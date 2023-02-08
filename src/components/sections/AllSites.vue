@@ -46,6 +46,16 @@ export default {
           `,
         },
         {
+          title: 'Retroactive New Tab Chrome Extension',
+          company: 'Personal',
+          url: 'https://chrome.google.com/webstore/detail/retroactive-new-tab/meofdjdpoiljkedjjmbedcdcaolhnbba',
+          icon: '🧩',
+          year: 2023,
+          desc: `
+            A small quality of life Chrome extension to take you back a page and open the current page in a new tab.
+          `,
+        },
+        {
           title: 'React Component Library',
           company: 'Yext',
           url: 'https://github.com/yext/react-components',
