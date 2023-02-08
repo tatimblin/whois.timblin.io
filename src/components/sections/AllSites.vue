@@ -240,7 +240,7 @@ export default {
           title: 'Lenscrafters Store & Doctor locator',
           company: 'Yext',
           url: 'https://local.lenscrafters.com/',
-          icon: '🕶',
+          icon: '🤓',
           year: 2020,
           desc: 'Store and doctor locator for US and Canada locations.',
         },
