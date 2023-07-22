@@ -27,10 +27,10 @@ export default {
   props: ['data', 'index'],
   methods: {
     getImage(fileName) {
-      return require('@/assets/img/' + fileName)
+      return require(`@/assets/img/${fileName}`);
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

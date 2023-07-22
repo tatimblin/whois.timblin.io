@@ -10,15 +10,15 @@
 </template>
 
 <script>
-import ContentContainer from '@/components/ContentContainer.vue'
-import JobItem from '@/components/JobItem.vue'
+import ContentContainer from '@/components/ContentContainer.vue';
+import JobItem from '@/components/JobItem.vue';
 
 export default {
   components: {
     ContentContainer,
     JobItem,
   },
-  data () {
+  data() {
     return {
       jobs: [
         {
@@ -51,9 +51,9 @@ export default {
           jobCode: '15-1252.00',
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

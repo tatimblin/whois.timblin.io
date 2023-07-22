@@ -16,13 +16,13 @@
 </template>
 
 <script>
-import CardItem from '@/components/CardItem'
+import CardItem from '@/components/CardItem';
 
 export default {
   components: {
     CardItem,
   },
-  data () {
+  data() {
     return {
       interests: [
         {
@@ -37,9 +37,9 @@ export default {
           and used throughout an application or across the organization.`,
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

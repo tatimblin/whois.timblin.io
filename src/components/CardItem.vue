@@ -13,13 +13,13 @@
 export default {
   props: ['image', 'title', 'desc', 'url'],
   methods: {
-    getImage (fileName) {
+    getImage(fileName) {
       if (fileName) {
-        return require('@/assets/img/' + fileName)
+        return require(`@/assets/img/${fileName}`);
       }
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

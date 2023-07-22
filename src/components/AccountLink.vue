@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       accounts: [
         {
@@ -29,9 +29,9 @@ export default {
           src: 'imageGoesHere',
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -21,12 +21,12 @@
 export default {
   props: ['title', 'external', 'route'],
   computed: {
-    prettyExternal () {
-      const url = this.external.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i)
-      return url[1]
-    }
-  }
-}
+    prettyExternal() {
+      const url = this.external.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i);
+      return url[1];
+    },
+  },
+};
 </script>
 
 <style lang="scss">

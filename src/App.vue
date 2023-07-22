@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import ogImage from "./assets/img/profile-cohere.jpg"
+import ogImage from './assets/img/profile-cohere.jpg';
 
 export default {
   metaInfo: {
     title: 'Tristan Timblin',
     htmlAttrs: {
       lang: 'en',
-      amp: true
+      amp: true,
     },
     meta: [
       { charset: 'utf-8' },
@@ -23,33 +23,33 @@ export default {
       { name: 'googlebot', content: 'index' },
       { name: 'generator', content: 'vue' },
       { name: 'subject', content: 'Professional profile of software engineer Tristan Timblin' },
-      { name: 'og:type', content: 'profile'},
-      { name: 'og:profile:first_name', content: 'Tristan'},
-      { name: 'og:profile:last_name', content: 'Timblin'},
-      { name: 'og:title', content: 'Tristan Timblin - Software Engineer'},
-      { name: 'og:image', content: ogImage},
-      { name: 'og:image:alt', content: 'Profile of Tristan Timblin'},
-      { name: 'og:description', content: 'A User Interface Engineer with a strong UX design background, focused on creating user valued digital experiences.'},
-      { name: 'os:site_name', content: 'tristantimblin.dev'},
-      { name: 'locale', content: 'en_US'},
-      { name: 'article:author', content: 'Tristan Timblin'},
-      { name: 'twitter:card', content: 'summary'},
-      { name: 'twitter:site', content: '@TristanTimblin'},
-      { name: 'twitter:creator', content: '@TristanTimblin'},
-      { name: 'twitter:url', content: 'https://tristantimblin.dev/'},
-      { name: 'twitter:title', content: 'Tristan Timblin - Software Engineer'},
-      { name: 'twitter:description', content: 'Professional profile of software engineer Tristan Timblin'},
-      { name: 'twitter:image', content: '/assets/img/profile-cohere.jpg'},
-      { name: 'twitter:image:alt', content: 'Profile of Tristan Timblin'},
-      { name: 'mobile-web-app-capable', content: 'yes'}
+      { name: 'og:type', content: 'profile' },
+      { name: 'og:profile:first_name', content: 'Tristan' },
+      { name: 'og:profile:last_name', content: 'Timblin' },
+      { name: 'og:title', content: 'Tristan Timblin - Software Engineer' },
+      { name: 'og:image', content: ogImage },
+      { name: 'og:image:alt', content: 'Profile of Tristan Timblin' },
+      { name: 'og:description', content: 'A User Interface Engineer with a strong UX design background, focused on creating user valued digital experiences.' },
+      { name: 'os:site_name', content: 'tristantimblin.dev' },
+      { name: 'locale', content: 'en_US' },
+      { name: 'article:author', content: 'Tristan Timblin' },
+      { name: 'twitter:card', content: 'summary' },
+      { name: 'twitter:site', content: '@TristanTimblin' },
+      { name: 'twitter:creator', content: '@TristanTimblin' },
+      { name: 'twitter:url', content: 'https://tristantimblin.dev/' },
+      { name: 'twitter:title', content: 'Tristan Timblin - Software Engineer' },
+      { name: 'twitter:description', content: 'Professional profile of software engineer Tristan Timblin' },
+      { name: 'twitter:image', content: '/assets/img/profile-cohere.jpg' },
+      { name: 'twitter:image:alt', content: 'Profile of Tristan Timblin' },
+      { name: 'mobile-web-app-capable', content: 'yes' },
     ],
     link: [
       { rel: 'author', href: 'humans.txt' },
       { rel: 'me', href: 'https://www.linkedin.com/in/tristan-timblin/', type: 'text/html' },
-      { rel: 'index', href: 'https://tristantimblin.dev/' }
-    ]
-  }
-}
+      { rel: 'index', href: 'https://tristantimblin.dev/' },
+    ],
+  },
+};
 </script>
 
 <style lang="scss">

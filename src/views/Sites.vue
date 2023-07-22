@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import UserProfile from '../components/UserProfile.vue'
-import MySites from '../components/sections/MySites.vue'
-import AllSites from '../components/sections/AllSites.vue'
+import UserProfile from '../components/UserProfile.vue';
+import MySites from '../components/sections/MySites.vue';
+import AllSites from '../components/sections/AllSites.vue';
 
 export default {
   name: 'app',
@@ -26,8 +26,8 @@ export default {
     AllSites,
   },
   metaInfo: {
-    titleTemplate: '%s - Site List'
-  }
+    titleTemplate: '%s - Site List',
+  },
 };
 </script>
 

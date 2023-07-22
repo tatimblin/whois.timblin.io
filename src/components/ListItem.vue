@@ -20,7 +20,7 @@
 <script>
 export default {
   props: ['icon', 'title', 'url', 'desc', 'newTab', 'noreferrer'],
-}
+};
 </script>
 
 <style lang="scss">
