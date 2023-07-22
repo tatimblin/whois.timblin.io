@@ -28,7 +28,7 @@ const serverInfo = {
     },
     {
       label: 'Domain',
-      value: 'timblin.io',
+      value: 'tristantimblin.dev',
     },
     {
       label: 'Host',

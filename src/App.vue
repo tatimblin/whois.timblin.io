@@ -30,13 +30,13 @@ export default {
       { name: 'og:image', content: ogImage},
       { name: 'og:image:alt', content: 'Profile of Tristan Timblin'},
       { name: 'og:description', content: 'A User Interface Engineer with a strong UX design background, focused on creating user valued digital experiences.'},
-      { name: 'os:site_name', content: 'whois.timblin.io'},
+      { name: 'os:site_name', content: 'tristantimblin.dev'},
       { name: 'locale', content: 'en_US'},
       { name: 'article:author', content: 'Tristan Timblin'},
       { name: 'twitter:card', content: 'summary'},
       { name: 'twitter:site', content: '@TristanTimblin'},
       { name: 'twitter:creator', content: '@TristanTimblin'},
-      { name: 'twitter:url', content: 'https://whois.timblin.io/'},
+      { name: 'twitter:url', content: 'https://tristantimblin.dev/'},
       { name: 'twitter:title', content: 'Tristan Timblin - Software Engineer'},
       { name: 'twitter:description', content: 'Professional profile of software engineer Tristan Timblin'},
       { name: 'twitter:image', content: '/assets/img/profile-cohere.jpg'},
@@ -46,7 +46,7 @@ export default {
     link: [
       { rel: 'author', href: 'humans.txt' },
       { rel: 'me', href: 'https://www.linkedin.com/in/tristan-timblin/', type: 'text/html' },
-      { rel: 'index', href: 'https://whois.timblin.io/' }
+      { rel: 'index', href: 'https://tristantimblin.dev/' }
     ]
   }
 }
