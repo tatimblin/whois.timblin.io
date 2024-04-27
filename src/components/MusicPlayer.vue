@@ -1,7 +1,7 @@
 <template>
   <div class="MusicPlayer">
     <a class="MusicPlayer-content" href="https://open.spotify.com/user/2rdu132h3xewzz4sjegc4j4pq">
-      <spotify-player src="http://localhost:8080/" />
+      <spotify-player src="https://spotify-stream-player-j2yxapx3oa-uk.a.run.app" />
     </a>
   </div>
 </template>
