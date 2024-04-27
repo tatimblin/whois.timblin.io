@@ -22,14 +22,27 @@ export default {
     return {
       jobs: [
         {
+          key: 3,
+          title: 'Senior Software Engineer',
+          co: 'Fisker',
+          duration: 'May 2023',
+          description: `
+            Developing cloud and data infrastructure for the capability of remote servicing vehicle components and
+            delivering over-the-updates to cars.
+          `,
+          url: 'https://www.fiskerinc.com/',
+          image: 'fisker.png',
+        },
+        {
           key: 2,
           title: 'Software Engineer',
           co: 'Yext',
-          duration: 'April 2019',
+          duration: 'April 2019 • February 2023',
           description: `
-            I work on creating the developer environment and experience building on the Pages product. This involves
-            communicating with third-party developers through the main open-source offering, as well as developing
-            auxiliary quality of life products like a component library or a reverse proxy network solution.
+            Built full-stack search, NLP Q&A, and booking experiences for customers on the Yext platform by writing ETLs,
+            REST/Streaming APIs, and web applications. I led initiatives to improve our internal tooling, and eventually
+            offered them as open-source software to our clients to acheive a company goal of product-izing the Yext Pages
+            service.
           `,
           referral: 'https://rolp.co/nVPMg',
           url: 'https://www.yext.com/',
@@ -40,7 +53,7 @@ export default {
           key: 1,
           title: 'Front End Developer',
           co: 'Cohere',
-          duration: 'April 2017 - April 2019',
+          duration: 'April 2017 • April 2019',
           description: `
             Established a design system, to reduce development time and standarize common code across the team. The
             component based system serves as a layer between web elements and company patterns.
