@@ -6,6 +6,10 @@ import '@/assets/sass/main.scss';
 
 Vue.config.productionTip = false;
 
+Vue.config.ignoredElements = [
+  "spotify-player",
+];
+
 Vue.use(VueMeta, {
   // optional pluginOptions
   refreshOnceOnNavigation: true,

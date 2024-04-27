@@ -110,8 +110,12 @@ export default {
 
     @include query (sm)
     {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include query (md)
+    {
       grid-template-columns: repeat(4, 1fr);
-      grid-gap: calc(#{$spacing} / 2) $spacing;
     }
   }
 }

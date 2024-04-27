@@ -1,11 +1,15 @@
 <template>
   <div id="app">
-    <router-view/>
+    <div>
+      <router-view/>
+      <music-player />
+    </div>
   </div>
 </template>
 
 <script>
 import ogImage from './assets/img/profile-cohere.jpg';
+import MusicPlayer from './components/MusicPlayer.vue';
 
 export default {
   metaInfo: {
@@ -49,12 +53,16 @@ export default {
       { rel: 'index', href: 'https://tristantimblin.dev/' },
     ],
   },
+  components: {
+    MusicPlayer,
+  },
 };
 </script>
 
 <style lang="scss">
 .App
 {
+  padding-bottom: 128px;
   background-color: #fff8eb;
 
   &-content
