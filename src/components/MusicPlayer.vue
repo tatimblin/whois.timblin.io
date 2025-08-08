@@ -1,8 +1,8 @@
 <template>
   <div class="MusicPlayer">
-    <a class="MusicPlayer-content" href="https://open.spotify.com/user/2rdu132h3xewzz4sjegc4j4pq">
+    <div class="MusicPlayer-content">
       <spotify-player src="https://spotify-stream-player-j2yxapx3oa-uk.a.run.app" />
-    </a>
+    </div>
   </div>
 </template>
 
@@ -39,10 +39,6 @@ export default {
     border-radius: 0;
     color: $gray60;
     text-decoration: none;
-
-    &:hover {
-      background-color: $pale-blue;
-    }
 
     @include query (xs)
     {
