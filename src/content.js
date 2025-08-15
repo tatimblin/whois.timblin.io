@@ -1,3 +1,5 @@
+const version = typeof __VERSION__ !== 'undefined' ? __VERSION__ : '0.0.0';
+
 const aboutMe = {
   title: 'About Me',
   paragraphs: [
@@ -24,7 +26,7 @@ const serverInfo = {
   bullets: [
     {
       label: 'Version',
-      value: '1.0.2',
+      value: version,
     },
     {
       label: 'Domain',

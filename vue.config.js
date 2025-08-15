@@ -1,6 +1,19 @@
 const path = require('path');
 const PrerenderSpaPlugin = require('prerender-spa-plugin');
 
+// Read version from package.json with error handling
+let packageVersion = 'unknown';
+try {
+  const packageJson = require('./package.json');
+  if (packageJson && packageJson.version && typeof packageJson.version === 'string') {
+    packageVersion = packageJson.version;
+  } else {
+    console.warn('Warning: Invalid or missing version in package.json, using fallback version');
+  }
+} catch (error) {
+  console.warn('Warning: Could not read package.json, using fallback version:', error.message);
+}
+
 const productionPlugins = [
   new PrerenderSpaPlugin({
     staticDir: path.join(__dirname, 'dist'),
@@ -30,6 +43,14 @@ module.exports = {
     },
   },
   configureWebpack: (config) => {
+    // Add DefinePlugin to inject version constant
+    const { DefinePlugin } = require('webpack');
+    config.plugins.push(
+      new DefinePlugin({
+        __VERSION__: JSON.stringify(packageVersion),
+      })
+    );
+
     if (process.env.NODE_ENV === 'production') {
       config.plugins.push(...productionPlugins);
     }
