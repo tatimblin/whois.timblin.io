@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# Git post-commit hook for automatic version bumping
+# This script runs after each commit and checks for version bump prefixes
+# in the commit message (patch:, minor:, major:)
+
+# Exit on any error
+set -e
+
+# Get the root directory of the git repository
+REPO_ROOT=$(git rev-parse --show-toplevel)
+
+# Path to the version bump script
+VERSION_SCRIPT="$REPO_ROOT/scripts/version-bump.js"
+
+# Check if the version bump script exists
+if [ ! -f "$VERSION_SCRIPT" ]; then
+    echo "Warning: Version bump script not found at $VERSION_SCRIPT"
+    exit 0
+fi
+
+# Check if Node.js is available
+if ! command -v node >/dev/null 2>&1; then
+    echo "Warning: Node.js not found. Skipping version bump."
+    exit 0
+fi
+
+# Get the latest commit message
+COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+
+# Check if we're already in a version bump commit to avoid infinite loops
+if echo "$COMMIT_MESSAGE" | grep -q "^chore: bump version to"; then
+    echo "Skipping version bump for version commit"
+    exit 0
+fi
+
+# Check if there are any uncommitted changes that might interfere
+if ! git diff --quiet HEAD -- package.json; then
+    echo "Warning: package.json has uncommitted changes. Skipping version bump."
+    exit 0
+fi
+
+# Change to repository root directory
+cd "$REPO_ROOT"
+
+# Call the version bump script with the commit message
+echo "Checking commit message for version bump prefixes..."
+if OUTPUT=$(node "$VERSION_SCRIPT" "$COMMIT_MESSAGE" 2>&1); then
+    # Check if version was actually bumped (script outputs version info)
+    if echo "$OUTPUT" | grep -q "Version bumped from"; then
+        echo "$OUTPUT"
+        
+        # Extract the new version from the output
+        NEW_VERSION=$(echo "$OUTPUT" | grep "Version bumped from" | sed -n 's/.*to \([^ ]*\) .*/\1/p')
+        
+        if [ -n "$NEW_VERSION" ]; then
+            # Stage the updated package.json
+            git add package.json
+            
+            # Create a follow-up commit with the version change
+            git commit -m "chore: bump version to $NEW_VERSION"
+            
+            echo "Created version bump commit for $NEW_VERSION"
+        fi
+    else
+        echo "$OUTPUT"
+    fi
+else
+    # Script failed, but don't fail the hook
+    echo "Version bump script failed: $OUTPUT"
+    echo "Continuing without version bump..."
+fi
+
+exit 0
