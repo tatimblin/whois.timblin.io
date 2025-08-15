@@ -6,6 +6,7 @@
       </aside>
       <div class="App-item">
         <default-section v-bind="content.aboutMe" />
+        <music-player />
         <my-sites></my-sites>
         <my-interests></my-interests>
         <work-history></work-history>
@@ -20,6 +21,7 @@
 
 <script>
 import DefaultSection from '../components/sections/DefaultSection.vue';
+import MusicPlayer from '../components/MusicPlayer.vue';
 import UserProfile from '../components/UserProfile.vue';
 import MySites from '../components/sections/MySites.vue';
 import MyInterests from '../components/sections/MyInterests.vue';
@@ -32,6 +34,7 @@ export default {
   name: 'app',
   components: {
     DefaultSection,
+    MusicPlayer,
     UserProfile,
     MySites,
     MyInterests,
