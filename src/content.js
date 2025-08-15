@@ -55,11 +55,6 @@ const personalInfo = {
       schema: 'homeLocation',
     },
     {
-      label: 'Birthday',
-      value: 'June 11',
-      schema: 'birthDate',
-    },
-    {
       label: 'Hobbies',
       value: ['Photography', 'Running', 'Drawing'],
       schema: 'knowsAbout',
@@ -68,16 +63,6 @@ const personalInfo = {
       label: 'Alumni',
       value: 'Drexel University',
       schema: 'alumniOf',
-    },
-    {
-      label: 'Height',
-      value: '6\'2"',
-      schema: 'height',
-    },
-    {
-      label: 'Weight',
-      value: '190lbs',
-      schema: 'weight',
     },
     {
       label: 'About',
