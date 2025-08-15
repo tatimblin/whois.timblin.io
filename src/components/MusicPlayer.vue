@@ -1,8 +1,8 @@
 <template>
   <div class="MusicPlayer">
     <div class="MusicPlayer-content">
-      <spotify-player src="http://localhost:8080" />
-      <!-- <spotify-player src="https://spotify-stream-player-j2yxapx3oa-uk.a.run.app" /> -->
+      <!-- <spotify-player src="http://localhost:8080" /> -->
+      <spotify-player src="https://spotify-stream-player-j2yxapx3oa-uk.a.run.app" />
     </div>
   </div>
 </template>
