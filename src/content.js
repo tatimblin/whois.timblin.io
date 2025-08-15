@@ -34,7 +34,7 @@ const serverInfo = {
     },
     {
       label: 'Host',
-      value: 'Netlify',
+      value: 'Github Pages',
     },
     {
       label: 'Creation',
