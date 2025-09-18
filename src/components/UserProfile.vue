@@ -8,7 +8,7 @@
       <span class="UserProfile-role Heading--flag" itemprop="jobTitle">Software Engineer</span>
     </h1>
     <p class="UserProfile-bio" itemprop="description">
-      I'm a developer building cloud infrastructure end-to-end at Amazon from San Francisco, CA
+      I'm a developer building middle-out cloud infrastructure at Amazon from San Francisco, CA
     </p>
     <a href="https://tristantimblin.dev/" class="UserProfile-cta Link Link--cta" itemprop="url">My homepage</a>
     <account-link></account-link>
