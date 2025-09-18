@@ -7,7 +7,9 @@
       <span class="UserProfile-name Heading Heading--lead" itemprop="name">Tristan Timblin&nbsp;</span>
       <span class="UserProfile-role Heading--flag" itemprop="jobTitle">Software Engineer</span>
     </h1>
-    <p class="UserProfile-bio" itemprop="description">I'm a developer building cloud infrastructure for EVs.</p>
+    <p class="UserProfile-bio" itemprop="description">
+      I'm a developer building cloud infrastructure end-to-end from San Francisco, CA
+    </p>
     <a href="https://tristantimblin.dev/" class="UserProfile-cta Link Link--cta" itemprop="url">My homepage</a>
     <account-link></account-link>
   </section>
@@ -34,7 +36,13 @@ export default {
   &-image
   {
     display: block;
-    width: 100%;
+    width: 120px;
+    margin-top: calc(#{$spacing} / 2);
+
+    @include query (sm) {
+      width: 100%;
+      margin-top: 0;
+    }
   }
 
   &-title
