@@ -1,11 +1,13 @@
 <template>
-  <ul class="AccountLink">
-    <li class="AccountLink-item" v-for="account in accounts" :key="account.url">
-      <a :href="account.url" class="AccountLink-link Link">
-        {{ account.name }}
-      </a>
-    </li>
-  </ul>
+  <div class="AccountLink">
+    <ul class="AccountLink-list">
+      <li class="AccountLink-item" v-for="account in accounts" :key="account.url">
+        <a :href="account.url" class="AccountLink-link Link">
+          {{ account.name }}
+        </a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -37,8 +39,10 @@ export default {
 <style lang="scss">
 .AccountLink
 {
-  display: flex;
-  flex-wrap: wrap;
+  &-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
   &-item
   {

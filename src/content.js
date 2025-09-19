@@ -4,11 +4,13 @@ const aboutMe = {
   title: 'About Me',
   paragraphs: [
     {
-      body: `I'm a software engineer focused on the human computer interaction between
-      people, and the applications they use day to day. At Yext I help build and maintain
-      the applications that generate our pages. Together our service hosts millions of
-      static pages receiving +5 billion views in a year (2021), chances are you've
-      already visited one.`,
+      body: `Tristan received his undergraduate in Interactive Digital Media from Drexel University in 2018 and has
+      worked at software and automotive companies Cohere, Yext, Fisker, AWS, and eero since. Throughout his career
+      Tristan has developed award-winning front-end experiences, open source software frameworks, high preformance
+      IoT signal processing systems, and critical local and cloud network infrastructure.
+
+      Tristan's creativity and interest in technology brings a breadth of experience to complex problems often leading
+      to well constructed and or novel solutions across disparate domains.`,
     },
   ],
 };

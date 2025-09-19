@@ -8,7 +8,11 @@
     >
       <div class="Paragraph-item" v-for="item in paragraphs" :key="item.title || item.body">
         <h3 class="Paragraph-title Heading--brow" v-if="item.title">{{ item.title }}</h3>
-        <p class="Paragraph-body">{{ item.body }}</p>
+        <div class="Paragraph-body">
+          <p v-for="(paragraph, index) in item.body.split('\n\n')" :key="index" v-if="paragraph.trim()">
+            {{ paragraph }}
+          </p>
+        </div>
       </div>
     </div>
 
@@ -61,6 +65,10 @@ export default {
   &-item:not(:last-child)
   {
     margin-bottom: calc(#{$spacing} / 2);
+  }
+
+  &-body p:not(:last-child) {
+    padding-bottom: calc(#{$spacing} / 2);
   }
 }
 

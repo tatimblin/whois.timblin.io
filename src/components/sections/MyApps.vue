@@ -27,6 +27,26 @@ export default {
     return {
       interests: [
         {
+          image: 'gopher.svg',
+          title: 'Golang',
+          url: 'https://go.dev/',
+        },
+        {
+          image: 'rust.png',
+          title: 'Rust',
+          url: 'https://www.rust-lang.org/',
+        },
+        {
+          image: 'ratatui.webp',
+          title: 'Ratatui',
+          url: 'https://ratatui.rs/'
+        },
+        {
+          image: 'kafka.svg',
+          title: 'Kafka',
+          url: 'https://kafka.apache.org/'
+        },
+        {
           image: 'vue.png',
           title: 'Vue.js',
           url: 'https://vuejs.org/',
