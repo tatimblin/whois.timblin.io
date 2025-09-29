@@ -7,10 +7,7 @@ const aboutMe = {
       body: `Tristan received his undergraduate in Interactive Digital Media from Drexel University in 2018 and has
       worked at software and automotive companies Cohere, Yext, Fisker, AWS, and eero since. Throughout his career
       Tristan has developed award-winning front-end experiences, open source software frameworks, high preformance
-      IoT signal processing systems, and critical local and cloud network infrastructure.
-
-      Tristan's creativity and interest in technology brings a breadth of experience to complex problems often leading
-      to well constructed and or novel solutions across disparate domains.`,
+      IoT signal processing systems, and critical local and cloud network infrastructure.`,
     },
   ],
 };
