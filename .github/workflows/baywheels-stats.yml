@@ -1,0 +1,34 @@
+name: BayWheels Stats Collection
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # Daily at 3 AM UTC
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  contents: write  # Required to commit and push changes
+
+jobs:
+  collect-stats:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Query BayWheels stats
+        id: baywheels
+        uses: tatimblin/baywheels-stats@main
+        with:
+          refresh_session: 'true'
+      
+      - name: Save stats to file
+        run: echo '${{ steps.baywheels.outputs.stats }}' > stats-latest.json
+      
+      - name: Commit and push stats
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add stats-latest.json
+          git commit -m "Update BayWheels stats - $(date +'%Y-%m-%d')" || exit 0
+          git push
