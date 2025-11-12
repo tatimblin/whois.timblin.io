@@ -25,6 +25,17 @@ jobs:
         uses: ./.github/actions/baywheels-stats
         with:
           refresh_session: 'true'
+        env:
+          COOKIE_SESSID: ${{ secrets.COOKIE_SESSID }}
+          COOKIE_STICKY_LYFT_BROWSER_ID: ${{ secrets.COOKIE_STICKY_LYFT_BROWSER_ID }}
+          COOKIE_BFE_PKCE: ${{ secrets.COOKIE_BFE_PKCE }}
+          COOKIE_LYFT_ACCESS_TOKEN: ${{ secrets.COOKIE_LYFT_ACCESS_TOKEN }}
+          COOKIE_GA: ${{ secrets.COOKIE_GA }}
+          COOKIE_GA_LCH: ${{ secrets.COOKIE_GA_LCH }}
+          COOKIE_STRIPE_MID: ${{ secrets.COOKIE_STRIPE_MID }}
+          COOKIE_BFE_FPVAL: ${{ secrets.COOKIE_BFE_FPVAL }}
+          COOKIE_STRIPE_SID: ${{ secrets.COOKIE_STRIPE_SID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Save stats to file
         run: echo '${{ steps.baywheels.outputs.stats }}' > stats-latest.json
