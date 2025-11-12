@@ -25,6 +25,7 @@ jobs:
         uses: ./.github/actions/baywheels-stats
         with:
           refresh_session: 'true'
+          github_token: ${{ secrets.GH_PAT }}
         env:
           COOKIE_SESSID: ${{ secrets.COOKIE_SESSID }}
           COOKIE_STICKY_LYFT_BROWSER_ID: ${{ secrets.COOKIE_STICKY_LYFT_BROWSER_ID }}
