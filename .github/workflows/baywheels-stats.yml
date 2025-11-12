@@ -15,10 +15,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          repository: tatimblin/baywheels-stats
+          token: ${{ secrets.GH_PAT }}
+          path: .github/actions/baywheels-stats
       
       - name: Query BayWheels stats
         id: baywheels
-        uses: tatimblin/baywheels-stats@main
+        uses: ./.github/actions/baywheels-stats
         with:
           refresh_session: 'true'
       
