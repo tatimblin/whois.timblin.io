@@ -45,17 +45,6 @@ jobs:
       
       - name: Save stats to file
         run: echo '${{ steps.baywheels.outputs.stats }}' > stats-latest.json
-
-      - name: Debug workspace
-        run: |
-          echo "Current directory:"
-          pwd
-          echo "Directory contents:"
-          ls -la
-          echo "Git status:"
-          git status || echo "Not a git repo"
-          echo "GITHUB_WORKSPACE:"
-          echo $GITHUB_WORKSPACE
       
       - name: Commit and push stats
         run: |
