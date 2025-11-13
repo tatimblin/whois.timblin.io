@@ -42,6 +42,7 @@ jobs:
           COOKIE_BFE_FPVAL: ${{ secrets.COOKIE_BFE_FPVAL }}
           COOKIE_STRIPE_SID: ${{ secrets.COOKIE_STRIPE_SID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DOTENV_CONFIG_SILENT: true
       
       - name: Save stats to file
         run: echo '${{ steps.baywheels.outputs.stats }}' > src/bike-stats.json
