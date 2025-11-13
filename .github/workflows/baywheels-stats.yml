@@ -44,13 +44,18 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DOTENV_CONFIG_SILENT: true
       
-      - name: Save stats to file
-        run: echo '${{ steps.baywheels.outputs.stats }}' > src/bike-stats.json
+      - name: Save stats to CSV
+        run: |
+          DATE=$(date +'%Y-%m-%d')
+          RIDES="${{ steps.baywheels.outputs.number_of_rides }}"
+          MILES="${{ steps.baywheels.outputs.total_miles }}"
+          MINUTES="${{ steps.baywheels.outputs.total_minutes }}"
+          echo "$DATE,$RIDES,$MILES,$MINUTES" > src/bike-stats.csv
       
       - name: Commit and push stats
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/bike-stats.json
+          git add src/bike-stats.csv
           git commit -m "Update BayWheels stats - $(date +'%Y-%m-%d')" || exit 0
           git push
