@@ -42,6 +42,7 @@ jobs:
         run: echo '${{ steps.baywheels.outputs.stats }}' > stats-latest.json
       
       - name: Commit and push stats
+        working-directory: ${{ github.workspace }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
