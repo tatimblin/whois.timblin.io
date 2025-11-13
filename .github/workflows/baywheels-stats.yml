@@ -13,6 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -40,9 +45,19 @@ jobs:
       
       - name: Save stats to file
         run: echo '${{ steps.baywheels.outputs.stats }}' > stats-latest.json
+
+      - name: Debug workspace
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Directory contents:"
+          ls -la
+          echo "Git status:"
+          git status || echo "Not a git repo"
+          echo "GITHUB_WORKSPACE:"
+          echo $GITHUB_WORKSPACE
       
       - name: Commit and push stats
-        working-directory: ${{ github.workspace }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
