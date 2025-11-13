@@ -1,0 +1,20 @@
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+[2025-11-13T06:53:42.918Z] [INFO] [main] Starting query-stats job...
+[2025-11-13T06:53:42.918Z] [INFO] [main] Execution mode: github-actions
+[2025-11-13T06:53:42.918Z] [INFO] [main] Loading cookies from environment...
+[2025-11-13T06:53:42.918Z] [INFO] [loadCookiesFromEnv] Loaded 9 cookies from environment variables
+[2025-11-13T06:53:42.918Z] [INFO] [main] Querying member statistics...
+[2025-11-13T06:53:42.918Z] [INFO] [queryMemberStats] Querying member statistics from BayWheels API...
+[2025-11-13T06:53:42.918Z] [INFO] [queryMemberStats] Sending POST request to https://account.baywheels.com/bikesharefe-gql...
+[2025-11-13T06:53:43.242Z] [INFO] [queryMemberStats] Received HTTP 200 response
+[2025-11-13T06:53:43.247Z] [INFO] [queryMemberStats] Successfully retrieved member stats
+[2025-11-13T06:53:43.247Z] [INFO] [queryMemberStats] Stats: 693 rides, 392700s total time, 923.149768086 distance
+[2025-11-13T06:53:43.247Z] [INFO] [main] Successfully retrieved member stats, outputting JSON...
+{
+  "stats": {
+    "numberOfRides": 693,
+    "totalTime": 392700,
+    "totalDistance": 923.149768086
+  }
+}
+[2025-11-13T06:53:43.247Z] [INFO] [main] query-stats job completed successfully
