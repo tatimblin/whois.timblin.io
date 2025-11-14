@@ -48,9 +48,9 @@ jobs:
         run: |
           DATE=$(date +'%Y-%m-%d')
           RIDES="${{ steps.baywheels.outputs.number_of_rides }}"
-          MILES="${{ steps.baywheels.outputs.total_miles }}"
-          MINUTES="${{ steps.baywheels.outputs.total_minutes }}"
-          echo "$DATE,$RIDES,$MILES,$MINUTES" > src/bike-stats.csv
+          DISTANCE="${{ steps.baywheels.outputs.total_distance }}"
+          TIME="${{ steps.baywheels.outputs.total_time }}"
+          echo "$DATE,$RIDES,$DISTANCE,$TIME" > src/bike-stats.csv
       
       - name: Commit and push stats
         run: |
