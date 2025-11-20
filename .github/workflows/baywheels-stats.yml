@@ -32,17 +32,8 @@ jobs:
           refresh_session: 'true'
           github_token: ${{ secrets.GH_PAT }}
         env:
-          COOKIE_SESSID: ${{ secrets.COOKIE_SESSID }}
-          COOKIE_STICKY_LYFT_BROWSER_ID: ${{ secrets.COOKIE_STICKY_LYFT_BROWSER_ID }}
-          COOKIE_BFE_PKCE: ${{ secrets.COOKIE_BFE_PKCE }}
-          COOKIE_LYFT_ACCESS_TOKEN: ${{ secrets.COOKIE_LYFT_ACCESS_TOKEN }}
-          COOKIE_GA: ${{ secrets.COOKIE_GA }}
-          COOKIE_GA_LCH: ${{ secrets.COOKIE_GA_LCH }}
-          COOKIE_STRIPE_MID: ${{ secrets.COOKIE_STRIPE_MID }}
-          COOKIE_BFE_FPVAL: ${{ secrets.COOKIE_BFE_FPVAL }}
-          COOKIE_STRIPE_SID: ${{ secrets.COOKIE_STRIPE_SID }}
+          BAYWHEELS_COOKIES: ${{ secrets.BAYWHEELS_COOKIES }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DOTENV_CONFIG_SILENT: true
       
       - name: Save stats to CSV
         run: |
