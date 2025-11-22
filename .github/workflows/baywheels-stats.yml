@@ -25,28 +25,30 @@ jobs:
           token: ${{ secrets.GH_PAT }}
           path: .github/actions/baywheels-stats
       
-      - name: Query BayWheels stats
-        id: baywheels
-        uses: ./.github/actions/baywheels-stats
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+      
+      - name: Refresh session tokens
+        uses: ./.github/actions/baywheels-stats/refresh-session
         with:
-          refresh_session: 'true'
           github_token: ${{ secrets.GH_PAT }}
         env:
           BAYWHEELS_COOKIES: ${{ secrets.BAYWHEELS_COOKIES }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Save stats to CSV
-        run: |
-          DATE=$(date +'%Y-%m-%d')
-          RIDES="${{ steps.baywheels.outputs.number_of_rides }}"
-          DISTANCE="${{ steps.baywheels.outputs.total_distance }}"
-          TIME="${{ steps.baywheels.outputs.total_time }}"
-          echo "$DATE,$RIDES,$DISTANCE,$TIME" > src/bike-stats.csv
+      - name: Query statistics
+        id: query
+        uses: ./.github/actions/baywheels-stats/query-stats
+        with:
+          github_token: ${{ secrets.GH_PAT }}
+        env:
+          BAYWHEELS_COOKIES: ${{ secrets.BAYWHEELS_COOKIES }}
       
-      - name: Commit and push stats
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/bike-stats.csv
-          git commit -m "Update BayWheels stats - $(date +'%Y-%m-%d')" || exit 0
-          git push
+      - name: Save to CSV and commit
+        uses: ./.github/actions/baywheels-stats/csv-output
+        with:
+          date: ${{ steps.date.outputs.date }}
+          rides: ${{ steps.query.outputs.number_of_rides }}
+          distance: ${{ steps.query.outputs.total_distance }}
+          time: ${{ steps.query.outputs.total_time }}
+          file_path: 'src/bike-stats.csv'
