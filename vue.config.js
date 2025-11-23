@@ -51,6 +51,12 @@ module.exports = {
       })
     );
 
+    // Add rule to handle CSV files as raw text
+    config.module.rules.push({
+      test: /\.csv$/,
+      use: 'raw-loader',
+    });
+
     if (process.env.NODE_ENV === 'production') {
       config.plugins.push(...productionPlugins);
     }

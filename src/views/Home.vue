@@ -6,7 +6,10 @@
       </aside>
       <div class="App-item">
         <default-section v-bind="content.aboutMe" />
-        <music-player />
+        <div class="App-itemSplit">
+          <music-player />
+          <bike-stats />
+        </div>
         <my-sites></my-sites>
         <my-interests></my-interests>
         <work-history></work-history>
@@ -28,6 +31,7 @@ import MyInterests from '../components/sections/MyInterests.vue';
 import WorkHistory from '../components/sections/WorkHistory.vue';
 import MyApps from '../components/sections/MyApps.vue';
 import AllSites from '../components/sections/AllSites.vue';
+import BikeStats from '../components/BikeStats.vue';
 import content from '../content';
 
 export default {
@@ -41,6 +45,7 @@ export default {
     WorkHistory,
     MyApps,
     AllSites,
+    BikeStats,
   },
   data() {
     return { content };
@@ -72,6 +77,19 @@ export default {
   &-item
   {
     min-width: 0;
+  }
+
+  &-itemSplit
+  {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: $spacing;
+
+    @include query (sm)
+    {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: calc(#{$spacing} / 2) $spacing;
+    }
   }
 }
 </style>

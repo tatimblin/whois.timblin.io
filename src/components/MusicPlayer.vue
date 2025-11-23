@@ -23,9 +23,9 @@
 
 <style lang="scss" scoped>
   .MusicPlayer {
-    &-content {
-      @include border-container;
+    @include border-container;
 
+    &-content {
       padding: unit(25);
     }
   }
