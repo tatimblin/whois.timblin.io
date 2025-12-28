@@ -4,10 +4,10 @@ const aboutMe = {
   title: 'About Me',
   paragraphs: [
     {
-      body: `Tristan received his undergraduate in Interactive Digital Media from Drexel University in 2018 and has
-      worked at software and automotive companies Cohere, Yext, Fisker, AWS, and eero since. Throughout his career
-      Tristan has developed award-winning front-end experiences, open source software frameworks, high preformance
-      IoT signal processing systems, and critical local and cloud network infrastructure.`,
+      body: `Tristan earned his degree in Interactive Digital Media from Drexel University in 2018 and has since
+      worked at Cohere, Yext, Fisker, AWS, and eero. His work spans high-performance IoT signal processing, data
+      center-scale network infrastructure, open-source tools and frameworks, over-the-air updates, and award-winning
+      front-end experiences.`,
     },
   ],
 };
