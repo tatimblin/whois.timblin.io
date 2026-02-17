@@ -32,6 +32,12 @@ export default {
           icon: '📸',
           desc: 'My photo gallery separated out into easily browsable collections, just keep scrolling.',
         },
+        {
+          title: 'tristantimblin.dev/txt',
+          url: '/txt',
+          icon: '✍️',
+          desc: 'Thoughts on software engineering, design, and other topics.',
+        },
       ],
     };
   },

@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const PrerenderSpaPlugin = require('prerender-spa-plugin');
 
 // Read version from package.json with error handling
@@ -14,10 +15,28 @@ try {
   console.warn('Warning: Could not read package.json, using fallback version:', error.message);
 }
 
+// Extract blog post slugs from txt-posts.js for prerendering
+function getTxtRoutes() {
+  const routes = ['/txt'];
+  try {
+    const content = fs.readFileSync(path.join(__dirname, 'src/txt-posts.js'), 'utf-8');
+    const slugMatches = content.match(/slug:\s*['"]([^'"]+)['"]/g);
+    if (slugMatches) {
+      slugMatches.forEach((match) => {
+        const slug = match.match(/slug:\s*['"]([^'"]+)['"]/)[1];
+        routes.push(`/txt/${slug}`);
+      });
+    }
+  } catch (error) {
+    console.warn('Warning: Could not read txt-posts.js for prerender routes:', error.message);
+  }
+  return routes;
+}
+
 const productionPlugins = [
   new PrerenderSpaPlugin({
     staticDir: path.join(__dirname, 'dist'),
-    routes: ['/', '/sites'],
+    routes: ['/', '/sites', ...getTxtRoutes()],
     postProcess(renderedRoute) {
       renderedRoute.html = renderedRoute.html
         .replace(/<script (.*?)>/g, '<script $1 defer>')

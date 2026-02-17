@@ -1,0 +1,50 @@
+name: Sync Blog Posts
+
+on:
+  push:
+    branches: ["master"]
+    paths:
+      - 'Published/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync-blog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout zettelkasten
+        uses: actions/checkout@v4
+
+      - name: Checkout whois.timblin.io
+        uses: actions/checkout@v4
+        with:
+          repository: tatimblin/whois.timblin.io
+          token: ${{ secrets.GH_PAT }}
+          path: whois-site
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install gray-matter marked
+
+      - name: Process blog posts
+        run: node process-blog.js
+
+      - name: Commit and push
+        working-directory: whois-site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/txt-posts.js
+          if git diff --cached --quiet; then
+            echo "No changes to blog posts"
+          else
+            git commit -m "Update blog posts"
+            git push
+          fi
