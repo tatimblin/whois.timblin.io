@@ -36,6 +36,26 @@ export default {
       count: 0,
       sites: [
         {
+          title: 'Aptitude',
+          company: 'Personal',
+          url: 'https://github.com/tatimblin/aptitude',
+          icon: '🧪',
+          year: 2026,
+          desc: `
+            Cognitive tests for your AI agent (Claude Code, Kiro).
+          `,
+        },
+        {
+          title: 'Spotify Now Playing API',
+          company: 'Personal',
+          url: 'https://github.com/tatimblin/spotify-stream-player',
+          icon: '🎧',
+          year: 2024,
+          desc: `
+            API Gateway for server-sent events of the Spotify API's now playing endpoint.
+          `,
+        },
+        {
           title: 'Credentials Manager VS Code Extension',
           company: 'Yext',
           url: 'https://github.com/tatimblin/vscode-yext',
