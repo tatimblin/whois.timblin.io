@@ -27,9 +27,9 @@ export default {
           co: 'Amazon',
           duration: 'June 2024',
           description: `
-          Built local network features into Wi-Fi access points to let customers connect on-prem compute directly to their AWS
-          resources, skipping the public internet with IP-based routing. Refactored the auth client used by all non-Java AWS
-          services, halving bearer token size and cutting TLS handshake roundtrips from two to one.
+            Building on-prem wifi network capabilities for AWS customers to run closer to their compute. Developed a language
+            agnostic authentication client for all non-Java/Rust aws services. Supporting ECDSA cryptography and TLS handshake,
+            halving the connection overhead.
           `,
           url: 'https://aws.amazon.com/iam/',
           image: 'amazon.png',
@@ -40,9 +40,10 @@ export default {
           co: 'Fisker',
           duration: 'May 2023 • June 2024',
           description: `
-            Built cloud infrastructure for connected vehicles, from persistent webhooks for each car across a load balancer to
-            event streams feeding distributed system consumers, processing 1.8M CAN bus messages per second (8 TB/day) to
-            support ML-driven performance training and deliver over-the-air software updates.
+            Engineered pre-training data pipeline and OTA update functionality for connected vehicles. Managed webhook connections
+            to pull raw CAN bus signals (1.8M msgs/sec, 8TB/day) into training datasets with a real-time inference API for
+            production scoring. Stateless architecture, horizontally scalable, bench marked at 283ms/100k messages per 10-core
+            node.
           `,
           url: 'https://www.fiskerinc.com/',
           image: 'fisker.png',
@@ -53,8 +54,8 @@ export default {
           co: 'Yext',
           duration: 'April 2019 • February 2023',
           description: `
-            Developed open-source software and tooling to enable third-party developers to build and generate server-rendered
-            web applications (+4.6B pages) on our platform.
+            Created open-source tooling (SSG framework, CLI, and VSCode extension) in React / Deno to enable customers to self-serve
+            a >$100M ARR product, responsible for generating 4.5M web pages and 5B page views annually.
           `,
           referral: 'https://rolp.co/nVPMg',
           url: 'https://www.yext.com/',
