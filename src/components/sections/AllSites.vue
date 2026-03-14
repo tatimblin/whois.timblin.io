@@ -36,6 +36,16 @@ export default {
       count: 0,
       sites: [
         {
+          title: 'Sonos Local SDK',
+          company: 'Personal',
+          url: 'https://crates.io/crates/sonos-sdk',
+          icon: '🎛️',
+          year: 2026,
+          desc: `
+            SDK to power local discovery, controls, and real-time events of Sonos speakers.
+          `,
+        },
+        {
           title: 'Aptitude',
           company: 'Personal',
           url: 'https://github.com/tatimblin/aptitude',
@@ -43,6 +53,16 @@ export default {
           year: 2026,
           desc: `
             Cognitive tests for your AI agent (Claude Code, Kiro).
+          `,
+        },
+        {
+          title: 'Sonos Local CLI',
+          company: 'Personal',
+          url: 'https://github.com/tatimblin/sonos-cli',
+          icon: '🎚️',
+          year: 2024,
+          desc: `
+            Discover and control Sonos speakers over local network.
           `,
         },
         {
