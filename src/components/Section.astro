@@ -2,16 +2,24 @@
 interface Props {
 	variant: 1 | 2 | 3;
 	revealRange?: string;
+	expand?: boolean;
 	shrink?: boolean;
 }
 
-const { variant, revealRange, shrink } = Astro.props;
+const { variant, revealRange, expand, shrink } = Astro.props;
 const revealId = revealRange
 	? `section-reveal-${Math.random().toString(36).slice(2, 10)}`
 	: undefined;
 
-const animationName = shrink ? "section-bleed-reversible" : "section-bleed";
-const css = revealId
+const animationName =
+	expand && shrink
+		? "section-bleed-reversible"
+		: expand
+			? "section-bleed"
+			: shrink
+				? "section-shrink"
+				: undefined;
+const css = revealId && animationName
 	? `.${revealId} .section__canvas { animation: ${animationName} linear both; animation-timeline: view(); animation-range: ${revealRange}; }`
 	: undefined;
 ---
@@ -109,6 +117,18 @@ const css = revealId
 		}
 		100% {
 			clip-path: inset(0 0 round 0);
+		}
+	}
+
+	@keyframes section-shrink {
+		0% {
+			clip-path: inset(0 0 round 0);
+		}
+		100% {
+			clip-path: inset(
+				0 max(var(--container-pad), calc(50vw - var(--container-max) / 2))
+					round var(--radius)
+			);
 		}
 	}
 
