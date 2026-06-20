@@ -1,64 +1,106 @@
 export class StickyHeadingElement extends HTMLElement {
 	private cleanup: (() => void) | null = null;
+	private wrapper: HTMLDivElement | null = null;
 
 	static get observedAttributes() {
-		return ["reveal"];
+		return ["reveal", "duration"];
 	}
 
 	connectedCallback() {
+		this.setupDuration();
 		if (this.hasAttribute("reveal")) this.setupReveal();
 	}
 
 	disconnectedCallback() {
 		this.cleanup?.();
 		this.cleanup = null;
+		this.teardownDuration();
 	}
 
 	attributeChangedCallback() {
 		this.cleanup?.();
 		this.cleanup = null;
+		this.teardownDuration();
+		this.setupDuration();
 		if (this.hasAttribute("reveal")) this.setupReveal();
 	}
 
+	private setupDuration() {
+		const duration = this.getAttribute("duration");
+		if (!duration) return;
+
+		this.style.height = duration;
+		this.style.paddingTop = "0.01px";
+
+		const wrapper = document.createElement("div");
+		wrapper.style.position = "sticky";
+		wrapper.style.top = "var(--sticky-heading-top, 0)";
+		wrapper.style.zIndex = "2";
+
+		while (this.firstChild) {
+			wrapper.appendChild(this.firstChild);
+		}
+		this.appendChild(wrapper);
+		this.wrapper = wrapper;
+	}
+
+	private teardownDuration() {
+		if (!this.wrapper) return;
+		while (this.wrapper.firstChild) {
+			this.appendChild(this.wrapper.firstChild);
+		}
+		this.wrapper.remove();
+		this.wrapper = null;
+		this.style.height = "";
+	}
+
 	private setupReveal() {
-		const parent = this.parentElement;
-		if (!parent) return;
+		const curtain = this.parentElement;
+		if (!curtain) return;
 
-		let stickyTop = parseFloat(getComputedStyle(this).top);
-		let headingHeight = this.offsetHeight;
+		const target = this.wrapper || this;
+		const stickyTop = parseFloat(getComputedStyle(target).top);
+		let headingHeight = target.offsetHeight;
 
-		this.style.clipPath = "inset(100% 0 0 0)";
+		target.style.clipPath = "inset(100% 0 0 0)";
+
+		// Use negative margin to pull target above section edge
+		// so it overlaps the root heading position.
+		// margin doesn't break sticky behavior like transform does.
+		target.style.marginTop = `${-headingHeight}px`;
+		target.style.marginBottom = `${headingHeight}px`;
 
 		const update = () => {
-			const parentTop = parent.getBoundingClientRect().top;
+			const curtainTop = curtain.getBoundingClientRect().top;
+			const targetTop = target.getBoundingClientRect().top;
 
-			if (parentTop > stickyTop) {
-				this.style.transform = `translateY(${stickyTop - parentTop}px)`;
+			// Clip: show only what's below the curtain line
+			const clipFromTop = curtainTop - targetTop;
+			if (clipFromTop <= 0) {
+				target.style.clipPath = "inset(0 0 0 0)";
+			} else if (clipFromTop >= headingHeight) {
+				target.style.clipPath = "inset(100% 0 0 0)";
 			} else {
-				this.style.transform = "";
+				target.style.clipPath = `inset(${clipFromTop}px 0 0 0)`;
 			}
-
-			const clipPx = Math.max(0, Math.min(headingHeight, parentTop - stickyTop));
-			this.style.clipPath = `inset(${clipPx}px 0 0 0)`;
 		};
 
-		const onScroll = () => requestAnimationFrame(update);
-		window.addEventListener("scroll", onScroll, { passive: true });
+		window.addEventListener("scroll", update, { passive: true });
 
 		const ro = new ResizeObserver(() => {
-			stickyTop = parseFloat(getComputedStyle(this).top);
-			headingHeight = this.offsetHeight;
+			headingHeight = target.offsetHeight;
 			update();
 		});
-		ro.observe(this);
+		ro.observe(target);
 
 		update();
 
 		this.cleanup = () => {
-			window.removeEventListener("scroll", onScroll);
+			window.removeEventListener("scroll", update);
 			ro.disconnect();
-			this.style.clipPath = "";
-			this.style.transform = "";
+			target.style.clipPath = "";
+			target.style.marginTop = "";
+			target.style.marginBottom = "";
 		};
 	}
 }

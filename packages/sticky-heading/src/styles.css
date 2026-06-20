@@ -4,3 +4,8 @@ sticky-heading {
 	top: var(--sticky-heading-top, 0);
 }
 
+sticky-heading[duration] {
+	position: static;
+}
+
+
