@@ -1,32 +1,41 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
+import "@whois/sticky-heading/styles.css";
 ---
+
+<script>
+	import "@whois/sticky-heading";
+</script>
 
 <Layout>
 	<main class="container">
-		<header class="grid heading-section">
-			<div class="col-span-12">
-				<h1>Tristan Timblin</h1>
-			</div>
-		</header>
+		<sticky-heading class="page-title page-title--root"
+			><h1>Tristan Timblin</h1></sticky-heading
+		>
 
-		<Section variant={1}>
-			<h2>Section one</h2>
+		<Section variant={1} revealRange="entry 75% entry 100%">
+			<sticky-heading slot="heading" class="page-title"
+				><h2>Section one</h2></sticky-heading
+			>
 			<p>
 				Body text for the first section. Replace this with a short paragraph
 				describing what lives here — an intro, a project, or a thought.
 			</p>
 		</Section>
 		<Section variant={2}>
-			<h2>Section two</h2>
+			<sticky-heading slot="heading" class="page-title"
+				><h2>Section two</h2></sticky-heading
+			>
 			<p>
 				Body text for the second section. A second beat to the page — could be
 				selected work, writing, or anything that benefits from its own block.
 			</p>
 		</Section>
 		<Section variant={3}>
-			<h2>Section three</h2>
+			<sticky-heading slot="heading" class="page-title"
+				><h2>Section three</h2></sticky-heading
+			>
 			<p>
 				Body text for the third section. The last band — good place for contact
 				info, a closing note, or a call to action.
@@ -37,9 +46,39 @@ import Section from "../components/Section.astro";
 	</main>
 </Layout>
 
+<style is:global>
+	:root {
+		--sticky-heading-top: var(--space-4);
+	}
+</style>
+
 <style>
-	.heading-section {
-		padding-block: var(--space-7) var(--space-6);
+	/* All four .page-title instances share a left edge by carrying the same
+	 * horizontal padding (matching .section__content's padding-inline), and
+	 * identical typography below. Stacking-wise, a section-level heading slotted
+	 * into <section> needs to sit above the absolutely-positioned canvas; sticky
+	 * positioning creates its own stacking context, and the heading is later in
+	 * source than .section__canvas, so it paints on top by default. */
+	.page-title {
+		display: block;
+		padding-inline: var(--container-pad);
+		color: var(--color-fg);
+	}
+
+	/* Page-level heading. Containing block is <main>, which spans the whole page,
+	 * so sticky pins across every section. The 50vh hero spacing is margin
+	 * (margin doesn't bound sticky the way a height-constrained parent did). */
+	.page-title--root {
+		margin-block: 50vh var(--space-6);
+	}
+
+	.page-title :global(h1),
+	.page-title :global(h2) {
+		font-size: var(--font-size-3xl);
+		line-height: var(--line-height-tight);
+		letter-spacing: -0.02em;
+		font-weight: 700;
+		color: inherit;
 	}
 
 	.scroll-spacer {
