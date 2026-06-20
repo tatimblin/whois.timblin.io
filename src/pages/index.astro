@@ -2,10 +2,12 @@
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
 import "@whois/sticky-heading/styles.css";
+import "@whois/wobble-text/styles.css";
 ---
 
 <script>
 	import "@whois/sticky-heading";
+	import "@whois/wobble-text";
 </script>
 
 <Layout>
@@ -20,12 +22,14 @@ import "@whois/sticky-heading/styles.css";
 			shrink
 		>
 			<sticky-heading slot="heading" class="page-title" reveal duration="50vh"
-				><h2>Tristan Timblin</h2></sticky-heading
+				><wobble-text scale="3" speed="0.6" frequency="0.04"><h2>Tristan Timblin</h2></wobble-text></sticky-heading
 			>
-			<p>
-				Body text for the first section. Replace this with a short paragraph
-				describing what lives here — an intro, a project, or a thought.
-			</p>
+			<wobble-text scale="3" speed="0.6" frequency="0.04">
+				<p>
+					Body text for the first section. Replace this with a short paragraph
+					describing what lives here — an intro, a project, or a thought.
+				</p>
+			</wobble-text>
 		</Section>
 		<Section
 			variant={2}

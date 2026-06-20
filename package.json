@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@whois/sticky-heading": "workspace:*",
+    "@whois/wobble-text": "workspace:*",
     "astro": "6.4.8",
     "scroll-timeline-polyfill": "^1.1.0"
   }
