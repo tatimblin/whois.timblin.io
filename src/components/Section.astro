@@ -5,11 +5,27 @@ interface Props {
 }
 
 const { variant, revealRange } = Astro.props;
+const revealId = revealRange
+	? `section-reveal-${Math.random().toString(36).slice(2, 10)}`
+	: undefined;
 ---
 
+{
+	revealRange && (
+		<style
+			is:global
+			set:html={`.${revealId} .section__canvas { animation: section-bleed linear both; animation-timeline: view(); animation-range: ${revealRange}; }`}
+		/>
+	)
+}
+
 <section
-	class:list={["section", `section--${variant}`, { "section--reveal": revealRange }]}
-	style={revealRange ? `--reveal-range: ${revealRange};` : undefined}
+	class:list={[
+		"section",
+		`section--${variant}`,
+		{ "section--reveal": revealRange },
+		revealId,
+	]}
 >
 	<div class="section__canvas">
 		<slot name="canvas" />
@@ -81,12 +97,6 @@ const { variant, revealRange } = Astro.props;
 		--section-fg: var(--section-3-fg);
 	}
 
-	.section--reveal .section__canvas {
-		animation: section-bleed linear both;
-		animation-timeline: view();
-		animation-range: var(--reveal-range);
-	}
-
 	@keyframes section-bleed {
 		0% {
 			clip-path: inset(
@@ -100,7 +110,7 @@ const { variant, revealRange } = Astro.props;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.section--reveal .section__canvas {
+		.section .section__canvas {
 			animation: none;
 		}
 	}
