@@ -1,11 +1,48 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import Section from "../components/Section.astro";
 ---
 
 <Layout>
-	<Welcome />
+	<main class="container">
+		<header class="grid heading-section">
+			<div class="col-span-12">
+				<h1>Tristan Timblin</h1>
+			</div>
+		</header>
+
+		<Section variant={1}>
+			<h2>Section one</h2>
+			<p>
+				Body text for the first section. Replace this with a short paragraph
+				describing what lives here — an intro, a project, or a thought.
+			</p>
+		</Section>
+		<Section variant={2}>
+			<h2>Section two</h2>
+			<p>
+				Body text for the second section. A second beat to the page — could be
+				selected work, writing, or anything that benefits from its own block.
+			</p>
+		</Section>
+		<Section variant={3}>
+			<h2>Section three</h2>
+			<p>
+				Body text for the third section. The last band — good place for contact
+				info, a closing note, or a call to action.
+			</p>
+		</Section>
+
+		<div class="scroll-spacer" aria-hidden="true"></div>
+	</main>
 </Layout>
+
+<style>
+	.heading-section {
+		padding-block: var(--space-7) var(--space-6);
+	}
+
+	.scroll-spacer {
+		height: 100vh;
+	}
+</style>

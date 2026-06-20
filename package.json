@@ -9,6 +9,6 @@
     "astro": "bunx --bun astro"
   },
   "dependencies": {
-    "astro": "^6.0.8"
+    "astro": "6.4.8"
   }
 }

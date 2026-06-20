@@ -1,0 +1,45 @@
+---
+interface Props {
+	variant: 1 | 2 | 3;
+}
+
+const { variant } = Astro.props;
+---
+
+<section class={`section section--${variant} grid`}>
+	<div class="col-span-12">
+		<slot />
+	</div>
+</section>
+
+<style>
+	.section {
+		padding-block: var(--space-6);
+		padding-inline: var(--space-5);
+		border-radius: var(--radius);
+		margin-block-end: calc(var(--space-7) * 2);
+		background: var(--section-bg);
+		color: var(--section-fg);
+	}
+
+	.section :global(h2 + p) {
+		margin-block-start: var(--space-3);
+	}
+
+	.section :global(p) {
+		max-width: 65ch;
+	}
+
+	.section--1 {
+		--section-bg: var(--section-1-bg);
+		--section-fg: var(--section-1-fg);
+	}
+	.section--2 {
+		--section-bg: var(--section-2-bg);
+		--section-fg: var(--section-2-fg);
+	}
+	.section--3 {
+		--section-bg: var(--section-3-bg);
+		--section-fg: var(--section-3-fg);
+	}
+</style>
