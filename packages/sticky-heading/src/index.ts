@@ -18,6 +18,7 @@ export class StickyHeadingElement extends HTMLElement {
 	}
 
 	attributeChangedCallback() {
+		if (!this.isConnected) return;
 		this.cleanup?.();
 		this.cleanup = null;
 		this.teardownDuration();
@@ -27,9 +28,8 @@ export class StickyHeadingElement extends HTMLElement {
 
 	private setupDuration() {
 		const duration = this.getAttribute("duration");
-		if (!duration) return;
+		if (duration === null) return;
 
-		this.style.height = duration;
 		this.style.paddingTop = "0.01px";
 
 		const wrapper = document.createElement("div");
@@ -42,6 +42,13 @@ export class StickyHeadingElement extends HTMLElement {
 		}
 		this.appendChild(wrapper);
 		this.wrapper = wrapper;
+
+		requestAnimationFrame(() => {
+			const naturalHeight = wrapper.offsetHeight;
+			this.style.height = duration === "0"
+				? `${naturalHeight}px`
+				: `calc(${duration} + ${naturalHeight}px)`;
+		});
 	}
 
 	private teardownDuration() {
@@ -64,11 +71,10 @@ export class StickyHeadingElement extends HTMLElement {
 
 		target.style.clipPath = "inset(100% 0 0 0)";
 
-		// Use negative margin to pull target above section edge
-		// so it overlaps the root heading position.
-		// margin doesn't break sticky behavior like transform does.
 		target.style.marginTop = `${-headingHeight}px`;
-		target.style.marginBottom = `${headingHeight}px`;
+		if (!this.wrapper) {
+			target.style.marginBottom = `${headingHeight}px`;
+		}
 
 		const update = () => {
 			const curtainTop = curtain.getBoundingClientRect().top;
