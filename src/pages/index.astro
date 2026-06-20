@@ -19,8 +19,8 @@ import "@whois/sticky-heading/styles.css";
 			revealRange="entry 50% exit 25%"
 			shrink
 		>
-			<sticky-heading slot="heading" class="page-title"
-				><h2>Section one</h2></sticky-heading
+			<sticky-heading slot="heading" class="page-title" reveal
+				><h2>Tristan Timblin</h2></sticky-heading
 			>
 			<p>
 				Body text for the first section. Replace this with a short paragraph
@@ -32,7 +32,7 @@ import "@whois/sticky-heading/styles.css";
 			revealRange="entry 50% exit 25%"
 			shrink
 		>
-			<sticky-heading slot="heading" class="page-title"
+			<sticky-heading slot="heading" class="page-title" reveal
 				><h2>Section two</h2></sticky-heading
 			>
 			<p>
@@ -45,7 +45,7 @@ import "@whois/sticky-heading/styles.css";
 			revealRange="entry 50% exit 25%"
 			shrink
 		>
-			<sticky-heading slot="heading" class="page-title"
+			<sticky-heading slot="heading" class="page-title" reveal
 				><h2>Section three</h2></sticky-heading
 			>
 			<p>
@@ -65,23 +65,15 @@ import "@whois/sticky-heading/styles.css";
 </style>
 
 <style>
-	/* All four .page-title instances share a left edge by carrying the same
-	 * horizontal padding (matching .section__content's padding-inline), and
-	 * identical typography below. Stacking-wise, a section-level heading slotted
-	 * into <section> needs to sit above the absolutely-positioned canvas; sticky
-	 * positioning creates its own stacking context, and the heading is later in
-	 * source than .section__canvas, so it paints on top by default. */
 	.page-title {
 		display: block;
 		padding-inline: var(--container-pad);
-		color: var(--color-fg);
+		color: var(--section-fg, var(--color-fg));
 	}
 
-	/* Page-level heading. Containing block is <main>, which spans the whole page,
-	 * so sticky pins across every section. The 50vh hero spacing is margin
-	 * (margin doesn't bound sticky the way a height-constrained parent did). */
 	.page-title--root {
 		margin-block: 50vh var(--space-6);
+		color: var(--color-fg);
 	}
 
 	.page-title :global(h1),

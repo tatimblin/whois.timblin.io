@@ -2,6 +2,7 @@
   "name": "tristantimblin.dev",
   "type": "module",
   "version": "0.0.1",
+  "workspaces": ["packages/*"],
   "scripts": {
     "dev": "bunx --bun astro dev",
     "build": "bunx --bun astro build",
@@ -9,6 +10,8 @@
     "astro": "bunx --bun astro"
   },
   "dependencies": {
-    "astro": "6.4.8"
+    "@whois/sticky-heading": "workspace:*",
+    "astro": "6.4.8",
+    "scroll-timeline-polyfill": "^1.1.0"
   }
 }

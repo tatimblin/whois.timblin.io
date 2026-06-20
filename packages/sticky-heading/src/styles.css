@@ -3,3 +3,4 @@ sticky-heading {
 	position: sticky;
 	top: var(--sticky-heading-top, 0);
 }
+
