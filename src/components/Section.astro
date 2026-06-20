@@ -2,28 +2,27 @@
 interface Props {
 	variant: 1 | 2 | 3;
 	revealRange?: string;
+	shrink?: boolean;
 }
 
-const { variant, revealRange } = Astro.props;
+const { variant, revealRange, shrink } = Astro.props;
 const revealId = revealRange
 	? `section-reveal-${Math.random().toString(36).slice(2, 10)}`
 	: undefined;
+
+const animationName = shrink ? "section-bleed-reversible" : "section-bleed";
+const css = revealId
+	? `.${revealId} .section__canvas { animation: ${animationName} linear both; animation-timeline: view(); animation-range: ${revealRange}; }`
+	: undefined;
 ---
 
-{
-	revealRange && (
-		<style
-			is:global
-			set:html={`.${revealId} .section__canvas { animation: section-bleed linear both; animation-timeline: view(); animation-range: ${revealRange}; }`}
-		/>
-	)
-}
+{revealId && <style is:global set:html={css} />}
 
 <section
 	class:list={[
 		"section",
 		`section--${variant}`,
-		{ "section--reveal": revealRange },
+		{ "section--reveal": revealId },
 		revealId,
 	]}
 >
@@ -105,6 +104,19 @@ const revealId = revealRange
 			);
 		}
 		100% {
+			clip-path: inset(0 0 round 0);
+		}
+	}
+
+	@keyframes section-bleed-reversible {
+		0%,
+		100% {
+			clip-path: inset(
+				0 max(var(--container-pad), calc(50vw - var(--container-max) / 2))
+					round var(--radius)
+			);
+		}
+		50% {
 			clip-path: inset(0 0 round 0);
 		}
 	}
