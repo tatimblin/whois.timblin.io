@@ -1,0 +1,10 @@
+cloud-scene {
+	display: block;
+	position: relative;
+}
+
+cloud-scene canvas {
+	display: block;
+	width: 100%;
+	height: 100%;
+}

@@ -1,11 +1,14 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
+import "@whois/cloud-scene/styles.css";
 import "@whois/sticky-heading/styles.css";
 import "@whois/wobble-text/styles.css";
 ---
 
 <script>
+	import "@whois/cloud-scene";
 	import "@whois/sticky-heading";
 	import "@whois/wobble-text";
 </script>
@@ -21,6 +24,7 @@ import "@whois/wobble-text/styles.css";
 			revealRange="entry 50% exit 25%"
 			expand
 		>
+			<cloud-scene slot="canvas"></cloud-scene>
 			<sticky-heading slot="heading" class="page-title" reveal duration="300px"
 				><wobble-text scale="3" speed="0.6" frequency="0.04"><h2>Tristan Timblin</h2></wobble-text></sticky-heading
 			>

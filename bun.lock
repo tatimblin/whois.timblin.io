@@ -5,11 +5,24 @@
     "": {
       "name": "tristantimblin.dev",
       "dependencies": {
+        "@whois/cloud-scene": "workspace:*",
+        "@whois/gallery-carousel": "workspace:*",
         "@whois/sticky-heading": "workspace:*",
         "@whois/wobble-text": "workspace:*",
         "astro": "6.4.8",
         "scroll-timeline-polyfill": "^1.1.0",
       },
+    },
+    "packages/cloud-scene": {
+      "name": "@whois/cloud-scene",
+      "version": "0.0.1",
+      "dependencies": {
+        "three": "^0.170.0",
+      },
+    },
+    "packages/gallery-carousel": {
+      "name": "@whois/gallery-carousel",
+      "version": "0.0.1",
     },
     "packages/sticky-heading": {
       "name": "@whois/sticky-heading",
@@ -236,6 +249,10 @@
     "@types/unist": ["@types/unist@3.0.3", "", {}, "sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q=="],
 
     "@ungap/structured-clone": ["@ungap/structured-clone@1.3.0", "", {}, "sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g=="],
+
+    "@whois/cloud-scene": ["@whois/cloud-scene@workspace:packages/cloud-scene"],
+
+    "@whois/gallery-carousel": ["@whois/gallery-carousel@workspace:packages/gallery-carousel"],
 
     "@whois/sticky-heading": ["@whois/sticky-heading@workspace:packages/sticky-heading"],
 
@@ -596,6 +613,8 @@
     "stringify-entities": ["stringify-entities@4.0.4", "", { "dependencies": { "character-entities-html4": "^2.0.0", "character-entities-legacy": "^3.0.0" } }, "sha512-IwfBptatlO+QCJUo19AqvrPNqlVMpW9YEL2LIVY+Rpv2qsjCGxaDLNRgeGsQWJhfItebuJhsGSLjaBbNSQ+ieg=="],
 
     "svgo": ["svgo@4.0.1", "", { "dependencies": { "commander": "^11.1.0", "css-select": "^5.1.0", "css-tree": "^3.0.1", "css-what": "^6.1.0", "csso": "^5.0.5", "picocolors": "^1.1.1", "sax": "^1.5.0" }, "bin": "./bin/svgo.js" }, "sha512-XDpWUOPC6FEibaLzjfe0ucaV0YrOjYotGJO1WpF0Zd+n6ZGEQUsSugaoLq9QkEZtAfQIxT42UChcssDVPP3+/w=="],
+
+    "three": ["three@0.170.0", "", {}, "sha512-FQK+LEpYc0fBD+J8g6oSEyyNzjp+Q7Ks1C568WWaoMRLW+TkNNWmenWeGgJjV105Gd+p/2ql1ZcjYvNiPZBhuQ=="],
 
     "tiny-inflate": ["tiny-inflate@1.0.3", "", {}, "sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw=="],
 
