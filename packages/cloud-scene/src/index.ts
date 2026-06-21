@@ -21,6 +21,7 @@ interface CloudCluster {
 	bobPhase: number;
 	bobAmplitude: number;
 	baseY: number;
+	baseZ: number;
 }
 
 class CloudSceneElement extends HTMLElement {
@@ -39,6 +40,7 @@ class CloudSceneElement extends HTMLElement {
 	private spanLeft = 0;
 	private spanRight = 0;
 	private coveredHalfWidth = 0;
+	private elapsed = 0;
 
 	connectedCallback() {
 		this.reducedMotion = window.matchMedia(
@@ -199,6 +201,7 @@ class CloudSceneElement extends HTMLElement {
 					bobPhase: Math.random() * Math.PI * 2,
 					bobAmplitude: cfg.bob,
 					baseY: cfg.y,
+					baseZ: cfg.z,
 				});
 			}
 		}
@@ -324,21 +327,42 @@ class CloudSceneElement extends HTMLElement {
 	}
 
 	private update() {
-		const elapsed = this.clock!.getElapsedTime();
+		// NOTE: Clock.getElapsedTime() internally advances the delta, so calling
+		// both it and getDelta() would leave getDelta() ~0. Use getDelta() alone
+		// and accumulate elapsed time ourselves.
+		const dt = Math.min(this.clock!.getDelta(), 0.05); // clamp tab-stall spikes
+		this.elapsed += dt;
+		const elapsed = this.elapsed;
 		this.material!.uniforms.uTime.value = elapsed;
 
 		const span = this.spanRight - this.spanLeft;
+		// Gentle, frame-rate-independent wind toward the right. driftSpeed (~0.02
+		// –0.06 per cluster) × this gives ~0.2–0.6 world units/sec, so a cloud
+		// takes a minute or two to cross — a slow, dreamy drift with gentle
+		// parallax (nearer clouds drift a touch faster).
+		const wind = 3.0;
 		for (const cluster of this.clusters) {
-			cluster.group.position.x += cluster.driftSpeed * 0.01;
-			cluster.group.position.y =
-				cluster.baseY +
-				Math.sin(elapsed * 0.5 + cluster.bobPhase) * cluster.bobAmplitude;
+			cluster.group.position.x += cluster.driftSpeed * wind * dt;
 
 			// Wrap drift within the full tiled span so clouds recirculate across
-			// the entire width rather than a fixed window.
+			// the entire width — a cloud leaving the right edge re-enters at left.
 			if (cluster.group.position.x > this.spanRight) {
 				cluster.group.position.x -= span;
 			}
+
+			// Recede slightly into the distance as the cloud drifts rightward:
+			// map its horizontal progress across the span to a small backward z
+			// push, so clouds enter near/large at the left and shrink toward the
+			// right. The offset resets to 0 at the wrap point (off-screen edge),
+			// so the loop stays seamless.
+			const progress =
+				(cluster.group.position.x - this.spanLeft) / span; // 0 left → 1 right
+			const depthPush = progress * 6.0; // world units of recession
+			cluster.group.position.z = cluster.baseZ - depthPush;
+
+			cluster.group.position.y =
+				cluster.baseY +
+				Math.sin(elapsed * 0.5 + cluster.bobPhase) * cluster.bobAmplitude;
 		}
 	}
 

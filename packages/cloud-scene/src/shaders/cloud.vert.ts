@@ -106,11 +106,14 @@ float fbmDetail(vec3 p) {
 // Layered displacement: big low-freq lobes for form + fine grain for cauliflower.
 // Used for the base position AND the finite-difference normal samples so the
 // recomputed normal always matches the displaced surface.
-float displace(vec3 worldPos) {
+float displace(vec3 p) {
     // Big rounded billows dominate; only a touch of fine detail so the
     // silhouette stays smooth and soft (Ghibli reference) rather than spiky.
-    float lobes = fbm(worldPos * (uNoiseScale * 0.45) + uTime * 0.03);
-    float detail = fbmDetail(worldPos * (uNoiseScale * 1.8) + uTime * 0.06);
+    // The uTime scroll makes the surface gently boil/warp in place. Sampled in
+    // cluster-local space, so this boil is the ONLY shape change — the cloud
+    // doesn't additionally morph from drifting across the sky.
+    float lobes = fbm(p * (uNoiseScale * 0.45) + uTime * 0.02);
+    float detail = fbmDetail(p * (uNoiseScale * 1.8) + uTime * 0.042);
     return (lobes * 0.88 + detail * 0.12) * uDisplacementStrength;
 }
 
@@ -120,13 +123,17 @@ void main() {
     // gives each sphere its own world position (and thus its own noise domain).
     mat4 mm = modelMatrix * instanceMatrix;
 
-    vec3 worldPos = (mm * vec4(position, 1.0)).xyz;
-    float displacement = displace(worldPos);
+    // Sample the displacement in CLUSTER-LOCAL space (instanceMatrix only — no
+    // drifting modelMatrix translation), so each cloud keeps a fixed shape as
+    // the cluster drifts across the sky instead of morphing through a world
+    // noise field.
+    vec3 localPos = (instanceMatrix * vec4(position, 1.0)).xyz;
+    float displacement = displace(localPos);
 
     vec3 displacedPosition = position + normal * displacement;
 
     // Compute perturbed normal via finite differences, sampling the noise in
-    // the same instance-transformed world space as the base point.
+    // the same cluster-local space as the base point.
     float eps = 0.01;
     vec3 tangent = normalize(cross(normal, vec3(0.0, 1.0, 0.0)));
     if (length(cross(normal, vec3(0.0, 1.0, 0.0))) < 0.001) {
@@ -134,10 +141,10 @@ void main() {
     }
     vec3 bitangent = normalize(cross(normal, tangent));
 
-    vec3 wp1 = (mm * vec4(position + tangent * eps, 1.0)).xyz;
-    vec3 wp2 = (mm * vec4(position + bitangent * eps, 1.0)).xyz;
-    float n1 = displace(wp1);
-    float n2 = displace(wp2);
+    vec3 lp1 = (instanceMatrix * vec4(position + tangent * eps, 1.0)).xyz;
+    vec3 lp2 = (instanceMatrix * vec4(position + bitangent * eps, 1.0)).xyz;
+    float n1 = displace(lp1);
+    float n2 = displace(lp2);
 
     vec3 p0 = displacedPosition;
     vec3 p1 = (position + tangent * eps) + normal * n1;
