@@ -83,8 +83,8 @@ class CloudSceneElement extends HTMLElement {
 				uDisplacementStrength: { value: 0.85 },
 				uLightDir: { value: new Vector3(-0.3, 0.55, -0.5).normalize() },
 				uColorHighlight: { value: new Color(0xffffff) }, // sunlit white tops
-				uColorMid: { value: new Color(0xeef3fb) }, // soft white
-				uColorShadow: { value: new Color(0x9fb3d4) }, // cool blue-grey base
+				uColorMid: { value: new Color(0xeaf1fa) }, // soft white
+				uColorShadow: { value: new Color(0xc2d2e4) }, // light blue-grey shadow
 				uFogColor: { value: new Color(0xbcd6ee) },
 				uFogNear: { value: 40 },
 				uFogFar: { value: 60 },

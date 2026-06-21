@@ -81,6 +81,14 @@ void main() {
     // 2) Wander the band boundaries with low-frequency surface noise so the
     //    value edges meander like brush strokes rather than tracing curvature.
     form += (fbm(bp * 1.3) - 0.5) * uFormNoise;
+
+    // 2b) Sparse shadow pockets — occasional darker dabs carved by the low spots
+    //     of a higher-frequency noise. Frequent toward the base, but kept a
+    //     little present up top so the crown isn't a flat white slab.
+    float pocketNoise = fbm(bp * 2.6);
+    float pocket = smoothstep(0.5, 0.32, pocketNoise); // 1 in noise dips, else 0
+    float pocketWeight = mix(0.7, 0.3, heightTerm);    // stronger low, sparse high
+    form -= pocket * pocketWeight * 0.16;
     form = clamp(form, 0.0, 1.0);
 
     // 3) Posterize into 3 flat tones (shadow / mid / light) with soft painted
@@ -95,8 +103,8 @@ void main() {
     // 4) Cool shadows / warm lights, driven off the banded value so it stays
     //    flat and graphic (not a smooth per-normal gradient).
     float band = t1 * 0.5 + t2 * 0.5; // 0 shadow, ~0.5 mid, 1 light
-    color *= mix(vec3(0.90, 0.94, 1.10), vec3(1.0), smoothstep(0.0, 0.5, band));
-    color *= mix(vec3(1.0), vec3(1.06, 1.03, 0.95), smoothstep(0.5, 1.0, band));
+    color *= mix(vec3(0.96, 0.98, 1.06), vec3(1.0), smoothstep(0.0, 0.5, band));
+    color *= mix(vec3(1.0), vec3(1.05, 1.03, 0.96), smoothstep(0.5, 1.0, band));
 
     // 5) Subtle lit-top glow — a quiet lightening where the form is high and
     //    faces up toward the sun. No crisp stroke.
