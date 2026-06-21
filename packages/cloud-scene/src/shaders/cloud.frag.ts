@@ -88,10 +88,13 @@ void main() {
     float baseDarken = mix(0.82, 1.0, smoothstep(0.0, 0.6, vCloudHeight));
     float ao = verticalAO * baseDarken;
 
-    // Combine into a single soft lit term. Floor kept moderate so shadows have
-    // real depth (tutorial step 5) without going muddy.
+    // Combine into a single soft lit term. The value range is compressed (high
+    // floor, lower gain) so the shading reacts gently to normal direction —
+    // this is what minimises the hard seam lines where two opaque spheres
+    // interpenetrate (their abrupt normal jump becomes a soft value step, not a
+    // crisp line). Flatter, but in the spirit of painterly clouds.
     float lit = clamp((diffuse + topBias + sss) * ao, 0.0, 1.0);
-    lit = 0.36 + lit * 0.64;
+    lit = 0.5 + lit * 0.5;
 
     // Whisper of low-frequency mottle so large flats aren't dead-uniform —
     // far gentler than brush grain, just enough to read as painted.
@@ -115,19 +118,21 @@ void main() {
     float lightAmt = smoothstep(0.62, 0.97, lit);
     color *= mix(vec3(1.0), vec3(1.07, 1.04, 0.95), lightAmt * 0.35);
 
-    // --- Crisp lit scallop edges (tutorial step 2) ---
-    // The tops of the billows — surfaces that protrude (high displacement) and
-    // face up toward the sun — catch a tight, bright highlight. A sharper
-    // transition than the soft body, giving the cauliflower-edge sparkle that
-    // reads as distinct lit puffs against the blue.
+    // --- Soft lit scallop edges (tutorial step 2) ---
+    // The tops of the billows that protrude and face the sun catch a highlight.
+    // Softened (wider transition, lower strength) so it reads as a gentle glow
+    // on the crowns rather than a crisp band — a crisp scallop also fires along
+    // sphere-intersection seams and reinforces those hard lines.
     float sunUp = smoothstep(-0.1, 0.55, ndl) * smoothstep(-0.15, 0.55, normal.y);
-    float protrude = smoothstep(0.05, 0.55, vDisplacement);
-    float scallop = smoothstep(0.4, 0.9, sunUp * protrude);
-    color = mix(color, uColorHighlight, scallop * 0.6);
+    float protrude = smoothstep(0.1, 0.7, vDisplacement);
+    float scallop = smoothstep(0.3, 1.0, sunUp * protrude);
+    color = mix(color, uColorHighlight, scallop * 0.3);
 
-    // --- Soft warm rim where the sun grazes thin edges (subtle) ---
-    float fresnel = pow(1.0 - max(dot(normal, viewDir), 0.0), 2.5);
-    float rimLight = fresnel * smoothstep(0.0, 0.8, ndl) * 0.18;
+    // --- Soft warm rim where the sun grazes thin edges (very subtle) ---
+    // Kept gentle: a tight fresnel traces every sphere-intersection seam (where
+    // the normal grazes the view), so a strong rim re-draws the hard lines.
+    float fresnel = pow(1.0 - max(dot(normal, viewDir), 0.0), 3.0);
+    float rimLight = fresnel * smoothstep(0.0, 0.8, ndl) * 0.08;
     color = mix(color, uColorRim, rimLight);
 
     // Translucent glow where light passes through thin/protruding edges
