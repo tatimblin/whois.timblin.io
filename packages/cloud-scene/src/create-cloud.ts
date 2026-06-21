@@ -169,10 +169,12 @@ export function createCloudCluster(params: ClusterParams): Group {
 	for (const p of placements) maxY = Math.max(maxY, p.y);
 
 	// --- Build InstancedMesh per LOD bucket (size-based) ---
-	// Large/medium spheres get more segments; small fringe puffs use low poly
-	// (displacement + soft shading hide it). Two draw calls instead of ~150.
-	const bigGeo = new SphereGeometry(1, 24, 18);
-	const smallGeo = new SphereGeometry(1, 12, 10);
+	// Enough segments that the silhouette stays smoothly curved — the soft edge
+	// erosion fades along the outline, so a coarse polygon would show flat facets
+	// ("triangles") at the rim. Instancing makes the higher tessellation cheap
+	// (still just two draw calls per cloud).
+	const bigGeo = new SphereGeometry(1, 32, 24);
+	const smallGeo = new SphereGeometry(1, 20, 14);
 	const lodThreshold = baseScale * 0.6;
 
 	const big = placements.filter((p) => p.radius >= lodThreshold);

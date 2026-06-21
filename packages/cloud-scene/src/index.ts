@@ -85,15 +85,15 @@ class CloudSceneElement extends HTMLElement {
 				uColorHighlight: { value: new Color(0xffffff) }, // sunlit white tops
 				uColorMid: { value: new Color(0xeef3fb) }, // soft white
 				uColorShadow: { value: new Color(0x9fb3d4) }, // cool blue-grey base
-				uColorRim: { value: new Color(0xfff4dd) }, // warm sun rim
-				uSkyColor: { value: new Color(0xbcd6ee) }, // sky bounce (above)
-				uGroundColor: { value: new Color(0x8aa0bd) }, // cool fill (below)
 				uFogColor: { value: new Color(0xbcd6ee) },
 				uFogNear: { value: 40 },
 				uFogFar: { value: 60 },
-				uBands: { value: 6.0 },
+				// Painted toon banding: step softness (0 = crisp cel, higher =
+				// softer painted boundary) and how much surface noise wanders the
+				// band edges so they read as brushwork, not sphere curvature.
+				uBandSoftness: { value: 0.06 },
+				uFormNoise: { value: 0.35 },
 			},
-			transparent: true,
 		});
 
 		this.addSkyDome(skyTop, skyHorizon);

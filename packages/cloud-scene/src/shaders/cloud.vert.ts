@@ -7,11 +7,9 @@ attribute vec3 aBrushSeed;
 attribute float aCloudHeight;
 
 varying vec3 vNormal;
-varying vec3 vViewDir;
 varying vec3 vWorldPosition;
 varying vec3 vLocalPosition;
 varying vec3 vBrushSeed;
-varying float vDisplacement;
 varying float vCloudHeight;
 
 // Simplex-style 3D noise (Ashima Arts)
@@ -152,12 +150,10 @@ void main() {
     vLocalPosition = displacedPosition;
     vBrushSeed = aBrushSeed;
     vCloudHeight = aCloudHeight;
-    vDisplacement = displacement / max(uDisplacementStrength, 0.0001); // normalized ~[-1,1]
     // Instance scales are near-uniform, so transforming the perturbed normal by
     // the instance rotation/scale via normalMatrix * (instanceMatrix's 3x3) is
     // approximated well enough by normalMatrix alone here.
     vNormal = normalize(normalMatrix * mat3(instanceMatrix) * perturbedNormal);
-    vViewDir = normalize(cameraPosition - worldPosition.xyz);
 
     gl_Position = projectionMatrix * viewMatrix * worldPosition;
 }
