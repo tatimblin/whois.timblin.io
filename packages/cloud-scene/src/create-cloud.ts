@@ -32,6 +32,15 @@ interface Placement {
 	radius: number;
 }
 
+function smoothstep(a: number, b: number, x: number): number {
+	const t = Math.max(0, Math.min(1, (x - a) / (b - a)));
+	return t * t * (3 - 2 * t);
+}
+
+function mix(a: number, b: number, t: number): number {
+	return a + (b - a) * t;
+}
+
 // Drop a sphere placement, slightly flattened, onto the build list.
 function addPlacement(out: Placement[], b: Billow, radius: number) {
 	const round = 0.9 + Math.random() * 0.2;
@@ -60,33 +69,55 @@ export function createCloudCluster(params: ClusterParams): Group {
 	// Budget the sphere count across tiers (primaries are few; fringe is many).
 	const primaryCount = Math.max(3, Math.round(sphereCount * 0.06));
 
-	// --- Tier 1: primary masses — the body, flat base + doming crown ---
+	// --- Tier 1: primary masses — a grand towering cumulus ---
+	// Skill cumulonimbus profile: strongly vertical (verticalBias ~0.9), broad
+	// through the rise, wide size variance, doming into a spreading cauliflower
+	// crown — not a cone. A flat base shelf, a full column body, and a wide crown.
 	const primaries: Billow[] = [];
-	const baseCount = Math.max(2, Math.round(primaryCount * 0.45));
+	const baseCount = Math.max(2, Math.round(primaryCount * 0.3));
 	for (let l = 0; l < primaryCount; l++) {
 		let b: Billow;
 		if (l < baseCount) {
-			// Wide low billows along a flat shelf.
+			// Wide low billows along a flat shelf — the broad foot of the tower.
 			const u = baseCount > 1 ? l / (baseCount - 1) : 0.5;
 			b = {
-				x: (u - 0.5) * spread.x * 0.95 + (Math.random() - 0.5) * spread.x * 0.25,
-				y: Math.random() * 0.16 * spread.y,
+				x: (u - 0.5) * spread.x * 1.0 + (Math.random() - 0.5) * spread.x * 0.25,
+				y: Math.random() * 0.12 * spread.y,
 				z: (Math.random() - 0.5) * spread.z,
-				radius: baseScale * (1.1 + Math.random() * 0.5),
+				radius: baseScale * (1.25 + Math.random() * 0.6),
 			};
 		} else {
-			// Crown billows climb upward and pull toward the centre (sqrt bias),
-			// tapering so the cloud domes into a cauliflower top.
+			// Body + crown billows stacked up the full height. Distribute roughly
+			// evenly over the column (slight upward lean) so the tower stays tall
+			// and full rather than bunching low.
 			const ut = (l - baseCount) / Math.max(1, primaryCount - baseCount - 1);
-			const h = 0.3 + Math.sqrt(ut) * 0.7;
-			const taper = 1.0 - h * 0.6;
+			const h = 0.12 + ut * 0.88; // 0.12 → 1.0 of spread.y, full column
+			// Stay broad for most of the rise; only round in near the very top so
+			// it reads as a thunderhead column, not a pinched cone.
+			const taper = mix(1.0, 0.5, smoothstep(0.55, 1.0, h));
+			// Size: large low/mid billows, smaller toward the crown (wide variance).
+			const sizeFalloff = mix(1.15, 0.6, smoothstep(0.2, 1.0, h));
 			b = {
 				x: (Math.random() - 0.5) * spread.x * taper,
 				y: h * spread.y,
-				z: (Math.random() - 0.5) * spread.z * 0.65,
-				radius: baseScale * (0.8 - h * 0.28) * (0.85 + Math.random() * 0.3),
+				z: (Math.random() - 0.5) * spread.z * mix(1.0, 0.6, h),
+				radius: baseScale * sizeFalloff * (0.85 + Math.random() * 0.3),
 			};
 		}
+		primaries.push(b);
+		addPlacement(placements, b, b.radius);
+	}
+
+	// Broad spreading crown: a few extra large billows clustered near the top so
+	// the tower domes into a wide cauliflower cap rather than a single point.
+	const crownCount = Math.max(2, Math.round(primaryCount * 0.25));
+	for (let c = 0; c < crownCount; c++) {
+		const b: Billow = {
+			x: (Math.random() - 0.5) * spread.x * 0.7,
+			y: spread.y * (0.82 + Math.random() * 0.16),
+			z: (Math.random() - 0.5) * spread.z * 0.6,
+			radius: baseScale * (0.85 + Math.random() * 0.4),
+		};
 		primaries.push(b);
 		addPlacement(placements, b, b.radius);
 	}

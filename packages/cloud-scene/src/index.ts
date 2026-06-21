@@ -62,12 +62,12 @@ class CloudSceneElement extends HTMLElement {
 		this.scene = new Scene();
 		this.scene.background = new Color(0x6fa8dc);
 
-		this.camera = new PerspectiveCamera(50, 1, 0.1, 120);
-		// Positioned so the cumulus forms read at a dramatic scale (towering
-		// billows) while still sitting as a band in the upper part of the wide,
-		// short hero section. Look slightly upward to emphasise the tower height.
-		this.camera.position.set(0, -1, 30);
-		this.camera.lookAt(0, 6, -6);
+		this.camera = new PerspectiveCamera(50, 1, 0.1, 160);
+		// Pulled well back so the full height of the grand cumulus tower fits the
+		// frame and reads at a dramatic scale, sitting in the upper band of the
+		// wide, short hero section. Look upward to emphasise the tower's height.
+		this.camera.position.set(0, 0, 42);
+		this.camera.lookAt(0, 8, -10);
 
 		this.clock = new Clock();
 
@@ -88,8 +88,8 @@ class CloudSceneElement extends HTMLElement {
 				uColorMid: { value: new Color(0xeaf1fa) }, // soft white
 				uColorShadow: { value: new Color(0xc2d2e4) }, // light blue-grey shadow
 				uFogColor: { value: new Color(0xbcd6ee) },
-				uFogNear: { value: 40 },
-				uFogFar: { value: 60 },
+				uFogNear: { value: 58 },
+				uFogFar: { value: 82 },
 				// Painted toon banding: step softness (0 = crisp cel, higher =
 				// softer painted boundary) and how much surface noise wanders the
 				// band edges so they read as brushwork, not sphere curvature.
@@ -145,15 +145,16 @@ class CloudSceneElement extends HTMLElement {
 	// Composition: one dominant hero cumulus mass + a supporting secondary, with
 	// small distant puffs filling the skyline (matching the reference).
 	private static readonly BASE_CONFIGS = [
-		// Hero cumulus — large, dense, dominant mass. Tighter spread.x so the
-		// many puffs concentrate into one big billowing cloud rather than a row.
-		{ count: 200, x: -2, y: 2, z: -4, spread: { x: 5, y: 9, z: 3.5 }, scale: 2.6, drift: 0.04, bob: 0.10 },
-		// Secondary cumulus, clearly smaller, offset to balance the composition.
-		{ count: 110, x: 13, y: 3, z: -7, spread: { x: 4.5, y: 6, z: 3 }, scale: 2.0, drift: 0.05, bob: 0.10 },
+		// Grand hero tower — a tall AND broad cumulonimbus mass that domes into a
+		// wide cauliflower crown. Broad through the rise (not a thin column),
+		// pushed deep so its full height fits. The clear focal point.
+		{ count: 280, x: -2, y: 0, z: -12, spread: { x: 12, y: 14, z: 5 }, scale: 2.6, drift: 0.04, bob: 0.06 },
+		// Supporting cumulus — clearly smaller, lower, set back, off to the side
+		// for scale contrast. Must not compete with the hero.
+		{ count: 70, x: 15, y: 2, z: -15, spread: { x: 6, y: 5, z: 3 }, scale: 1.6, drift: 0.05, bob: 0.08 },
 		// Small distant puffs for depth and a natural skyline.
-		{ count: 45, x: -15, y: 7, z: -12, spread: { x: 4, y: 2.5, z: 2 }, scale: 1.2, drift: 0.03, bob: 0.08 },
-		{ count: 38, x: 6, y: 9, z: -14, spread: { x: 3.5, y: 2, z: 2 }, scale: 1.0, drift: 0.03, bob: 0.07 },
-		{ count: 34, x: 20, y: 8, z: -15, spread: { x: 3, y: 2, z: 2 }, scale: 1.0, drift: 0.02, bob: 0.06 },
+		{ count: 36, x: -16, y: 6, z: -18, spread: { x: 4, y: 2.5, z: 2 }, scale: 1.1, drift: 0.03, bob: 0.07 },
+		{ count: 30, x: 9, y: 8, z: -20, spread: { x: 3.5, y: 2, z: 2 }, scale: 0.9, drift: 0.03, bob: 0.06 },
 	];
 	private tilesEachSide = -1;
 
@@ -252,7 +253,7 @@ class CloudSceneElement extends HTMLElement {
 				}
 
 				void main() {
-					float h = clamp(vPos.y / 60.0 * 0.5 + 0.5, 0.0, 1.0);
+					float h = clamp(vPos.y / 100.0 * 0.5 + 0.5, 0.0, 1.0);
 					vec3 c = mix(uSkyHorizon, uSkyTop, smoothstep(0.15, 0.95, h));
 
 					// Direction on the dome, used as stable UVs for sky detail.
@@ -277,7 +278,7 @@ class CloudSceneElement extends HTMLElement {
 			`,
 		});
 
-		const dome = new Mesh(new SphereGeometry(60, 32, 16), this.skyMaterial);
+		const dome = new Mesh(new SphereGeometry(100, 32, 16), this.skyMaterial);
 		dome.renderOrder = -1;
 		this.scene!.add(dome);
 	}
@@ -291,10 +292,10 @@ class CloudSceneElement extends HTMLElement {
 		this.renderer!.setSize(width, height);
 
 		// Half-width of the camera frustum at the clouds' average depth. The
-		// clouds live around z ≈ -6; camera is at z = 30, so the view distance to
-		// that plane is ~36. We add a tile's margin so clouds fully cover the
+		// clouds live around z ≈ -15; camera is at z = 42, so the view distance to
+		// that plane is ~57. We add a tile's margin so clouds fully cover the
 		// edges as the section bleeds to full viewport width.
-		const cloudDepth = 36;
+		const cloudDepth = 57;
 		const halfFovV = (this.camera!.fov * Math.PI) / 180 / 2;
 		const halfH = Math.tan(halfFovV) * cloudDepth * this.camera!.aspect;
 		this.coveredHalfWidth = halfH + CloudSceneElement.TILE_WIDTH / 2;
