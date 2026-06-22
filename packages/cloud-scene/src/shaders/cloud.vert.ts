@@ -9,6 +9,7 @@ attribute float aCloudHeight;
 varying vec3 vNormal;
 varying vec3 vWorldPosition;
 varying vec3 vLocalPosition;
+varying vec3 vInstanceCenter;
 varying vec3 vBrushSeed;
 varying float vCloudHeight;
 
@@ -155,12 +156,21 @@ void main() {
     vec4 worldPosition = mm * vec4(displacedPosition, 1.0);
     vWorldPosition = worldPosition.xyz;
     vLocalPosition = displacedPosition;
+    // Centre of this instance in CLUSTER-LOCAL space (instanceMatrix translation
+    // only — excludes the drifting modelMatrix). This spans the whole cluster, so
+    // projecting it onto the light gives ONE lit/shadow side across the entire
+    // mass rather than a per-sphere gradient. Drift-stable: the cloud keeps its
+    // light read as the cluster slides across the sky.
+    vInstanceCenter = (instanceMatrix * vec4(0.0, 0.0, 0.0, 1.0)).xyz;
     vBrushSeed = aBrushSeed;
     vCloudHeight = aCloudHeight;
-    // Instance scales are near-uniform, so transforming the perturbed normal by
-    // the instance rotation/scale via normalMatrix * (instanceMatrix's 3x3) is
-    // approximated well enough by normalMatrix alone here.
-    vNormal = normalize(normalMatrix * mat3(instanceMatrix) * perturbedNormal);
+    // World-space normal. Clusters and instances carry only translation and
+    // near-uniform scale (no rotation — see create-cloud.ts), so the world normal
+    // is just the instance-space normal: modelMatrix/instanceMatrix rotation is
+    // identity. Computing it in WORLD space (not view space) lets the fragment
+    // shader's fresnel and sun-side terms use world-space cameraPosition/uLightDir
+    // directly.
+    vNormal = normalize(mat3(instanceMatrix) * perturbedNormal);
 
     gl_Position = projectionMatrix * viewMatrix * worldPosition;
 }

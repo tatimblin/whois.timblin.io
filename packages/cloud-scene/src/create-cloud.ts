@@ -151,8 +151,8 @@ export function createCloudCluster(params: ClusterParams): Group {
 		// Heavy overlap: place the lobe close enough that it fuses with the
 		// parent mass (centre distance < parent radius) while still bumping out
 		// the silhouette. Bigger lobes than before so puffs read as solid mass.
-		const radius = parent.radius * (0.5 + Math.random() * 0.3);
-		const offset = parent.radius * (0.45 + Math.random() * 0.4);
+		const radius = parent.radius * (0.55 + Math.random() * 0.3);
+		const offset = parent.radius * (0.32 + Math.random() * 0.3);
 		const b: Billow = {
 			x: parent.x + dir.x * offset,
 			y: parent.y + dir.y * offset,
@@ -181,12 +181,12 @@ export function createCloudCluster(params: ClusterParams): Group {
 			(Math.random() - 0.15) * 0.9,
 			(Math.random() - 0.5) * 0.7
 		).normalize();
-		// ~25% jut out as outcroppings; the rest tighten the fringe with heavy
+		// ~15% jut out as outcroppings; the rest tighten the fringe with heavy
 		// overlap so the cloud edge stays a solid scalloped mass, not popcorn.
-		const outcrop = Math.random() < 0.25;
-		const radius = parent.radius * (0.45 + Math.random() * 0.25);
+		const outcrop = Math.random() < 0.15;
+		const radius = parent.radius * (0.5 + Math.random() * 0.25);
 		const offset =
-			parent.radius * (outcrop ? 0.8 + Math.random() * 0.5 : 0.4 + Math.random() * 0.35);
+			parent.radius * (outcrop ? 0.65 + Math.random() * 0.4 : 0.3 + Math.random() * 0.3);
 		const b: Billow = {
 			x: parent.x + dir.x * offset,
 			y: parent.y + dir.y * offset,

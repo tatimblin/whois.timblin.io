@@ -72,8 +72,11 @@ class CloudSceneElement extends HTMLElement {
 		this.clock = new Clock();
 
 		// Bright daytime sky gradient — deeper blue overhead fading to a pale
-		// near-white blue at the horizon.
-		const skyTop = new Color(0x3d7fc4); // clear blue zenith
+		// near-white blue at the horizon. Zenith pulled a touch deeper to give the
+		// warm cloud crowns more value contrast to read against (still daytime, not
+		// dusk — the high-contrast backlit "crown glow" of the reference needs a
+		// dark sky and is intentionally out of scope here).
+		const skyTop = new Color(0x336fbe); // clear blue zenith (slightly deeper)
 		const skyHorizon = new Color(0xcfe4f5); // pale haze near horizon
 
 		this.material = new ShaderMaterial({
@@ -82,18 +85,37 @@ class CloudSceneElement extends HTMLElement {
 			uniforms: {
 				uTime: { value: 0 },
 				uNoiseScale: { value: 0.2 },
-				uDisplacementStrength: { value: 0.85 },
+				// Lowered so the per-sphere fBm displacement no longer spikes the
+				// silhouette into discrete cauliflower beads — the cloud reads as one
+				// softer cohesive mass (the bumpy outline, not just shading, was part
+				// of the "pile of balls" look).
+				uDisplacementStrength: { value: 0.55 },
 				uLightDir: { value: new Vector3(-0.3, 0.55, -0.5).normalize() },
-				uColorHighlight: { value: new Color(0xffffff) }, // sunlit white tops
-				uColorMid: { value: new Color(0xeaf1fa) }, // soft white
-				uColorShadow: { value: new Color(0xc2d2e4) }, // light blue-grey shadow
-				uFogColor: { value: new Color(0xbcd6ee) },
+				// Painted multi-hue ramp (darkest → lightest): muted blue-violet
+				// deep bellies → lavender shadow → soft warm white mid → warm
+				// cream/peach lit crowns, plus a faint pink/gold accent used only in
+				// the narrow upper transition near the crown edge.
+				uColorHighlight: { value: new Color(0xfffaf2) }, // warm-white lit tops
+				uColorMid: { value: new Color(0xeef0f6) }, // soft cool white
+				uColorShadow: { value: new Color(0xc4cbe0) }, // soft blue-grey shadow
+				uColorDeep: { value: new Color(0xa6acc9) }, // deeper blue-grey undersides
+				uColorAccent: { value: new Color(0xffeeda) }, // faint warm glow
+				// Soft feathered edge: pale sky tint the sunward silhouette fringes
+				// lift toward, how strong that lift is, and how tightly it hugs the
+				// grazing rim (higher = thinner rim).
+				uEdgeColor: { value: new Color(0xe8eef8) },
+				uEdgeStrength: { value: 0.35 },
+				uEdgeFalloff: { value: 2.5 },
+				// Fog pulled toward lavender so the violet shadow/deep stops on
+				// distant clouds recede cleanly into haze instead of seaming against
+				// a grey-blue fog.
+				uFogColor: { value: new Color(0xcacae8) },
 				uFogNear: { value: 58 },
 				uFogFar: { value: 82 },
 				// Painted toon banding: step softness (0 = crisp cel, higher =
 				// softer painted boundary) and how much surface noise wanders the
 				// band edges so they read as brushwork, not sphere curvature.
-				uBandSoftness: { value: 0.06 },
+				uBandSoftness: { value: 0.13 },
 				uFormNoise: { value: 0.35 },
 			},
 		});
@@ -301,6 +323,13 @@ class CloudSceneElement extends HTMLElement {
 		this.coveredHalfWidth = halfH + CloudSceneElement.TILE_WIDTH / 2;
 
 		this.layoutClouds();
+
+		// setSize() clears the drawing buffer. When no animation loop is running
+		// (reduced-motion, or paused off-screen) nothing would repaint it, leaving
+		// a blank canvas after a resize — so render one static frame here.
+		if (!this.rafId && this.scene && this.camera) {
+			this.renderFrame();
+		}
 	}
 
 	private handleVisibility = () => {
