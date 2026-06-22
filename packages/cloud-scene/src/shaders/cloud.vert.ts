@@ -5,11 +5,14 @@ uniform float uDisplacementStrength;
 
 attribute vec3 aBrushSeed;
 attribute float aCloudHeight;
+attribute vec3 aClusterCentroid;
 
 varying vec3 vNormal;
+varying vec3 vNormalSmooth;
 varying vec3 vWorldPosition;
 varying vec3 vLocalPosition;
 varying vec3 vInstanceCenter;
+varying vec3 vMassOut;
 varying vec3 vBrushSeed;
 varying float vCloudHeight;
 
@@ -104,6 +107,23 @@ float fbmDetail(vec3 p) {
     return value;
 }
 
+// 2-octave fBm for the SHADING normal only — just the broadest lobe forms. The
+// higher octaves of the 5-octave fbm above still wiggle several times across a
+// large billow at meaningful slope, which the interior shading reads as ripple;
+// keeping only the two lowest octaves makes a big billow face resolve to one
+// near-constant normal (a single flat colour in its centre).
+float fbmBroad(vec3 p) {
+    float value = 0.0;
+    float amplitude = 0.5;
+    float frequency = 1.0;
+    for (int i = 0; i < 2; i++) {
+        value += amplitude * snoise(p * frequency);
+        amplitude *= 0.45;
+        frequency *= 2.01;
+    }
+    return value;
+}
+
 // Layered displacement: big low-freq lobes for form + fine grain for cauliflower.
 // Used for the base position AND the finite-difference normal samples so the
 // recomputed normal always matches the displaced surface.
@@ -116,6 +136,18 @@ float displace(vec3 p) {
     float lobes = fbm(p * (uNoiseScale * 0.45) + uTime * 0.02);
     float detail = fbmDetail(p * (uNoiseScale * 1.8) + uTime * 0.042);
     return (lobes * 0.88 + detail * 0.12) * uDisplacementStrength;
+}
+
+// Smooth displacement: ONLY the low-frequency lobe component, no cauliflower
+// grain. The grain is a small fraction of the amplitude but, being high
+// frequency, dominates the surface SLOPE — so a normal built from the full
+// displace() above is peppered with little wiggles that ripple across flat
+// interior faces. We build the interior shading normal from this smooth field
+// instead, so the middle of each cloud reads as broad flat value zones. The
+// detailed silhouette still comes from the full displace() geometry.
+float displaceSmooth(vec3 p) {
+    float lobes = fbmBroad(p * (uNoiseScale * 0.45) + uTime * 0.02);
+    return lobes * 0.88 * uDisplacementStrength;
 }
 
 void main() {
@@ -153,6 +185,16 @@ void main() {
 
     vec3 perturbedNormal = normalize(cross(p1 - p0, p2 - p0));
 
+    // Second normal from the SMOOTH (grain-free) displacement, sampled at the
+    // same points. This drives the interior shading so flat faces read flat,
+    // while the detailed perturbedNormal above still shapes the silhouette edge.
+    float ns1 = displaceSmooth(lp1);
+    float ns2 = displaceSmooth(lp2);
+    vec3 sp0 = position + normal * displaceSmooth(localPos);
+    vec3 sp1 = (position + tangent * eps) + normal * ns1;
+    vec3 sp2 = (position + bitangent * eps) + normal * ns2;
+    vec3 perturbedNormalSmooth = normalize(cross(sp1 - sp0, sp2 - sp0));
+
     vec4 worldPosition = mm * vec4(displacedPosition, 1.0);
     vWorldPosition = worldPosition.xyz;
     vLocalPosition = displacedPosition;
@@ -162,6 +204,13 @@ void main() {
     // mass rather than a per-sphere gradient. Drift-stable: the cloud keeps its
     // light read as the cluster slides across the sky.
     vInstanceCenter = (instanceMatrix * vec4(0.0, 0.0, 0.0, 1.0)).xyz;
+    // Mass-outward direction: from the cluster centroid to this surface point, in
+    // cluster-local space (instanceMatrix only, drift-stable). Surfaces facing
+    // outward from the mass are the true outer silhouette; surfaces facing inward
+    // are interior sphere overlaps (where the seam should be welded away). No
+    // rotation in the matrices, so this direction is valid against vNormal.
+    vec3 clusterPos = (instanceMatrix * vec4(displacedPosition, 1.0)).xyz;
+    vMassOut = normalize(clusterPos - aClusterCentroid);
     vBrushSeed = aBrushSeed;
     vCloudHeight = aCloudHeight;
     // World-space normal. Clusters and instances carry only translation and
@@ -171,6 +220,7 @@ void main() {
     // shader's fresnel and sun-side terms use world-space cameraPosition/uLightDir
     // directly.
     vNormal = normalize(mat3(instanceMatrix) * perturbedNormal);
+    vNormalSmooth = normalize(mat3(instanceMatrix) * perturbedNormalSmooth);
 
     gl_Position = projectionMatrix * viewMatrix * worldPosition;
 }

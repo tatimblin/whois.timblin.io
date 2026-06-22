@@ -117,6 +117,11 @@ class CloudSceneElement extends HTMLElement {
 				// band edges so they read as brushwork, not sphere curvature.
 				uBandSoftness: { value: 0.13 },
 				uFormNoise: { value: 0.35 },
+				// Seam weld: how strongly the per-billow shading normal bends toward
+				// the shared mass-outward direction at grazing/overlap angles, so
+				// deeply-overlapping spheres read as one mass instead of showing a
+				// hard intersection line. 0 = off, ~0.5 = balanced.
+				uWeldAmount: { value: 0.5 },
 			},
 		});
 

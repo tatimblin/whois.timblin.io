@@ -13,12 +13,15 @@ uniform float uFogNear;
 uniform float uFogFar;
 uniform float uBandSoftness;
 uniform float uFormNoise;
+uniform float uWeldAmount;
 uniform float uTime;
 
 varying vec3 vNormal;
+varying vec3 vNormalSmooth;
 varying vec3 vWorldPosition;
 varying vec3 vLocalPosition;
 varying vec3 vInstanceCenter;
+varying vec3 vMassOut;
 varying vec3 vBrushSeed;
 varying float vCloudHeight;
 
@@ -57,6 +60,8 @@ float fbm(vec3 p) {
 void main() {
     vec3 normal = normalize(vNormal);
     vec3 lightDir = normalize(uLightDir);
+    vec3 viewDir = normalize(cameraPosition - vWorldPosition);
+    vec3 massOut = normalize(vMassOut);
 
     // Stable per-surface coordinate for the subtle painterly mottle (anchored
     // to local space + per-mesh seed so it sticks to the cloud and doesn't
@@ -86,12 +91,21 @@ void main() {
 
     //    Per-billow form shading. Light comes from above, so each rounded billow
     //    catches light on its TOP and falls into soft shadow on its UNDERSIDE —
-    //    this is what gives Ghibli cumulus its sculpted, detailed lobes (the
-    //    references are built on it). It reads as painted, not as "separate
-    //    balls", because the geometry is soft and the value is posterised +
-    //    noise-wandered below. normal.y is the up/down-facing of the displaced
-    //    surface.
-    float upFacing = smoothstep(-0.65, 0.85, normal.y);             // under→top of each billow
+    //    this is what gives Ghibli cumulus its sculpted lobes. Driven off the
+    //    SMOOTH normal (grain-free, low frequency) so the interior reads as broad
+    //    flat value zones instead of fine ripple — a painter limits mid-cloud
+    //    detail. The detailed normal is reserved for the silhouette edge below.
+    //
+    //    Seam weld: where two spheres overlap, each presents its OWN normal at the
+    //    shared pixel, so the value steps and a hard line appears. At grazing
+    //    angles (where overlap intersections live) blend the smooth normal toward
+    //    the shared mass-outward direction, so neighbouring spheres shade alike
+    //    across the overlap. massOut is cluster-continuous, so this cannot add a
+    //    new seam; clean front faces (low grazing) keep their own normal.
+    vec3 smoothN = normalize(vNormalSmooth);
+    float grazing = 1.0 - max(dot(smoothN, viewDir), 0.0);
+    vec3 shadeN = normalize(mix(smoothN, massOut, uWeldAmount * grazing));
+    float upFacing = smoothstep(-0.65, 0.85, shadeN.y); // under→top of each billow
     float form = 0.30                       // floor
                + heightTerm * 0.22          // tops of the whole tower brightest
                + sunGradient * 0.15         // whole sun-side of the mass lifts
@@ -99,7 +113,13 @@ void main() {
 
     // 2) Wander the band boundaries with low-frequency surface noise so the
     //    value edges meander like brush strokes rather than tracing curvature.
-    form += (fbm(bp * 1.3) - 0.5) * uFormNoise;
+    //    Lower frequency (0.7) so the offset is near-constant across a single
+    //    billow — it nudges whole zones, not the centre of a face. Faded out
+    //    where the billow centre is bright and up-facing (upFacing high) so the
+    //    lit crowns read as one clean colour; kept on sides/undersides for the
+    //    painterly edge wander.
+    float centreFlatten = 1.0 - smoothstep(0.5, 0.9, upFacing) * 0.7;
+    form += (fbm(bp * 0.7) - 0.5) * uFormNoise * centreFlatten;
 
     // 2b) Soft shadow recesses — broad darker hollows carved by the low spots of
     //     a LOW-frequency noise (large, rounded recesses following the billow
@@ -136,10 +156,15 @@ void main() {
     // angles, but ONLY where the surface also faces the sun — so it reads as the
     // reference's directional backlit rim, not a uniform halo around the cloud.
     // Stays opaque (no alpha sorting): just a colour lift at the rim.
-    vec3 viewDir = normalize(cameraPosition - vWorldPosition);
     float fresnel = pow(1.0 - max(dot(normal, viewDir), 0.0), uEdgeFalloff);
     float sunSide = max(dot(normal, lightDir), 0.0); // 0 on the shadow side
-    color = mix(color, uEdgeColor, fresnel * sunSide * uEdgeStrength);
+    // Gate to the TRUE outer silhouette: the fresnel rim otherwise fires on every
+    // sphere's grazing edge, including interior overlaps buried in the mass, which
+    // paints bright crescents exactly along seams. Suppress it where the surface
+    // faces inward from the cluster centroid (an interior overlap) and keep it
+    // where it faces outward (the genuine outer edge).
+    float rimMask = smoothstep(0.0, 0.5, dot(normal, massOut));
+    color = mix(color, uEdgeColor, fresnel * sunSide * uEdgeStrength * rimMask);
 
     // --- Atmospheric depth fade ---
     // Use forward (camera-Z) distance, not radial distance, so clouds spread

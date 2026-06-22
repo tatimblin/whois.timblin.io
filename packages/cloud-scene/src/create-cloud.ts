@@ -87,7 +87,7 @@ export function createCloudCluster(params: ClusterParams): Group {
 				x: (u - 0.5) * spread.x * 1.15 + (Math.random() - 0.5) * spread.x * 0.2,
 				y: Math.random() * 0.08 * spread.y,
 				z: (Math.random() - 0.5) * spread.z,
-				radius: baseScale * (1.45 + Math.random() * 0.7),
+				radius: baseScale * (1.95 + Math.random() * 0.8),
 			};
 		} else {
 			// Body + crown billows stacked up the full height. Distribute roughly
@@ -99,7 +99,9 @@ export function createCloudCluster(params: ClusterParams): Group {
 			// it reads as a thunderhead column, not a pinched cone.
 			const taper = mix(1.0, 0.5, smoothstep(0.55, 1.0, h));
 			// Size: large low/mid billows, smaller toward the crown (wide variance).
-			const sizeFalloff = mix(1.15, 0.6, smoothstep(0.2, 1.0, h));
+			// Kept large so the body is one solid welded core — seams stay buried
+			// deep inside and detail rides the perimeter.
+			const sizeFalloff = mix(1.55, 0.85, smoothstep(0.2, 1.0, h));
 			b = {
 				x: (Math.random() - 0.5) * spread.x * taper,
 				y: h * spread.y,
@@ -119,7 +121,7 @@ export function createCloudCluster(params: ClusterParams): Group {
 			x: (Math.random() - 0.5) * spread.x * 0.7,
 			y: spread.y * (0.82 + Math.random() * 0.16),
 			z: (Math.random() - 0.5) * spread.z * 0.6,
-			radius: baseScale * (0.85 + Math.random() * 0.4),
+			radius: baseScale * (1.15 + Math.random() * 0.5),
 		};
 		primaries.push(b);
 		addPlacement(placements, b, b.radius);
@@ -208,6 +210,20 @@ export function createCloudCluster(params: ClusterParams): Group {
 	let maxY = 0.0001;
 	for (const p of placements) maxY = Math.max(maxY, p.y);
 
+	// Radius-weighted centroid of all billows, in cluster-local space. The shader
+	// uses (surfacePoint - centroid) as a "mass-outward" direction to tell a true
+	// outer-silhouette fragment (rim wanted) from an interior sphere-overlap
+	// surface (seam unwanted). Same value for every instance in this cluster.
+	let cx = 0, cy = 0, cz = 0, cw = 0;
+	for (const p of placements) {
+		cx += p.x * p.radius;
+		cy += p.y * p.radius;
+		cz += p.z * p.radius;
+		cw += p.radius;
+	}
+	cw = cw || 1;
+	const centroid = [cx / cw, cy / cw, cz / cw];
+
 	// --- Build InstancedMesh per LOD bucket (size-based) ---
 	// Enough segments that the silhouette stays smoothly curved — the soft edge
 	// erosion fades along the outline, so a coarse polygon would show flat facets
@@ -233,6 +249,7 @@ export function createCloudCluster(params: ClusterParams): Group {
 		const mesh = new InstancedMesh(geo, material, list.length);
 		const seeds = new Float32Array(list.length * 3);
 		const heights = new Float32Array(list.length);
+		const centroids = new Float32Array(list.length * 3);
 
 		for (let i = 0; i < list.length; i++) {
 			const p = list[i];
@@ -246,10 +263,14 @@ export function createCloudCluster(params: ClusterParams): Group {
 			seeds[i * 3 + 1] = Math.random() * 100;
 			seeds[i * 3 + 2] = Math.random() * 100;
 			heights[i] = p.y / maxY;
+			centroids[i * 3] = centroid[0];
+			centroids[i * 3 + 1] = centroid[1];
+			centroids[i * 3 + 2] = centroid[2];
 		}
 		mesh.instanceMatrix.needsUpdate = true;
 		geo.setAttribute("aBrushSeed", new InstancedBufferAttribute(seeds, 3));
 		geo.setAttribute("aCloudHeight", new InstancedBufferAttribute(heights, 1));
+		geo.setAttribute("aClusterCentroid", new InstancedBufferAttribute(centroids, 3));
 
 		// Clouds drift; their bounds change — skip frustum culling to avoid pop-out.
 		mesh.frustumCulled = false;
