@@ -167,16 +167,18 @@ class CloudSceneElement extends HTMLElement {
 	// Composition: one dominant hero cumulus mass + a supporting secondary, with
 	// small distant puffs filling the skyline (matching the reference).
 	private static readonly BASE_CONFIGS = [
-		// Grand hero tower — a tall AND broad cumulonimbus mass that domes into a
-		// wide cauliflower crown. Broad through the rise (not a thin column),
-		// pushed deep so its full height fits. The clear focal point.
-		{ count: 280, x: -2, y: 0, z: -12, spread: { x: 12, y: 14, z: 5 }, scale: 2.6, drift: 0.04, bob: 0.06 },
-		// Supporting cumulus — clearly smaller, lower, set back, off to the side
-		// for scale contrast. Must not compete with the hero.
-		{ count: 70, x: 15, y: 2, z: -15, spread: { x: 6, y: 5, z: 3 }, scale: 1.6, drift: 0.05, bob: 0.08 },
+		// Hero cumulus — a broad, flat-bottomed mass that billows up into a domed
+		// crown (cloudBig / cloudCumulo character): clearly WIDER than tall, the
+		// focal point. Pushed deep so its full width fits.
+		{ count: 300, x: -3, y: 0, z: -12, spread: { x: 18, y: 9, z: 5 }, scale: 2.6, drift: 0.04, bob: 0.06 },
+		// Supporting wide cumulus — a flatter, lower cloudBig-style mass off to the
+		// side for scale + shape contrast. Smaller, must not compete with the hero.
+		{ count: 90, x: 16, y: 1, z: -15, spread: { x: 10, y: 4, z: 3 }, scale: 1.6, drift: 0.05, bob: 0.08 },
+		// A taller, narrower towering accent — a bit of cloudCumulo verticality so
+		// the skyline isn't all the same proportion.
+		{ count: 60, x: -17, y: 3, z: -17, spread: { x: 4.5, y: 6, z: 2.5 }, scale: 1.2, drift: 0.04, bob: 0.07 },
 		// Small distant puffs for depth and a natural skyline.
-		{ count: 36, x: -16, y: 6, z: -18, spread: { x: 4, y: 2.5, z: 2 }, scale: 1.1, drift: 0.03, bob: 0.07 },
-		{ count: 30, x: 9, y: 8, z: -20, spread: { x: 3.5, y: 2, z: 2 }, scale: 0.9, drift: 0.03, bob: 0.06 },
+		{ count: 34, x: 8, y: 7, z: -20, spread: { x: 5, y: 2, z: 2 }, scale: 0.95, drift: 0.03, bob: 0.06 },
 	];
 	private tilesEachSide = -1;
 

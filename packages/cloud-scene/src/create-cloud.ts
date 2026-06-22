@@ -78,13 +78,16 @@ export function createCloudCluster(params: ClusterParams): Group {
 	for (let l = 0; l < primaryCount; l++) {
 		let b: Billow;
 		if (l < baseCount) {
-			// Wide low billows along a flat shelf — the broad foot of the tower.
+			// Wide low billows along a flat shelf — the broad foot of the cloud.
+			// Spread them across the full width and keep them large and overlapping
+			// so the base reads as one continuous flat-bottomed mass (cloudBig /
+			// cloudMid character), not separate lumps.
 			const u = baseCount > 1 ? l / (baseCount - 1) : 0.5;
 			b = {
-				x: (u - 0.5) * spread.x * 1.0 + (Math.random() - 0.5) * spread.x * 0.25,
-				y: Math.random() * 0.12 * spread.y,
+				x: (u - 0.5) * spread.x * 1.15 + (Math.random() - 0.5) * spread.x * 0.2,
+				y: Math.random() * 0.08 * spread.y,
 				z: (Math.random() - 0.5) * spread.z,
-				radius: baseScale * (1.25 + Math.random() * 0.6),
+				radius: baseScale * (1.45 + Math.random() * 0.7),
 			};
 		} else {
 			// Body + crown billows stacked up the full height. Distribute roughly
@@ -123,9 +126,11 @@ export function createCloudCluster(params: ClusterParams): Group {
 	}
 
 	// How many child lobes each remaining tier gets, distributed across parents.
+	// Weighted toward bold rim lobes over tiny fringe so the cloud reads as a few
+	// strong masses with detail nestled on them, not a uniform field of small puffs.
 	const remaining = sphereCount - placements.length;
-	const rimTotal = Math.round(remaining * 0.45); // tier 2
-	const fringeTotal = remaining - rimTotal; // tier 3
+	const rimTotal = Math.round(remaining * 0.42); // tier 2 (bold billows)
+	const fringeTotal = remaining - rimTotal; // tier 3 (fine cauliflower grain)
 
 	// --- Tier 2: rim lobes — medium puffs on the OUTWARD rim of each primary ---
 	const rimLobes: Billow[] = [];
@@ -141,18 +146,21 @@ export function createCloudCluster(params: ClusterParams): Group {
 				break;
 			}
 		}
-		// Random direction, biased upward/sideways (busy detail on top & sides,
-		// flatter underside) — push OUTWARD past the parent rim.
+		// Direction strongly biased UP and sideways so billowing gathers on top
+		// and the underside stays flat (cumulus character). Push OUTWARD past the
+		// parent rim.
 		const dir = new Vector3(
 			Math.random() - 0.5,
-			(Math.random() - 0.2) * 0.9, // upward bias
+			(Math.random() + 0.15) * 0.9, // strong upward bias, rarely downward
 			(Math.random() - 0.5) * 0.7
 		).normalize();
-		// Heavy overlap: place the lobe close enough that it fuses with the
-		// parent mass (centre distance < parent radius) while still bumping out
-		// the silhouette. Bigger lobes than before so puffs read as solid mass.
-		const radius = parent.radius * (0.55 + Math.random() * 0.3);
-		const offset = parent.radius * (0.32 + Math.random() * 0.3);
+		// Heavy overlap and clearly SMALLER than the parent. WIDE size variance
+		// (squared random) so most rim lobes are small cauliflower detail with the
+		// occasional bold billow — that mix breaks up the uniform field of
+		// equal-sized bumps. Nestled on the big masses, not equal-sized puffs.
+		const sv = Math.random();
+		const radius = parent.radius * (0.28 + sv * sv * 0.45);
+		const offset = parent.radius * (0.35 + Math.random() * 0.32);
 		const b: Billow = {
 			x: parent.x + dir.x * offset,
 			y: parent.y + dir.y * offset,
@@ -181,12 +189,13 @@ export function createCloudCluster(params: ClusterParams): Group {
 			(Math.random() - 0.15) * 0.9,
 			(Math.random() - 0.5) * 0.7
 		).normalize();
-		// ~15% jut out as outcroppings; the rest tighten the fringe with heavy
-		// overlap so the cloud edge stays a solid scalloped mass, not popcorn.
-		const outcrop = Math.random() < 0.15;
-		const radius = parent.radius * (0.5 + Math.random() * 0.25);
+		// Fine cauliflower grain: small lobes hugging the rim lobes, with ~12%
+		// jutting out a touch as outcroppings. Distinctly smaller than tier 2 so
+		// they read as surface texture, breaking up the uniform bump silhouette.
+		const outcrop = Math.random() < 0.12;
+		const radius = parent.radius * (0.34 + Math.random() * 0.22);
 		const offset =
-			parent.radius * (outcrop ? 0.65 + Math.random() * 0.4 : 0.3 + Math.random() * 0.3);
+			parent.radius * (outcrop ? 0.6 + Math.random() * 0.35 : 0.28 + Math.random() * 0.28);
 		const b: Billow = {
 			x: parent.x + dir.x * offset,
 			y: parent.y + dir.y * offset,
