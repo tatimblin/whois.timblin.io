@@ -24,6 +24,7 @@ varying vec3 vInstanceCenter;
 varying vec3 vMassOut;
 varying vec3 vBrushSeed;
 varying float vCloudHeight;
+varying float vEdgeSoft;
 
 // --- Noise primitives ---
 
@@ -165,6 +166,20 @@ void main() {
     // where it faces outward (the genuine outer edge).
     float rimMask = smoothstep(0.0, 0.5, dot(normal, massOut));
     color = mix(color, uEdgeColor, fresnel * sunSide * uEdgeStrength * rimMask);
+
+    // --- Diffuse silhouette edge (atmospheric, per-band) ---
+    // The clouds are opaque, so their outline against the sky is razor-sharp.
+    // For distant/mid bands (vEdgeSoft > 0) melt the silhouette into the sky by
+    // fading toward the haze colour at grazing view angles (the rim), so the
+    // outline reads as soft atmosphere rather than a hard cutout. The near band
+    // (vEdgeSoft = 0) stays crisp. Opaque throughout — no alpha sorting.
+    float edgeGraze = 1.0 - max(dot(normal, viewDir), 0.0);
+    // The stronger vEdgeSoft is, the EARLIER the melt begins along the surface —
+    // so a high-edgeSoft far cloud diffuses deep into its body (feathery haze),
+    // not just at the thin rim. A crisp near cloud (vEdgeSoft 0) never melts.
+    float edgeLo = mix(0.6, 0.05, clamp(vEdgeSoft, 0.0, 1.0));
+    float edgeMelt = smoothstep(edgeLo, 0.95, edgeGraze) * clamp(vEdgeSoft, 0.0, 1.0);
+    color = mix(color, uFogColor, edgeMelt);
 
     // --- Atmospheric depth fade ---
     // Use forward (camera-Z) distance, not radial distance, so clouds spread

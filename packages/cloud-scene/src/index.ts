@@ -106,12 +106,14 @@ class CloudSceneElement extends HTMLElement {
 				uEdgeColor: { value: new Color(0xe8eef8) },
 				uEdgeStrength: { value: 0.35 },
 				uEdgeFalloff: { value: 2.5 },
-				// Fog pulled toward lavender so the violet shadow/deep stops on
-				// distant clouds recede cleanly into haze instead of seaming against
-				// a grey-blue fog.
-				uFogColor: { value: new Color(0xcacae8) },
+				// Atmospheric recession: distant clouds fade toward the pale SKY
+				// HORIZON colour (matching the sky dome's horizon) so the far band
+				// melts into the sky like real atmosphere, rather than into a separate
+				// haze tint. Near band (camera-Z depth ~52) stays crisp; mid band
+				// (~66) softens; far band (~86+) hazes out strongly.
+				uFogColor: { value: new Color(0xcfe4f5) },
 				uFogNear: { value: 58 },
-				uFogFar: { value: 82 },
+				uFogFar: { value: 86 },
 				// Painted toon banding: step softness (0 = crisp cel, higher =
 				// softer painted boundary) and how much surface noise wanders the
 				// band edges so they read as brushwork, not sphere curvature.
@@ -159,31 +161,31 @@ class CloudSceneElement extends HTMLElement {
 	}
 
 	// One "tile" of clouds. The x values stay within ±tileWidth/2 so the pattern
-	// repeats seamlessly when tiled horizontally to fill any screen width.
-	private static readonly TILE_WIDTH = 36;
-	// Each cloud builds upward from its group origin (flat base, doming crown),
-	// so `y` is the base height and `spread.y` is how tall the cumulus stacks.
-	// Y values are raised so the clouds gather near the top of the section.
-	// A mix of larger "hero" cumulus and smaller puffs for a natural skyline.
-	// Counts are high now that spheres are instanced — each cloud is the union of
-	// many overlapping puffs (hierarchical billows + rim fringe + outcroppings).
-	// Counts are high now that spheres are instanced — each cloud is the union of
-	// many overlapping puffs (hierarchical billows + rim fringe + outcroppings).
-	// Composition: one dominant hero cumulus mass + a supporting secondary, with
-	// small distant puffs filling the skyline (matching the reference).
+	// repeats seamlessly when tiled horizontally to fill any screen width. Wider
+	// now so each depth band has room for sky gaps between discrete clouds.
+	private static readonly TILE_WIDTH = 60;
+	// Composition: three DISTINCT DEPTH BANDS (Kiki's Delivery Service reference) —
+	// discrete cumulus separated by sky gaps, arranged so nearer clouds are larger,
+	// higher, and crisp, while farther clouds are smaller, lower (toward a horizon
+	// line), and haze into the sky via fog. `y` is each cloud's base height,
+	// `spread.y` how tall it stacks; `drift` is parallax (nearer = faster). Depth is
+	// baked into `z` per band and is NOT animated (see update()), so the bands stay
+	// visually distinct as the clouds drift. x values are spread across the tile
+	// with gaps and staggered between bands so the gaps don't line up into columns.
 	private static readonly BASE_CONFIGS = [
-		// Hero cumulus — a broad, flat-bottomed mass that billows up into a domed
-		// crown (cloudBig / cloudCumulo character): clearly WIDER than tall, the
-		// focal point. Pushed deep so its full width fits.
-		{ count: 300, x: -3, y: 0, z: -12, spread: { x: 18, y: 9, z: 5 }, scale: 2.6, drift: 0.04, bob: 0.06 },
-		// Supporting wide cumulus — a flatter, lower cloudBig-style mass off to the
-		// side for scale + shape contrast. Smaller, must not compete with the hero.
-		{ count: 90, x: 16, y: 1, z: -15, spread: { x: 10, y: 4, z: 3 }, scale: 1.6, drift: 0.05, bob: 0.08 },
-		// A taller, narrower towering accent — a bit of cloudCumulo verticality so
-		// the skyline isn't all the same proportion.
-		{ count: 60, x: -17, y: 3, z: -17, spread: { x: 4.5, y: 6, z: 2.5 }, scale: 1.2, drift: 0.04, bob: 0.07 },
-		// Small distant puffs for depth and a natural skyline.
-		{ count: 34, x: 8, y: 7, z: -20, spread: { x: 5, y: 2, z: 2 }, scale: 0.95, drift: 0.03, bob: 0.06 },
+		// --- NEAR band (z ≈ -10): few large crisp cumulus, HIGH in the frame ---
+		{ count: 520, x: -16, y: 11, z: -10, spread: { x: 13, y: 9, z: 5 }, scale: 2.4, drift: 0.07, bob: 0.06, flatten: 0.62 },
+		{ count: 260, x: 14, y: 13, z: -11, spread: { x: 9, y: 7, z: 4 }, scale: 1.9, drift: 0.065, bob: 0.07 },
+		// --- MID band (z ≈ -24): medium clouds, clearly BELOW the near band ---
+		{ count: 150, x: -2, y: 6, z: -24, spread: { x: 8, y: 4, z: 3 }, scale: 1.5, drift: 0.045, bob: 0.05, edgeSoft: 0.5 },
+		{ count: 130, x: -26, y: 7, z: -25, spread: { x: 7, y: 4, z: 3 }, scale: 1.35, drift: 0.045, bob: 0.05, flatten: 0.62, edgeSoft: 0.5 },
+		{ count: 110, x: 24, y: 5, z: -26, spread: { x: 7, y: 3.5, z: 3 }, scale: 1.3, drift: 0.04, bob: 0.06, edgeSoft: 0.5 },
+		// --- FAR band (z ≈ -42): SPARSE long, low, wispy strips along the horizon
+		// line, wide and flat (stretched x, squashed y) so they read as distant
+		// haze rather than little puffs. Only two per tile with big sky gaps
+		// between them — most of the horizon is open sky. ---
+		{ count: 64, x: -18, y: 0, z: -42, spread: { x: 13, y: 1.1, z: 2 }, scale: 1.0, drift: 0.022, bob: 0.02, flatten: 0.45, edgeSoft: 1.0 },
+		{ count: 54, x: 16, y: 0.3, z: -45, spread: { x: 11, y: 0.9, z: 2 }, scale: 0.85, drift: 0.02, bob: 0.018, flatten: 0.45, edgeSoft: 1.0 },
 	];
 	private tilesEachSide = -1;
 
@@ -221,6 +223,8 @@ class CloudSceneElement extends HTMLElement {
 					spread: cfg.spread,
 					baseScale: cfg.scale,
 					material: this.material!,
+					flatten: (cfg as { flatten?: number }).flatten,
+					edgeSoft: (cfg as { edgeSoft?: number }).edgeSoft,
 				});
 				group.position.set(cfg.x + offset, cfg.y, cfg.z);
 
@@ -320,11 +324,13 @@ class CloudSceneElement extends HTMLElement {
 		this.camera!.updateProjectionMatrix();
 		this.renderer!.setSize(width, height);
 
-		// Half-width of the camera frustum at the clouds' average depth. The
-		// clouds live around z ≈ -15; camera is at z = 42, so the view distance to
-		// that plane is ~57. We add a tile's margin so clouds fully cover the
-		// edges as the section bleeds to full viewport width.
-		const cloudDepth = 57;
+		// Half-width of the camera frustum at the FARTHEST cloud band's depth. The
+		// far band lives around z ≈ -46; camera is at z = 42, so the view distance
+		// to that plane is ~88 — the frustum is widest there, so covering it
+		// guarantees every band reaches the screen edges (nearer bands are simply
+		// over-covered off-screen, which is harmless). We add a tile's margin so
+		// clouds fully cover the edges as the section bleeds to full viewport width.
+		const cloudDepth = 88;
 		const halfFovV = (this.camera!.fov * Math.PI) / 180 / 2;
 		const halfH = Math.tan(halfFovV) * cloudDepth * this.camera!.aspect;
 		this.coveredHalfWidth = halfH + CloudSceneElement.TILE_WIDTH / 2;
@@ -387,16 +393,10 @@ class CloudSceneElement extends HTMLElement {
 				cluster.group.position.x -= span;
 			}
 
-			// Recede slightly into the distance as the cloud drifts rightward:
-			// map its horizontal progress across the span to a small backward z
-			// push, so clouds enter near/large at the left and shrink toward the
-			// right. The offset resets to 0 at the wrap point (off-screen edge),
-			// so the loop stays seamless.
-			const progress =
-				(cluster.group.position.x - this.spanLeft) / span; // 0 left → 1 right
-			const depthPush = progress * 6.0; // world units of recession
-			cluster.group.position.z = cluster.baseZ - depthPush;
-
+			// Depth is baked statically per band (see BASE_CONFIGS) so the near /
+			// mid / far lines stay visually distinct; we deliberately do NOT push z
+			// over time here. Parallax comes from per-band drift speed (nearer bands
+			// drift faster). Only the gentle vertical bob is animated.
 			cluster.group.position.y =
 				cluster.baseY +
 				Math.sin(elapsed * 0.5 + cluster.bobPhase) * cluster.bobAmplitude;

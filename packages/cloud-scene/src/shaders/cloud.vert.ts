@@ -6,6 +6,7 @@ uniform float uDisplacementStrength;
 attribute vec3 aBrushSeed;
 attribute float aCloudHeight;
 attribute vec3 aClusterCentroid;
+attribute float aEdgeSoft;
 
 varying vec3 vNormal;
 varying vec3 vNormalSmooth;
@@ -15,6 +16,7 @@ varying vec3 vInstanceCenter;
 varying vec3 vMassOut;
 varying vec3 vBrushSeed;
 varying float vCloudHeight;
+varying float vEdgeSoft;
 
 // Simplex-style 3D noise (Ashima Arts)
 vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -213,6 +215,7 @@ void main() {
     vMassOut = normalize(clusterPos - aClusterCentroid);
     vBrushSeed = aBrushSeed;
     vCloudHeight = aCloudHeight;
+    vEdgeSoft = aEdgeSoft;
     // World-space normal. Clusters and instances carry only translation and
     // near-uniform scale (no rotation — see create-cloud.ts), so the world normal
     // is just the instance-space normal: modelMatrix/instanceMatrix rotation is

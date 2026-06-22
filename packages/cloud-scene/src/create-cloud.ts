@@ -13,6 +13,15 @@ export interface ClusterParams {
 	spread: { x: number; y: number; z: number };
 	baseScale: number;
 	material: ShaderMaterial;
+	// Per-billow vertical squash: 1 = round spheres, lower = flatter ellipsoids.
+	// Distant clouds use a strong flatten so they read as low, wispy horizon
+	// strips rather than rounded balls. Defaults to a gentle 0.94.
+	flatten?: number;
+	// How much the silhouette edge melts into the sky at grazing view angles
+	// (0 = crisp opaque edge, higher = softer diffuse edge). Distant/mid bands
+	// use this so their outlines read as atmospheric haze rather than razor-sharp
+	// cutouts. Defaults to 0 (crisp) for the near band. 0..1.
+	edgeSoft?: number;
 }
 
 interface Billow {
@@ -41,22 +50,23 @@ function mix(a: number, b: number, t: number): number {
 	return a + (b - a) * t;
 }
 
-// Drop a sphere placement, slightly flattened, onto the build list.
-function addPlacement(out: Placement[], b: Billow, radius: number) {
+// Drop a sphere placement, vertically flattened by `flatten`, onto the build
+// list. flatten=1 is round; lower values squash each billow into an ellipsoid.
+function addPlacement(out: Placement[], b: Billow, radius: number, flatten: number) {
 	const round = 0.9 + Math.random() * 0.2;
 	out.push({
 		x: b.x,
 		y: Math.max(b.y, 0), // flat base: nothing hangs below the y=0 shelf
 		z: b.z,
 		sx: radius * round,
-		sy: radius * round * 0.94,
+		sy: radius * round * flatten,
 		sz: radius * round,
 		radius,
 	});
 }
 
 export function createCloudCluster(params: ClusterParams): Group {
-	const { sphereCount, spread, baseScale, material } = params;
+	const { sphereCount, spread, baseScale, material, flatten = 0.94, edgeSoft = 0.0 } = params;
 	const group = new Group();
 
 	// --- Hierarchical billow placement (matches the pixel-art breakdown) ---
@@ -110,7 +120,7 @@ export function createCloudCluster(params: ClusterParams): Group {
 			};
 		}
 		primaries.push(b);
-		addPlacement(placements, b, b.radius);
+		addPlacement(placements, b, b.radius, flatten);
 	}
 
 	// Broad spreading crown: a few extra large billows clustered near the top so
@@ -124,7 +134,7 @@ export function createCloudCluster(params: ClusterParams): Group {
 			radius: baseScale * (1.15 + Math.random() * 0.5),
 		};
 		primaries.push(b);
-		addPlacement(placements, b, b.radius);
+		addPlacement(placements, b, b.radius, flatten);
 	}
 
 	// How many child lobes each remaining tier gets, distributed across parents.
@@ -170,7 +180,7 @@ export function createCloudCluster(params: ClusterParams): Group {
 			radius,
 		};
 		rimLobes.push(b);
-		addPlacement(placements, b, radius);
+		addPlacement(placements, b, radius, flatten);
 	}
 
 	// --- Tier 3: fringe + outcroppings — small puffs on the rim of rim lobes ---
@@ -204,7 +214,7 @@ export function createCloudCluster(params: ClusterParams): Group {
 			z: parent.z + dir.z * offset,
 			radius,
 		};
-		addPlacement(placements, b, radius);
+		addPlacement(placements, b, radius, flatten);
 	}
 
 	let maxY = 0.0001;
@@ -250,6 +260,7 @@ export function createCloudCluster(params: ClusterParams): Group {
 		const seeds = new Float32Array(list.length * 3);
 		const heights = new Float32Array(list.length);
 		const centroids = new Float32Array(list.length * 3);
+		const edgeSofts = new Float32Array(list.length);
 
 		for (let i = 0; i < list.length; i++) {
 			const p = list[i];
@@ -266,11 +277,13 @@ export function createCloudCluster(params: ClusterParams): Group {
 			centroids[i * 3] = centroid[0];
 			centroids[i * 3 + 1] = centroid[1];
 			centroids[i * 3 + 2] = centroid[2];
+			edgeSofts[i] = edgeSoft;
 		}
 		mesh.instanceMatrix.needsUpdate = true;
 		geo.setAttribute("aBrushSeed", new InstancedBufferAttribute(seeds, 3));
 		geo.setAttribute("aCloudHeight", new InstancedBufferAttribute(heights, 1));
 		geo.setAttribute("aClusterCentroid", new InstancedBufferAttribute(centroids, 3));
+		geo.setAttribute("aEdgeSoft", new InstancedBufferAttribute(edgeSofts, 1));
 
 		// Clouds drift; their bounds change — skip frustum culling to avoid pop-out.
 		mesh.frustumCulled = false;
