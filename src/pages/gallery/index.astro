@@ -1,0 +1,76 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import GalleryGridItem from "../../components/GalleryGridItem.astro";
+
+const items = (await getCollection("gallery")).sort(
+	(a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<Layout title="Gallery — Tristan Timblin">
+	<main class="gallery-page">
+		<header class="gallery-header">
+			<h1>Gallery</h1>
+		</header>
+
+		{
+			items.length > 0 ? (
+				<div class="gallery-grid">
+					{items.map((item) => (
+						<GalleryGridItem
+							slug={item.id}
+							title={item.data.title}
+							media={item.data.media}
+							type={item.data.type}
+							poster={item.data.poster}
+							alt={item.data.alt}
+						/>
+					))}
+				</div>
+			) : (
+				<p class="gallery-empty">No items yet.</p>
+			)
+		}
+	</main>
+</Layout>
+
+<style>
+	.gallery-page {
+		max-width: var(--container-max);
+		margin-inline: auto;
+		padding-inline: var(--container-pad);
+		padding-block: var(--space-7);
+	}
+
+	.gallery-header {
+		margin-bottom: var(--space-7);
+	}
+
+	.gallery-header h1 {
+		font-size: var(--font-size-3xl);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+	}
+
+	.gallery-grid {
+		column-count: 3;
+		column-gap: var(--grid-gap);
+	}
+
+	@media (min-width: 640px) {
+		.gallery-grid {
+			column-count: 4;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.gallery-grid {
+			column-count: 5;
+		}
+	}
+
+	.gallery-empty {
+		color: var(--color-muted);
+	}
+</style>

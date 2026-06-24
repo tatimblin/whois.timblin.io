@@ -1,0 +1,106 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export const getStaticPaths = (async () => {
+	const items = await getCollection("gallery");
+	return items.map((item) => ({
+		params: { slug: item.id },
+		props: { item },
+	}));
+}) satisfies GetStaticPaths;
+
+const { item } = Astro.props;
+const { title, date, media, type, poster, alt } = item.data;
+const formattedDate = new Date(date).toLocaleDateString("en-US", {
+	year: "numeric",
+	month: "long",
+	day: "numeric",
+});
+---
+
+<Layout title={`${title} — Gallery`}>
+	<main class="detail-page">
+		<nav class="detail-nav">
+			<a href="/gallery">&larr; Gallery</a>
+		</nav>
+
+		<figure class="detail-media">
+			{
+				type === "video" ? (
+					<video
+						src={media}
+						poster={poster}
+						controls
+						autoplay
+						muted
+						aria-label={alt}
+						transition:name={`gallery-${item.id}`}
+					/>
+				) : (
+					<img
+						src={media}
+						alt={alt}
+						transition:name={`gallery-${item.id}`}
+					/>
+				)
+			}
+			<figcaption class="detail-caption">
+				<h1>{title}</h1>
+				<time datetime={date.toISOString().split("T")[0]}>{formattedDate}</time>
+			</figcaption>
+		</figure>
+	</main>
+</Layout>
+
+<style>
+	.detail-page {
+		max-width: var(--container-max);
+		margin-inline: auto;
+		padding-inline: var(--container-pad);
+		padding-block: var(--space-6);
+	}
+
+	.detail-nav {
+		margin-bottom: var(--space-5);
+	}
+
+	.detail-nav a {
+		color: var(--color-muted);
+		text-decoration: none;
+		font-size: var(--font-size-base);
+	}
+
+	.detail-nav a:hover {
+		color: var(--color-fg);
+	}
+
+	.detail-media {
+		margin: 0;
+	}
+
+	.detail-media img,
+	.detail-media video {
+		display: block;
+		width: 100%;
+		max-height: 80vh;
+		object-fit: contain;
+		border-radius: var(--radius);
+	}
+
+	.detail-caption {
+		margin-top: var(--space-5);
+	}
+
+	.detail-caption h1 {
+		font-size: var(--font-size-xl);
+		font-weight: 600;
+		margin-bottom: var(--space-2);
+	}
+
+	.detail-caption time {
+		color: var(--color-muted);
+		font-size: var(--font-size-base);
+	}
+</style>

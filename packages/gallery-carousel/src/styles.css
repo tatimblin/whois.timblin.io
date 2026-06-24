@@ -1,0 +1,77 @@
+gallery-carousel {
+	display: block;
+	position: relative;
+	height: var(--carousel-height, 300vh);
+	z-index: 1;
+}
+
+gallery-carousel [data-carousel-track] {
+	position: sticky;
+	top: 0;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	gap: var(--carousel-gap, 1.5rem);
+	padding-inline: var(--container-pad, clamp(1rem, 4vw, 2rem));
+	will-change: transform;
+	background: var(--color-bg, #fafaf7);
+}
+
+/* Active state (JS-driven) */
+gallery-carousel.gallery-carousel--active [data-carousel-item] {
+	overflow: hidden;
+	flex-shrink: 0;
+}
+
+/* Fallback: horizontal scroll container */
+gallery-carousel.gallery-carousel--fallback {
+	height: auto;
+}
+
+gallery-carousel.gallery-carousel--fallback [data-carousel-track] {
+	position: relative;
+	height: auto;
+	min-height: 60vh;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	-webkit-overflow-scrolling: touch;
+}
+
+gallery-carousel.gallery-carousel--fallback [data-carousel-item] {
+	scroll-snap-align: center;
+	flex-shrink: 0;
+}
+
+/* Items */
+[data-carousel-item] {
+	flex-shrink: 0;
+	border-radius: var(--radius, 12px);
+	overflow: hidden;
+}
+
+[data-carousel-item] img,
+[data-carousel-item] video {
+	display: block;
+	height: 60vh;
+	width: auto;
+	object-fit: cover;
+}
+
+[data-carousel-item] a {
+	display: block;
+	text-decoration: none;
+}
+
+/* CTA trailing element */
+[data-carousel-cta] {
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	padding-inline: var(--space-6, 2rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	gallery-carousel [data-carousel-track] {
+		transform: none !important;
+	}
+}

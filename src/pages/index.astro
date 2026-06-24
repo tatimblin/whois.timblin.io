@@ -2,15 +2,22 @@
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
+import CarouselItem from "../components/CarouselItem.astro";
 import "@whois/cloud-scene/styles.css";
 import "@whois/sticky-heading/styles.css";
 import "@whois/wobble-text/styles.css";
+import "@whois/gallery-carousel/styles.css";
+
+const galleryItems = (await getCollection("gallery")).sort(
+	(a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
 ---
 
 <script>
 	import "@whois/cloud-scene";
 	import "@whois/sticky-heading";
 	import "@whois/wobble-text";
+	import "@whois/gallery-carousel";
 </script>
 
 <Layout>
@@ -19,12 +26,28 @@ import "@whois/wobble-text/styles.css";
 			><h1>Tristan Timblin</h1></sticky-heading
 		>
 
+		<gallery-carousel>
+			<div data-carousel-track>
+				{galleryItems.map((item) => (
+					<CarouselItem
+						slug={item.id}
+						media={item.data.media}
+						type={item.data.type}
+						poster={item.data.poster}
+						alt={item.data.alt}
+					/>
+				))}
+				<div data-carousel-cta>
+					<a href="/gallery" class="carousel-cta">View all &rarr;</a>
+				</div>
+			</div>
+		</gallery-carousel>
+
 		<Section
 			variant={1}
 			revealRange="entry 50% exit 25%"
 			expand
 		>
-			<cloud-scene slot="canvas"></cloud-scene>
 			<sticky-heading slot="heading" class="page-title" reveal duration="600px"
 				><wobble-text scale="3" speed="0.6" frequency="0.04"><h2>Tristan Timblin</h2></wobble-text></sticky-heading
 			>
@@ -93,5 +116,19 @@ import "@whois/wobble-text/styles.css";
 
 	.scroll-spacer {
 		height: 100vh;
+	}
+
+	.carousel-cta {
+		display: inline-block;
+		padding: var(--space-3) var(--space-5);
+		color: var(--color-fg);
+		text-decoration: none;
+		font-weight: 600;
+		font-size: var(--font-size-lg);
+		white-space: nowrap;
+	}
+
+	.carousel-cta:hover {
+		color: var(--color-muted);
 	}
 </style>
