@@ -3,7 +3,6 @@ import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
 import CarouselItem from "../components/CarouselItem.astro";
-import "@whois/cloud-scene/styles.css";
 import "@whois/sticky-heading/styles.css";
 import "@whois/wobble-text/styles.css";
 import "@whois/gallery-carousel/styles.css";
@@ -14,7 +13,6 @@ const galleryItems = (await getCollection("gallery")).sort(
 ---
 
 <script>
-	import "@whois/cloud-scene";
 	import "@whois/sticky-heading";
 	import "@whois/wobble-text";
 	import "@whois/gallery-carousel";
