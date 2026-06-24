@@ -1,0 +1,20 @@
+---
+interface Props {
+	as?: "h1" | "h2";
+}
+
+const { as: Tag = "h1" } = Astro.props;
+---
+
+<Tag>Tristan Timblin</Tag>
+<p class="page-subtitle">And Other Stories</p>
+
+<style>
+	.page-subtitle {
+		margin-block: var(--space-2) 0;
+		font-size: var(--font-size-lg);
+		font-weight: 400;
+		color: var(--color-muted);
+		letter-spacing: -0.01em;
+	}
+</style>

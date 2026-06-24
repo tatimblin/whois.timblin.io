@@ -14,7 +14,6 @@ gallery-carousel [data-carousel-track] {
 	gap: var(--carousel-gap, 1.5rem);
 	padding-inline: var(--container-pad, clamp(1rem, 4vw, 2rem));
 	will-change: transform;
-	background: var(--color-bg, #fafaf7);
 }
 
 /* Active state (JS-driven) */

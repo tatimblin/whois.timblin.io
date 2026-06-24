@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
 import CarouselItem from "../components/CarouselItem.astro";
+import Title from "../components/Title.astro";
 import "@whois/sticky-heading/styles.css";
 import "@whois/wobble-text/styles.css";
 import "@whois/gallery-carousel/styles.css";
@@ -21,7 +22,7 @@ const galleryItems = (await getCollection("gallery")).sort(
 <Layout>
 	<main class="container">
 		<sticky-heading class="page-title page-title--root"
-			><h1>Tristan Timblin</h1></sticky-heading
+			><Title as="h1" /></sticky-heading
 		>
 
 		<gallery-carousel>
@@ -47,7 +48,7 @@ const galleryItems = (await getCollection("gallery")).sort(
 			expand
 		>
 			<sticky-heading slot="heading" class="page-title" reveal duration="600px"
-				><wobble-text scale="3" speed="0.6" frequency="0.04"><h2>Tristan Timblin</h2></wobble-text></sticky-heading
+				><wobble-text scale="3" speed="0.6" frequency="0.04"><Title as="h2" /></wobble-text></sticky-heading
 			>
 			<wobble-text scale="3" speed="0.6" frequency="0.04">
 				<p>
