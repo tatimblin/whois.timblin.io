@@ -15,5 +15,8 @@
     "@whois/wobble-text": "workspace:*",
     "astro": "6.4.8",
     "scroll-timeline-polyfill": "^1.1.0"
+  },
+  "patchedDependencies": {
+    "scroll-timeline-polyfill@1.1.0": "patches/scroll-timeline-polyfill@1.1.0.patch"
   }
 }

@@ -2,43 +2,36 @@ gallery-carousel {
 	display: block;
 	position: relative;
 	height: var(--carousel-height, 300vh);
-	z-index: 1;
+	view-timeline-name: --carousel;
+	view-timeline-axis: block;
 }
 
+/*
+ * CSS scroll-driven horizontal scrub. The track's translateX is driven off a
+ * view-timeline on the tall container, reproducing the old JS rAF behavior
+ * with no carousel-specific JavaScript. scroll-timeline-polyfill (loaded in
+ * the site layout) supplies this for browsers without native support.
+ */
 gallery-carousel [data-carousel-track] {
 	position: sticky;
 	top: 0;
 	height: 100vh;
+	width: max-content;
 	display: flex;
 	align-items: center;
 	gap: var(--carousel-gap, 1.5rem);
 	padding-inline: var(--container-pad, clamp(1rem, 4vw, 2rem));
 	will-change: transform;
+	animation: carousel-scrub linear both;
+	animation-timeline: --carousel;
+	animation-range: contain;
 }
 
-/* Active state (JS-driven) */
-gallery-carousel.gallery-carousel--active [data-carousel-item] {
-	overflow: hidden;
-	flex-shrink: 0;
-}
-
-/* Fallback: horizontal scroll container */
-gallery-carousel.gallery-carousel--fallback {
-	height: auto;
-}
-
-gallery-carousel.gallery-carousel--fallback [data-carousel-track] {
-	position: relative;
-	height: auto;
-	min-height: 60vh;
-	overflow-x: auto;
-	scroll-snap-type: x mandatory;
-	-webkit-overflow-scrolling: touch;
-}
-
-gallery-carousel.gallery-carousel--fallback [data-carousel-item] {
-	scroll-snap-align: center;
-	flex-shrink: 0;
+@keyframes carousel-scrub {
+	to {
+		/* travel == -(content width - viewport width), matching the old JS */
+		transform: translateX(calc(-100% + 100vw));
+	}
 }
 
 /* Items */
@@ -69,8 +62,28 @@ gallery-carousel.gallery-carousel--fallback [data-carousel-item] {
 	padding-inline: var(--space-6, 2rem);
 }
 
+/*
+ * Reduced motion: drop the scroll-driven scrub and fall back to a plain
+ * horizontal scroll-snap strip so every image stays reachable without motion.
+ */
 @media (prefers-reduced-motion: reduce) {
+	gallery-carousel {
+		height: auto;
+	}
+
 	gallery-carousel [data-carousel-track] {
-		transform: none !important;
+		position: relative;
+		height: auto;
+		min-height: 60vh;
+		width: auto;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		animation: none;
+		transform: none;
+	}
+
+	gallery-carousel [data-carousel-item] {
+		scroll-snap-align: center;
 	}
 }

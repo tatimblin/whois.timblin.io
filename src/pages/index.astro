@@ -16,7 +16,6 @@ const galleryItems = (await getCollection("gallery")).sort(
 <script>
 	import "@whois/sticky-heading";
 	import "@whois/wobble-text";
-	import "@whois/gallery-carousel";
 </script>
 
 <Layout>
@@ -24,6 +23,27 @@ const galleryItems = (await getCollection("gallery")).sort(
 		<sticky-heading class="page-title page-title--root"
 			><Title as="h1" /></sticky-heading
 		>
+
+		<Section
+			variant={1}
+			revealRange="entry 50% exit 25%"
+			expand
+		>
+			<sticky-heading slot="heading" class="page-title" reveal duration="300px"
+				><wobble-text scale="3" speed="0.6" frequency="0.04"><Title as="h2" /></wobble-text></sticky-heading
+			>
+			<wobble-text scale="3" speed="0.6" frequency="0.04">
+				<p>
+					A good story cannot function like a legal brief, which attempts to persuade and lead the reader down a
+					narrow path suspended above the abyss of unreason. Rather, it must be more like an empty house, an open
+					garden, a deserted beach by the ocean. The reader moves in with their own burdensome baggage and
+					long-cherished possessions, seeds of doubt and shears of understanding, maps of human nature and baskets
+					of sustaining faith. The reader then inhabits the story, explores its nooks and crannies, rearranges the
+					furniture to suit their taste, covers the walls with sketches of their inner life, and thereby makes the
+					story their home.
+				</p>
+			</wobble-text>
+		</Section>
 
 		<gallery-carousel>
 			<div data-carousel-track>
@@ -42,21 +62,6 @@ const galleryItems = (await getCollection("gallery")).sort(
 			</div>
 		</gallery-carousel>
 
-		<Section
-			variant={1}
-			revealRange="entry 50% exit 25%"
-			expand
-		>
-			<sticky-heading slot="heading" class="page-title" reveal duration="600px"
-				><wobble-text scale="3" speed="0.6" frequency="0.04"><Title as="h2" /></wobble-text></sticky-heading
-			>
-			<wobble-text scale="3" speed="0.6" frequency="0.04">
-				<p>
-					Body text for the first section. Replace this with a short paragraph
-					describing what lives here — an intro, a project, or a thought.
-				</p>
-			</wobble-text>
-		</Section>
 		<Section
 			variant={2}
 			revealRange="entry 50% exit 25%"
