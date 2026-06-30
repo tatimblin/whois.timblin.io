@@ -1,16 +1,20 @@
 gallery-carousel {
 	display: block;
 	position: relative;
-	height: var(--carousel-height, 300vh);
-	view-timeline-name: --carousel;
-	view-timeline-axis: block;
+	/* Single lever: horizontal px scrubbed per vertical px scrolled (higher =
+	   faster). JS reads this, measures the track, and derives --carousel-height
+	   to achieve it. Override per-instance: gallery-carousel { --carousel-speed: 2.5 } */
+	--carousel-speed: 3;
+	/* No-JS fallback; the JS-set inline --carousel-height overrides it. */
+	height: var(--carousel-height, 200vh);
 }
 
 /*
- * CSS scroll-driven horizontal scrub. The track's translateX is driven off a
- * view-timeline on the tall container, reproducing the old JS rAF behavior
- * with no carousel-specific JavaScript. scroll-timeline-polyfill (loaded in
- * the site layout) supplies this for browsers without native support.
+ * Horizontal scrub driven by JS (see ./index.ts): the element pins the track
+ * while it scrolls past, and the element maps that scroll progress onto the
+ * track's translateX so it always lands exactly on the last item. Done in JS
+ * rather than CSS view-timeline because the `contain` animation-range is not
+ * reliably supported across browsers (Firefox in particular never scrolled).
  */
 gallery-carousel [data-carousel-track] {
 	position: sticky;
@@ -18,20 +22,14 @@ gallery-carousel [data-carousel-track] {
 	height: 100vh;
 	width: max-content;
 	display: flex;
-	align-items: center;
+	/* Top-align items and inset them by --carousel-top so they sit flush below
+	   whatever pins above (e.g. a sticky page title) instead of centering over
+	   the full viewport and overlapping it. Default 0 = flush to viewport top. */
+	align-items: flex-start;
+	padding-top: var(--carousel-top, 0);
 	gap: var(--carousel-gap, 1.5rem);
 	padding-inline: var(--container-pad, clamp(1rem, 4vw, 2rem));
 	will-change: transform;
-	animation: carousel-scrub linear both;
-	animation-timeline: --carousel;
-	animation-range: contain;
-}
-
-@keyframes carousel-scrub {
-	to {
-		/* travel == -(content width - viewport width), matching the old JS */
-		transform: translateX(calc(-100% + 100vw));
-	}
 }
 
 /* Items */
@@ -44,7 +42,7 @@ gallery-carousel [data-carousel-track] {
 [data-carousel-item] img,
 [data-carousel-item] video {
 	display: block;
-	height: 60vh;
+	height: var(--carousel-item-height, 48vh);
 	width: auto;
 	object-fit: cover;
 }
@@ -54,11 +52,14 @@ gallery-carousel [data-carousel-track] {
 	text-decoration: none;
 }
 
-/* CTA trailing element */
+/* CTA trailing element. Matches the item height so its content centers level
+   with the images (the track top-aligns items, so the CTA must take the same
+   height rather than collapsing to its text). */
 [data-carousel-cta] {
 	flex-shrink: 0;
 	display: flex;
 	align-items: center;
+	height: var(--carousel-item-height, 48vh);
 	padding-inline: var(--space-6, 2rem);
 }
 
@@ -79,7 +80,6 @@ gallery-carousel [data-carousel-track] {
 		overflow-x: auto;
 		scroll-snap-type: x mandatory;
 		-webkit-overflow-scrolling: touch;
-		animation: none;
 		transform: none;
 	}
 
